@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 /**
  * @author Stanislau Palaukou on 10.04.2019
- * @project task06
+ * @project TravelAgency
  */
 
 public class Main {

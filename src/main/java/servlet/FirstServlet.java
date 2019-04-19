@@ -9,7 +9,7 @@ import javax.servlet.annotation.WebServlet;
 
 /**
  * @author Stanislau Palaukou on 18.04.2019
- * @project task06
+ * @project TravelAgency
  */
 
 @WebServlet("/FirstServletTest")
