@@ -26,6 +26,8 @@ $END$
     <input type="submit" name="button" value="Посчитать время"/>
 </form>
 
+<jsp:forward page="/jsp/login.jsp"/>
+
 </body>
 
 </html>
