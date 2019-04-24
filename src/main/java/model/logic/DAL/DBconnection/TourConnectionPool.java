@@ -13,10 +13,14 @@ import javax.sql.DataSource;
  */
 
 public class TourConnectionPool {
-
+    private static TourConnectionPool instance = new TourConnectionPool();
     private static DataSource datasource;
 
     private TourConnectionPool() {
+    }
+
+    public static TourConnectionPool getInstance() {
+        return instance;
     }
 
     public static synchronized DataSource getConnection() throws DBconnectionException {

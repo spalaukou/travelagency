@@ -3,17 +3,32 @@ package model.entity;
 import java.util.Objects;
 
 /**
- * TourAgent is a User, that can manage Tours(create, change, delete),
- * and set 'hot' variable in double to special Tours.
+ * User is a User, that can be a Travel Agent(can manage Tours
+ * (create, change, delete) and set 'hot' variable in double
+ * to special Tours) and can be a Consumer(can buy Tours).
  *
  * @author Stanislau Palaukou on 21.04.2019
  * @project TravelAgency
  * @see Tour
  */
 
-public class TourAgent extends AbstractEntity {
+public class User extends AbstractEntity {
+
+    public enum Type {
+        AGENT, CONSUMER;
+    }
+
+    private Type type;
     private String login;
     private String password;
+
+    public Type getType() {
+        return type;
+    }
+
+    public void setType(Type type) {
+        this.type = type;
+    }
 
     public String getLogin() {
         return login;
@@ -35,13 +50,14 @@ public class TourAgent extends AbstractEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        TourAgent tourAgent = (TourAgent) o;
-        return Objects.equals(login, tourAgent.login) &&
-                Objects.equals(password, tourAgent.password);
+        User user = (User) o;
+        return type == user.type &&
+                Objects.equals(login, user.login) &&
+                Objects.equals(password, user.password);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(login, password);
+        return Objects.hash(type, login, password);
     }
 }
