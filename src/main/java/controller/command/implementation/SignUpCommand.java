@@ -1,6 +1,7 @@
 package controller.command.implementation;
 
 import controller.command.Command;
+import model.logic.exception.technical.DBconnectionException;
 import model.logic.service.UserService;
 import model.logic.service.implementation.UserServiceImpl;
 
@@ -14,13 +15,12 @@ import javax.servlet.http.HttpServletRequest;
 public class SignUpCommand implements Command {
 
     @Override
-    public String execute(HttpServletRequest request) {
+    public String execute(HttpServletRequest request) throws DBconnectionException {
         String login = request.getParameter("login");
         String password = request.getParameter("password");
 
         UserService userService = new UserServiceImpl();
         userService.signUp(login, password);
-
 
         return null;
     }

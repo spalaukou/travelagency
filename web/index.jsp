@@ -9,14 +9,15 @@
 <html>
 
 <head>
-    <title>$Title$</title>
+    <title>Travel Agency</title>
 </head>
 
 <body>
-
+<%--
 <form action="FirstServletTest">
     <input type="submit" value="Execute">
 </form>
+
 $END$
 <h5>Счетчик времени от запуска приложения до нажатия кнопки</h5>
 
@@ -27,6 +28,15 @@ $END$
 </form>
 
 <jsp:forward page="/jsp/login.jsp"/>
+--%>
+<form name="sign_up" method="post" action="mainController">
+    <input type="submit" value="Sign Up">
+</form>
+
+<form name="all_tours" method="post" action="tours_table.jsp">
+    <input type="submit" value="All tours">
+</form>
+
 
 </body>
 

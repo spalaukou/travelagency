@@ -2,6 +2,7 @@ package model.logic.service.implementation;
 
 import model.logic.DAL.UserDAO;
 import model.logic.DAL.implementation.UserDAOImpl;
+import model.logic.exception.technical.DBconnectionException;
 import model.logic.service.UserService;
 
 /**
@@ -12,7 +13,7 @@ import model.logic.service.UserService;
 public class UserServiceImpl implements UserService {
 
     @Override
-    public int signUp(String login, String password) {
+    public int signUp(String login, String password) throws DBconnectionException {
         UserDAO userDAO = new UserDAOImpl();
         userDAO.signUp(login, password);
         return 0;

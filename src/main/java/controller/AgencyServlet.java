@@ -1,5 +1,11 @@
 package controller;
 
+import controller.command.Command;
+import controller.command.CommandManager;
+import model.logic.ConstantContainer;
+import model.logic.exception.technical.DBconnectionException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,24 +18,38 @@ import java.io.IOException;
  * @project TravelAgency
  */
 
-@WebServlet(name = "Servlet")
+@WebServlet(name = "mainController")
 public class AgencyServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (DBconnectionException e) {
+            e.printStackTrace();
+        }
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (DBconnectionException e) {
+            e.printStackTrace();
+        }
     }
 
     public void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        String command = request.getParameter("command");//CommandContainer
+            throws ServletException, IOException, DBconnectionException {
 
+        String cmd = request.getParameter(ConstantContainer.COMMAND);
+
+        Command command  = CommandManager.getCommand(cmd);
+        String page = command.execute(request);
+
+        RequestDispatcher dispatcher = request.getRequestDispatcher(page);
+        dispatcher.forward(request, response);
 
     }
 }

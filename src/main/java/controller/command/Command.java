@@ -1,5 +1,7 @@
 package controller.command;
 
+import model.logic.exception.technical.DBconnectionException;
+
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -8,5 +10,5 @@ import javax.servlet.http.HttpServletRequest;
  */
 
 public interface Command {
-    String execute(HttpServletRequest request);
+    String execute(HttpServletRequest request) throws DBconnectionException;
 }
