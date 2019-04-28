@@ -1,4 +1,4 @@
-package model.logic.service;
+package model.logic.dal.dao;
 
 import model.logic.exception.technical.DAOSQLException;
 import model.logic.exception.technical.DBconnectionException;
@@ -9,7 +9,7 @@ import model.logic.exception.technical.TourConnectionPoolException;
  * @project TravelAgency
  */
 
-public interface UserService {
+public interface UserDAO {
 
-    int signUp(String login, String password);
+    int signUp(String login, String password) throws TourConnectionPoolException, DAOSQLException;
 }

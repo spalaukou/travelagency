@@ -2,8 +2,10 @@ package controller;
 
 import controller.command.Command;
 import controller.command.CommandManager;
-import model.logic.ConstantContainer;
+import model.ConstantContainer;
+import model.logic.exception.technical.DAOSQLException;
 import model.logic.exception.technical.DBconnectionException;
+import model.logic.exception.technical.TourConnectionPoolException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -18,38 +20,34 @@ import java.io.IOException;
  * @project TravelAgency
  */
 
-@WebServlet(name = "mainController")
+@WebServlet("/mainController")
 public class AgencyServlet extends HttpServlet {
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-
-        try {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) {
             processRequest(request, response);
-        } catch (DBconnectionException e) {
-            e.printStackTrace();
-        }
     }
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        try {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) {
             processRequest(request, response);
-        } catch (DBconnectionException e) {
-            e.printStackTrace();
-        }
     }
 
-    public void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, DBconnectionException {
+    public void processRequest(HttpServletRequest request, HttpServletResponse response) {
 
         String cmd = request.getParameter(ConstantContainer.COMMAND);
 
-        Command command  = CommandManager.getCommand(cmd);
-        String page = command.execute(request);
+        Command command = CommandManager.getCommand(cmd);
+        String page = null;
+
+        page = command.execute(request);
 
         RequestDispatcher dispatcher = request.getRequestDispatcher(page);
-        dispatcher.forward(request, response);
 
+        try {
+            dispatcher.forward(request, response);
+        } catch (ServletException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

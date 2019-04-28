@@ -4,13 +4,19 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
 
-    <display-name>AgencyServlet</display-name>
+    <servlet>
+        <servlet-name>Controller</servlet-name>
+        <servlet-class>controller.AgencyServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>Controller</servlet-name>
+        <url-pattern>/TravelAgency</url-pattern>
+    </servlet-mapping>
+
     <session-config>
         <session-timeout>30</session-timeout>
     </session-config>
-    <welcome-file-list>
-        <welcome-file>index.jsp</welcome-file>
-    </welcome-file-list>
 
     <description>MySQL</description>
     <resource-ref>
@@ -19,18 +25,5 @@
         <res-type>javax.sql.DataSource</res-type>
         <res-auth>Container</res-auth>
     </resource-ref>
-
-    <display-name> FirstJspServletTest </display-name>
-    <welcome-file-list>
-        <welcome-file>index.html</welcome-file>
-    </welcome-file-list>
-    <error-page>
-        <error-code>404</error-code>
-        <location>/jsp/error.jsp</location>
-    </error-page>
-    <error-page>
-        <exception-type>java.lang.RuntimeException</exception-type>
-        <location>/jsp/error.jsp</location>
-    </error-page>
 
 </web-app>

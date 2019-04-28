@@ -7,7 +7,7 @@ package model.entity;
  * @project TravelAgency
  */
 
-public class AbstractEntity {
+public class BaseEntity {
     protected int id;
 
     public int getId() {

@@ -9,35 +9,84 @@
 <html>
 
 <head>
-    <title>Travel Agency</title>
+    <title>Travel Agency GoTravel</title>
 </head>
 
 <body>
-<%--
-<form action="FirstServletTest">
-    <input type="submit" value="Execute">
+
+<div style="overflow:hidden">
+    <div style="float:left">
+        <a href="${pageContext.request.contextPath}">GoTravel</a>
+    </div>
+    <div style="float:right">
+        <a href="${pageContext.request.contextPath}/jsp/sign_in.jsp">Sing In</a>
+        <a href="${pageContext.request.contextPath}">Sing Up</a>
+    </div>
+</div>
+
+<hr/>
+
+<a href="${pageContext.request.contextPath}/jsp/calculator.jsp">calculator</a>
+
+<form name="calculate" action="mainController" method="post">
+    <input type="hidden" name="command" value="calculate"/>
+    <table>
+        <tr>
+            <td>value of a:</td>
+            <td>
+                <input type="text" name="a" value="0">
+            </td>
+        </tr>
+        <tr>
+            <td>value of b:</td>
+            <td>
+                <input type="text" name="b" value="0">
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input type="reset" value="reset"/>
+                <input type="submit" value="calculate"/>
+            </td>
+        </tr>
+    </table>
 </form>
 
-$END$
-<h5>Счетчик времени от запуска приложения до нажатия кнопки</h5>
+<hr/>
 
-<jsp:useBean id="calendar" class="java.util.GregorianCalendar"/>
-<form name="Simple" action="timeaction" method="POST">
-    <input type="hidden" name="time" value="${calendar.timeInMillis}"/>
-    <input type="submit" name="button" value="Посчитать время"/>
-</form>
-
-<jsp:forward page="/jsp/login.jsp"/>
---%>
 <form name="sign_up" method="post" action="mainController">
+    <input type="hidden" name="command" value="sign_up">
+    <p>Register form</p>
+    <p>Login(3 chars min):<br>
+        <input type="text" name="login" size="20">
+    </p>
+    <p>Password(3 chars min):<br>
+        <input type="text" name="password" size="20">
+    </p>
+    <input type="reset" value="Clear form">
     <input type="submit" value="Sign Up">
 </form>
 
-<form name="all_tours" method="post" action="tours_table.jsp">
-    <input type="submit" value="All tours">
-</form>
+<hr/>
 
+<div style="float: left;">
+    <form name="show_all_tours" method="post" action="mainController">
+        <input type="hidden" name="command" value="show_all_tours">
+        <input type="submit" value="Show all tours">
+    </form>
+</div>
+<div style="float: left;">
+    <form name="show_turkey_tours" method="post" action="mainController">
+        <input type="submit" value="Rest in Turkey">
+    </form>
+</div>
+<div style="float: left;">
+    <form name="show_spain_tours" method="post" action="mainController">
+        <input type="submit" value="Travel to Spain">
+    </form>
+</div>
+<br/>
+<br/>
 
 </body>
-
 </html>

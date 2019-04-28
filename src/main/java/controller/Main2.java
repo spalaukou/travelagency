@@ -1,6 +1,5 @@
 package controller;
 
-import javax.sql.PooledConnection;
 import java.sql.*;
 import java.util.Scanner;
 
@@ -9,21 +8,15 @@ import java.util.Scanner;
  * @project TravelAgency
  */
 
-public class Main {
+public class Main2 {
     private static String JDBC_MYSQL_DRIVER = "com.mysql.cj.jdbc.Driver";
     private static String DATABASE_URL = "jdbc:mysql://127.0.0.1:3306/student?useTimezone=true&serverTimezone=UTC";
     private static String DATABASE_USER = "root";
     private static String DATABASE_PASSWORD = "root";
 
-    //    private static String SQL = "SELECT * FROM student";
-//    private static String SQL = "SELECT * FROM student WHERE idstudent = ? AND idgroup > ?";
-    private static String SQL = "SELECT * FROM student WHERE idstudent = ";
-    private static String SQL2 = "INSERT INTO `student`.`student` (`stname`, `idgroup`) VALUES ('ddd', '1');";
+    private static String SQL2 = "INSERT INTO `tour`.`user` (`login`, `password`) VALUES (?, ?);";
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Input student id: ");
-        int id = scanner.nextInt();
 
         Connection connection = null;
         try {
@@ -35,7 +28,7 @@ public class Main {
 
             //run to check connection !!!
 
-            Statement statement = connection.createStatement();
+            //Statement statement = connection.createStatement();
 //            PreparedStatement statement = connection.prepareStatement(SQL);
 //            CallableStatement statement = connection.prepareCall("{ call getStudent(?)}");
 
@@ -45,21 +38,17 @@ public class Main {
 //            statement.registerOutParameter(2, Types.INTEGER);
 //            statement.setInt(2, temp); // OUT
 
-            String sql = SQL + id;
+            String sql = SQL2;
 //            String sql = SQL + " WHERE idstudent = " + id + "; drop table group";
 //
 //            System.out.println(sql);
 
+            CallableStatement statement = connection.prepareCall(sql);
 
+            statement.setString(1, "mmm");
+            statement.setString(2, "1");
+            statement.execute();
 
-            ResultSet resultSet = statement.executeQuery(sql); //sql
-
-
-            while(resultSet.next()) { //id name group
-                System.out.print(resultSet.getInt("idstudent") + " ");
-                System.out.print(resultSet.getString("stname") + " ");
-                System.out.println(resultSet.getInt("idgroup")); //null -> to 0
-            }
 
         } catch (ClassNotFoundException | SQLException e) {
             System.out.println(e);

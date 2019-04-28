@@ -1,5 +1,7 @@
 package model.entity;
 
+import model.entity.old.Customer;
+
 import java.util.Objects;
 
 /**
@@ -13,42 +15,72 @@ import java.util.Objects;
  * @see Customer
  */
 
-public class Tour {
-    private double price;
-    private double hot;
-    private String type;
-    private String description;
+public class Tour extends BaseEntity {
+    private String name;
+    private Hotel hotel;
+    private int night;
+    private Transport.Type transportType;
+    private int cost;
+    private float hot;
 
-    public double getPrice() {
-        return price;
+    public Tour() {
     }
 
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
-    public double getHot() {
-        return hot;
-    }
-
-    public void setHot(double hot) {
+    public Tour(String name, Hotel hotel, int night, Transport.Type transportType, int cost, float hot) {
+        this.name = name;
+        this.hotel = hotel;
+        this.night = night;
+        this.transportType = transportType;
+        this.cost = cost;
         this.hot = hot;
     }
 
-    public String getType() {
-        return type;
+    public String getName() {
+        return name;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getDescription() {
-        return description;
+    public Hotel getHotel() {
+        return hotel;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setHotel(Hotel hotel) {
+        this.hotel = hotel;
+    }
+
+    public int getNight() {
+        return night;
+    }
+
+    public void setNight(int night) {
+        this.night = night;
+    }
+
+    public Transport.Type getTransportType() {
+        return transportType;
+    }
+
+    public void setTransportType(Transport.Type transportType) {
+        this.transportType = transportType;
+    }
+
+    public int getCost() {
+        return cost;
+    }
+
+    public void setCost(int cost) {
+        this.cost = cost;
+    }
+
+    public float getHot() {
+        return hot;
+    }
+
+    public void setHot(float hot) {
+        this.hot = hot;
     }
 
     @Override
@@ -56,14 +88,16 @@ public class Tour {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Tour tour = (Tour) o;
-        return Double.compare(tour.price, price) == 0 &&
-                Double.compare(tour.hot, hot) == 0 &&
-                Objects.equals(type, tour.type) &&
-                Objects.equals(description, tour.description);
+        return night == tour.night &&
+                cost == tour.cost &&
+                Float.compare(tour.hot, hot) == 0 &&
+                Objects.equals(name, tour.name) &&
+                Objects.equals(hotel, tour.hotel) &&
+                transportType == tour.transportType;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(price, hot, type, description);
+        return Objects.hash(name, hotel, night, transportType, cost, hot);
     }
 }

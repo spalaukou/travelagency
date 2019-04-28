@@ -11,7 +11,19 @@
     <title>Welcome</title>
 </head>
 <body>
-    <h3>Welcome</h3>
+<div style="overflow:hidden">
+    <div style="float:left">
+        <a href ="${pageContext.request.contextPath}">GoTravel</a>
+    </div>
+    <div style="float:right">
+        <a href ="${pageContext.request.contextPath}/jsp/sign_in.jsp">Sing In</a>
+        <a href ="${pageContext.request.contextPath}">Sing Up</a>
+    </div>
+</div>
+
+    <h3>
+        Welcome
+    </h3>
     <hr/>
         ${user}, hello!
     <hr/>

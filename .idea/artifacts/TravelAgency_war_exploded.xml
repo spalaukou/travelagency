@@ -7,7 +7,10 @@
         <element id="directory" name="classes">
           <element id="module-output" name="TravelAgency" />
         </element>
-        <element id="directory" name="lib" />
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="mysql-connector-java-8.0.15" />
+          <element id="library" level="project" name="taglibs-standard-impl-1.2.5" />
+        </element>
       </element>
     </root>
   </artifact>

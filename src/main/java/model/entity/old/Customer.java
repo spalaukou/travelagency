@@ -1,4 +1,7 @@
-package model.entity;
+package model.entity.old;
+
+import model.entity.BaseEntity;
+import model.entity.Tour;
 
 import java.util.List;
 import java.util.Objects;
@@ -15,7 +18,7 @@ import java.util.Objects;
  * @see Tour
  */
 
-public class Customer extends AbstractEntity {
+public class Customer extends BaseEntity {
     private String login;
     private String password;
     private double balance;

@@ -1,7 +1,6 @@
 package controller.command;
 
-import controller.command.implementation.EmptyCommand;
-import controller.command.implementation.SignUpCommand;
+import controller.command.implementation.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,7 +13,17 @@ import java.util.Map;
 public class CommandManager {
 
     public enum CommandType {
-        DEFAULT, SIGN_UP, ALL_TOURS;
+        DEFAULT,
+        SIGN_IN, SIGN_UP,
+
+        SHOW_ALL_TOURS,
+        SHOW_TURKEY_TOURS,
+        SHOW_SPAIN_TOURS,
+
+        CALCULATE, ALL_TOURS;
+    }
+
+    private CommandManager() {
     }
 
     private static final Map<CommandType, Command> map;
@@ -22,7 +31,11 @@ public class CommandManager {
     static {
         map = new HashMap<>();
         map.put(CommandType.DEFAULT, new EmptyCommand());
+        map.put(CommandType.SIGN_IN, new SignInCommand());
         map.put(CommandType.SIGN_UP, new SignUpCommand());
+        map.put(CommandType.SHOW_ALL_TOURS, new ShowAllToursCommand());
+        //del
+        map.put(CommandType.CALCULATE, new CalculateCommand());
     }
 
     public static Command getCommand(String cmd) {

@@ -11,35 +11,21 @@
     <title>Title</title>
 </head>
 <body>
+<div style="overflow:hidden">
+    <div style="float:left">
+        <a href ="${pageContext.request.contextPath}">GoTravel</a>
+    </div>
+    <div style="float:right">
+        <a href ="${pageContext.request.contextPath}/jsp/sign_in.jsp">Sing In</a>
+        <a href ="${pageContext.request.contextPath}">Sing Up</a>
+    </div>
+</div>
 
+<hr/>
 
-<form name="sign_up" method="POST" action="controller">
-    <input type="hidden" name="command" value="login" />
-    Login:<br/>
-    <input type="text" name="login" value=""/>
-    <br/>Password:<br/>
-    <input type="password" name="password" value=""/>
-    <br/>
-    ${errorLoginPassMessage}
-    <br/>
-    ${wrongAction}
-    <br/>
-    ${nullPage}
-    <br/>
-    <input type="submit" value="Log in"/>
-</form>
-
-<form name="sign_up" method="post" action="mainCot">
-    <p><b>Sign up</b><br>
-    <p>Login:<br>
-        <input type="text" name="login" size="40">
-    </p>
-    <p>Password:<br>
-        <input type="text" name="password" size="40">
-    </p>
-    <p><input type="submit" value="Отправить">
-        <input type="reset" value="Очистить"></p>
-</form>
-
+<p>You are successfully signed up, ${param.login} (id = ${requestScope.iduser})!
+<br/>
+<br/>
+<a href ="${pageContext.request.contextPath}">Back to main page</a>
 </body>
 </html>
