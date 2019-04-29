@@ -26,34 +26,6 @@
 
 <hr/>
 
-<a href="${pageContext.request.contextPath}/jsp/calculator.jsp">calculator</a>
-
-<form name="calculate" action="mainController" method="post">
-    <input type="hidden" name="command" value="calculate"/>
-    <table>
-        <tr>
-            <td>value of a:</td>
-            <td>
-                <input type="text" name="a" value="0">
-            </td>
-        </tr>
-        <tr>
-            <td>value of b:</td>
-            <td>
-                <input type="text" name="b" value="0">
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2">
-                <input type="reset" value="reset"/>
-                <input type="submit" value="calculate"/>
-            </td>
-        </tr>
-    </table>
-</form>
-
-<hr/>
-
 <form name="sign_up" method="post" action="mainController">
     <input type="hidden" name="command" value="sign_up">
     <p>Register form</p>
@@ -87,6 +59,38 @@
 </div>
 <br/>
 <br/>
+
+<hr/>
+
+
+
+<%--<a href="${pageContext.request.contextPath}/jsp/calculator.jsp">calculator</a>
+
+<form name="calculate" action="mainController" method="post">
+    <input type="hidden" name="command" value="calculate"/>
+    <table>
+        <tr>
+            <td>value of a:</td>
+            <td>
+                <input type="text" name="a" value="0">
+            </td>
+        </tr>
+        <tr>
+            <td>value of b:</td>
+            <td>
+                <input type="text" name="b" value="0">
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input type="reset" value="reset"/>
+                <input type="submit" value="calculate"/>
+            </td>
+        </tr>
+    </table>
+</form>
+
+<hr/>--%>
 
 </body>
 </html>

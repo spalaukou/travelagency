@@ -10,8 +10,10 @@
         <element id="directory" name="lib">
           <element id="library" level="project" name="mysql-connector-java-8.0.15" />
           <element id="library" level="project" name="taglibs-standard-impl-1.2.5" />
+          <element id="library" level="project" name="jstl-1.2" />
         </element>
       </element>
+      <element id="library" level="project" name="taglibs-standard-impl-1.2.5" />
     </root>
   </artifact>
 </component>

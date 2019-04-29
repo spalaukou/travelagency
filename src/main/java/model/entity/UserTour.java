@@ -119,11 +119,11 @@ public class UserTour {
     }
 
     public int getUserCost() {
-        return (int) (cost * hot);
+        return userCost;
     }
 
-    public void setUserCost(int userCost) {
-        this.userCost = userCost;
+    public void setUserCost() {
+        this.userCost = (int) (cost * hot);
     }
 
     @Override
@@ -147,5 +147,20 @@ public class UserTour {
     @Override
     public int hashCode() {
         return Objects.hash(country, city, hotelName, star, meal, person, night, transportType, cost, hot, userCost);
+    }
+
+    @Override
+    public String toString() {
+        return country + " " +
+                city + " " +
+                hotelName + " " +
+                star + " " +
+                meal + " " +
+                person + " " +
+                night + " " +
+                transportType + " " +
+                cost + " " +
+                hot + " " +
+                userCost;
     }
 }

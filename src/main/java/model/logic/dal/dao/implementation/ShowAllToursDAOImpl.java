@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -21,7 +22,11 @@ public class ShowAllToursDAOImpl implements ShowAllToursDAO {
     @Override
     public List<UserTour> getList() {
         Connection connection = ConnectionPool.getConnection();
-        List<UserTour> list = null;
+        List<UserTour> list;
+
+        {
+            list = new ArrayList<>();
+        }
 
         try {
             Statement statement = connection.createStatement();
@@ -29,20 +34,34 @@ public class ShowAllToursDAOImpl implements ShowAllToursDAO {
 
             ResultSet resultSet = statement.executeQuery(sql);
 
-            System.out.println("hello");
-
             while(resultSet.next()) {
-                System.out.print(resultSet.getString("hotel.country") + " ");
-                System.out.print(resultSet.getString("hotel.city") + " ");
-                System.out.print(resultSet.getString("hotel.name") + " ");
-                System.out.print(resultSet.getInt("hotel.star") + " ");
-                System.out.print(resultSet.getString("hotel.meal") + " ");
-                System.out.print(resultSet.getInt("hotel.person") + " ");
-                System.out.print(resultSet.getInt("tour.night") + " ");
-                System.out.print(resultSet.getString("transport.type") + " ");
-                System.out.print(resultSet.getInt("tour.cost") + " ");
-                System.out.print(resultSet.getFloat("tour.hot") + " ");
+                UserTour userTour = new UserTour();
+                userTour.setCountry(resultSet.getString("hotel.country"));
+                userTour.setCity(resultSet.getString("hotel.city"));
+                userTour.setHotelName(resultSet.getString("hotel.name"));
+                userTour.setStar(resultSet.getInt("hotel.star"));
+                userTour.setMeal(resultSet.getString("hotel.meal"));
+                userTour.setPerson(resultSet.getInt("hotel.person"));
+                userTour.setNight(resultSet.getInt("tour.night"));
+                userTour.setTransportType(resultSet.getString("transport.type"));
+                userTour.setCost(resultSet.getInt("tour.cost"));
+                userTour.setHot(resultSet.getFloat("tour.hot"));
+                userTour.setUserCost();
+                list.add(userTour);
+
+//                System.out.print(resultSet.getString("hotel.country") + " ");
+//                System.out.print(resultSet.getString("hotel.city") + " ");
+//                System.out.print(resultSet.getString("hotel.name") + " ");
+//                System.out.print(resultSet.getInt("hotel.star") + " ");
+//                System.out.print(resultSet.getString("hotel.meal") + " ");
+//                System.out.print(resultSet.getInt("hotel.person") + " ");
+//                System.out.print(resultSet.getInt("tour.night") + " ");
+//                System.out.print(resultSet.getString("transport.type") + " ");
+//                System.out.print(resultSet.getInt("tour.cost") + " ");
+//                System.out.print(resultSet.getFloat("tour.hot") + " ");
+//                System.out.println();
             }
+//            System.out.println(list);
         } catch (SQLException e) {
             e.printStackTrace();
         }

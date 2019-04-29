@@ -19,4 +19,5 @@ public final class DBConstantContainer {
     //DB constants
     public static final int WRONG_RESPONSE = -1;
     public static final String ID_USER = "iduser";
+    public static final String USER_TOUR = "user_tour";
 }

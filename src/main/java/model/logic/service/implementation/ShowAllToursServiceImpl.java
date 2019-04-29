@@ -16,7 +16,6 @@ public class ShowAllToursServiceImpl implements ShowAllToursService {
 
     @Override
     public List<UserTour> getList() {
-        System.out.println(0);
         DAOFactory daoFactory = DAOFactory.getInstance();
         ShowAllToursDAO showAllToursDAO = daoFactory.getShowAllToursDAO();
 

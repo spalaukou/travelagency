@@ -3,6 +3,7 @@ package controller.command.implementation;
 import controller.command.Command;
 import model.ConstantContainer;
 import model.entity.UserTour;
+import model.logic.dal.db_connection.DBConstantContainer;
 import model.logic.service.ServiceFactory;
 import model.logic.service.ShowAllToursService;
 
@@ -23,8 +24,9 @@ public class ShowAllToursCommand implements Command {
         ServiceFactory serviceFactory = ServiceFactory.getInstance();
         ShowAllToursService tourService = serviceFactory.getShowAllToursService();
 
-        tourService.getList();
+        list = tourService.getList();
 
+        request.setAttribute("tourlist", list);
 
         return ConstantContainer.TOURS_PAGE;
     }
