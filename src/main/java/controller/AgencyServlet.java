@@ -20,7 +20,7 @@ import java.io.IOException;
  * @project TravelAgency
  */
 
-@WebServlet("/mainController")
+@WebServlet("/start")
 public class AgencyServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) {
@@ -36,17 +36,15 @@ public class AgencyServlet extends HttpServlet {
         String cmd = request.getParameter(ConstantContainer.COMMAND);
 
         Command command = CommandManager.getCommand(cmd);
-        String page = null;
 
+        String page;
         page = command.execute(request);
 
         RequestDispatcher dispatcher = request.getRequestDispatcher(page);
 
         try {
             dispatcher.forward(request, response);
-        } catch (ServletException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+        } catch (ServletException | IOException e) {
             e.printStackTrace();
         }
     }

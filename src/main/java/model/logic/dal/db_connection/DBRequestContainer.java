@@ -16,6 +16,8 @@ public final class DBRequestContainer {
             " FROM tour, hotel, transport" +
             " WHERE idhotel = hotel_id AND idtransport = transport_id;";
 
+    public static final String GET_USER = "SELECT * FROM user WHERE login = \'";
+
     public static final String GET_TOURS_BY_COUNTRY_BEGIN = "SELECT" +
             " hotel.country, hotel.city, hotel.name, hotel.star, hotel.meal, hotel.person," +
             " tour.night, transport.type, tour.cost, tour.hot" +

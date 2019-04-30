@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: Admin
@@ -11,17 +12,10 @@
     <title>Title</title>
 </head>
 <body>
-<div style="overflow:hidden">
-    <div style="float:left">
-        <a href ="${pageContext.request.contextPath}">GoTravel</a>
-    </div>
-    <div style="float:right">
-        <a href ="${pageContext.request.contextPath}/jsp/sign_in.jsp">Sing In</a>
-        <a href ="${pageContext.request.contextPath}">Sing Up</a>
-    </div>
-</div>
 
-<hr/>
+<c:if test="${sessionScope.user == null}">
+    <jsp:include page="header/GuestHeader.jsp"/>
+</c:if>
 
 <p>You are successfully signed up, ${param.login} (id = ${requestScope.iduser})!
 <br/>

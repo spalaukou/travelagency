@@ -14,34 +14,50 @@
 
 <body>
 
-<div style="overflow:hidden">
+<c:if test="${sessionScope.user == null}">
+    <jsp:include page="jsp/header/GuestHeader.jsp"/>
+</c:if>
+
+<%--<c:if test="${sessionScope.user != null}">
+    <jsp:include page="header/RegistredUserHeader.jsp">
+        <jsp:param name="balance" value="${balance}"/>
+    </jsp:include>
+</c:if>--%>
+
+<%--<div style="overflow:hidden">
     <div style="float:left">
         <a href="${pageContext.request.contextPath}">GoTravel</a>
     </div>
     <div style="float:right">
-        <a href="${pageContext.request.contextPath}/jsp/sign_in.jsp">Sing In</a>
-        <a href="${pageContext.request.contextPath}">Sing Up</a>
+        <a href="${pageContext.request.contextPath}/jsp/sign_in.jsp">Sign In</a>
+        <a href="${pageContext.request.contextPath}">Sign Up</a>
     </div>
+</div>
+
+<hr/>--%>
+
+<div style="text-align: center;">
+    <form name="sign_up" method="post" action="start">
+        <input type="hidden" name="command" value="sign_up">
+        <p>Register form</p>
+        <p>Login:<br>
+            <input type="text" name="login" size="20">
+        </p>
+        <p>Password:<br>
+            <input type="text" name="password" size="20">
+        </p>
+        <input type="reset" value="Clear form">
+        <input type="submit" value="Sign Up">
+    </form>
 </div>
 
 <hr/>
 
-<form name="sign_up" method="post" action="mainController">
-    <input type="hidden" name="command" value="sign_up">
-    <p>Register form</p>
-    <p>Login(3 chars min):<br>
-        <input type="text" name="login" size="20">
-    </p>
-    <p>Password(3 chars min):<br>
-        <input type="text" name="password" size="20">
-    </p>
-    <input type="reset" value="Clear form">
-    <input type="submit" value="Sign Up">
-</form>
+<div style="text-align: center;">
+    <a href="start?command=show_all_tours">Show all tours</a>
+</div>
 
-<hr/>
-
-<div style="float: left;">
+<%--<div style="float: left;">
     <form name="show_all_tours" method="post" action="mainController">
         <input type="hidden" name="command" value="show_all_tours">
         <input type="submit" value="Show all tours">
@@ -58,11 +74,9 @@
     </form>
 </div>
 <br/>
-<br/>
+<br/>--%>
 
-<hr/>
-
-
+<jsp:include page="jsp/footer/footer.jsp"/>
 
 <%--<a href="${pageContext.request.contextPath}/jsp/calculator.jsp">calculator</a>
 

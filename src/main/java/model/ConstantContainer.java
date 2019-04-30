@@ -17,7 +17,26 @@ public final class ConstantContainer {
     public final static String USER = "user";
     public final static String SHOW_ALL_TOURS = "show_all_tours";
 
+    //attributes
+    public final static String ERR_LOGIN_PASS_MSG = "errorLoginPassMessage";
+    public final static String SHORT_LOGIN_PASS_MSG = "shortLoginPassMessage";
+    public final static String USER_ID = "userid";
+    public final static String USER_TYPE = "userType";
+    public final static String BALANCE = "balance";
+    public final static String DISCOUNT = "discount";
+
     //pages
+    public final static String GUEST_HEADER = "header/GuestHeader.jsp";
+    public final static String INDEX_PAGE = "index.jsp";
     public final static String SIGN_UP_PAGE = "jsp/sign_up.jsp";
+    public final static String SIGN_IN_PAGE = "jsp/sign_in.jsp";
     public final static String TOURS_PAGE = "jsp/tours_table.jsp";
+    public final static String MAIN_PAGE = "jsp/main.jsp";
+    public final static String ERROR_PAGE = "jsp/error.jsp";
+
+    //messages
+    public final static String MESSAGE_LOGIN_ERROR = "Incorrect login or password.";
+    public final static String MESSAGE_SHORT_LOGIN_PASS = "Too short login or password (min 3).";
+    public final static String MESSAGE_NULL_PAGE = "Page not found. Business logic error";
+    public final static String MESSAGE_WRONG_ACTION = ": command not found or wrong!";
 }

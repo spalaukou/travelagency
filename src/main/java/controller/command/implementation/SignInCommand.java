@@ -2,9 +2,12 @@ package controller.command.implementation;
 
 import controller.command.Command;
 import model.ConstantContainer;
-import servlet.command.ConfigurationManager;
+import model.entity.User;
+import model.logic.service.ServiceFactory;
+import model.logic.service.UserService;
+import model.logic.validator.Validator;
+import model.logic.validator.ValidatorFactory;
 import servlet.command.LoginLogic;
-import servlet.command.MessageManager;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -17,20 +20,45 @@ public class SignInCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request) {
-        String page = null;
-        // извлечение из запроса логина и пароля
-        String login = request.getParameter(ConstantContainer.LOGIN);
-        String pass = request.getParameter(ConstantContainer.PASSWORD);
-        // проверка логина и пароля
-        if (LoginLogic.checkLogin(login, pass)) {
-            request.setAttribute(ConstantContainer.USER, login);
-            // определение пути к main.jsp
-            page = ConfigurationManager.getProperty("path.page.main");
+        String page;
+
+        ValidatorFactory validatorFactory = ValidatorFactory.getInstance();
+        Validator lengthValidator = validatorFactory.getLoginPassLengthValidator();
+
+        ServiceFactory serviceFactory = ServiceFactory.getInstance();
+        UserService userService = serviceFactory.getUserService();
+
+        if (lengthValidator.validate(request)) {
+            User user = userService.signIn(request);
+
+            if(user != null) {
+                request.setAttribute(ConstantContainer.USER_ID, user.getId());
+                request.setAttribute(ConstantContainer.USER_TYPE, user.getType());
+                request.setAttribute(ConstantContainer.LOGIN, user.getLogin());
+                request.setAttribute(ConstantContainer.PASSWORD, user.getPassword());
+                request.setAttribute(ConstantContainer.BALANCE, user.getBalance());
+                request.setAttribute(ConstantContainer.DISCOUNT, user.getDiscount());
+
+                page = ConstantContainer.MAIN_PAGE;
+            } else {
+                request.setAttribute(ConstantContainer.ERR_LOGIN_PASS_MSG, ConstantContainer.MESSAGE_LOGIN_ERROR);
+                page = ConstantContainer.SIGN_IN_PAGE;
+            }
+
+//            if (LoginLogic.checkLogin(login, password)) {
+//                request.setAttribute(ConstantContainer.USER, login);
+//
+//                page = ConstantContainer.MAIN_PAGE;
+//            } else {
+//                request.setAttribute(ConstantContainer.ERR_LOGIN_PASS_MSG, ConstantContainer.MESSAGE_LOGIN_ERROR);
+//                page = ConstantContainer.SIGN_IN_PAGE;
+//            }
+
         } else {
-                    request.setAttribute("errorLoginPassMessage",
-                    MessageManager.getProperty("message.loginerror"));
-            page = ConfigurationManager.getProperty("path.page.login");
+            request.setAttribute(ConstantContainer.ERR_LOGIN_PASS_MSG, ConstantContainer.MESSAGE_SHORT_LOGIN_PASS);
+            page = ConstantContainer.SIGN_IN_PAGE;
         }
+
         return page;
     }
 }

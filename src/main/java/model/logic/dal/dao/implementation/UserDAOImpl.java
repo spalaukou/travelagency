@@ -1,11 +1,14 @@
 package model.logic.dal.dao.implementation;
 
+import model.ConstantContainer;
+import model.entity.User;
 import model.logic.dal.dao.UserDAO;
 import model.logic.dal.db_connection.DBConstantContainer;
 import model.logic.dal.db_connection.DBRequestContainer;
 import model.logic.dal.db_connection.connection_pool.ConnectionPool;
 import model.logic.exception.technical.DAOSQLException;
 
+import javax.servlet.http.HttpServletRequest;
 import java.sql.*;
 
 /**
@@ -15,10 +18,10 @@ import java.sql.*;
 
 public class UserDAOImpl implements UserDAO {
 
+    Connection connection = ConnectionPool.getConnection();
+
     @Override
     public int signUp(String login, String password) throws DAOSQLException {
-
-        Connection connection = ConnectionPool.getConnection();
 
         int userID = DBConstantContainer.WRONG_RESPONSE;
 
@@ -40,6 +43,33 @@ public class UserDAOImpl implements UserDAO {
         } catch (SQLException e) {
             throw new DAOSQLException(e);
         }
+    }
+
+    @Override
+    public User signIn(HttpServletRequest request) {
+        User user = null;
+
+        String login = request.getParameter(ConstantContainer.LOGIN);
+
+        try {
+            Statement statement = connection.createStatement();
+            String sql = DBRequestContainer.GET_USER + login + DBRequestContainer.SQL_END;
+            ResultSet resultSet = statement.executeQuery(sql);
+
+            while(resultSet.next()) {
+                user = new User();
+                user.setId(resultSet.getInt(DBConstantContainer.ID_USER));
+                user.setType(User.Type.valueOf(resultSet.getString(DBConstantContainer.USER_TYPE).toUpperCase()));
+                user.setLogin(resultSet.getString(DBConstantContainer.USER_LOGIN));
+                user.setPassword(resultSet.getString(DBConstantContainer.USER_PASSWORD));
+                user.setBalance(resultSet.getInt(DBConstantContainer.USER_BALANCE));
+                user.setDiscount(resultSet.getFloat(DBConstantContainer.USER_DISCOUNT));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return user;
     }
 }
 

@@ -5,12 +5,12 @@
          version="4.0">
 
     <servlet>
-        <servlet-name>Controller</servlet-name>
+        <servlet-name>start</servlet-name>
         <servlet-class>controller.AgencyServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>Controller</servlet-name>
+        <servlet-name>start</servlet-name>
         <url-pattern>/TravelAgency</url-pattern>
     </servlet-mapping>
 

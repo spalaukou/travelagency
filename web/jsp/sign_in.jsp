@@ -11,38 +11,33 @@
     <title>Sign In</title>
 </head>
 <body>
-<div style="overflow:hidden">
-    <div style="float:left">
-        <a href ="${pageContext.request.contextPath}">GoTravel</a>
-    </div>
-    <div style="float:right">
-        <a href ="${pageContext.request.contextPath}/jsp/sign_in.jsp">Sing In</a>
-        <a href ="${pageContext.request.contextPath}">Sing Up</a>
-    </div>
+
+<jsp:include page="header/GuestHeader.jsp"/>
+
+<div style="text-align: center;">
+    <form name="loginForm" method="POST" action="${pageContext.request.contextPath}\start">
+        <input type="hidden" name="command" value="sign_in"/>
+        <p>Please, sign in</p>
+        <p>Login:<br/>
+            <input type="text" name="login"/>
+        </p>
+        <p>Password:<br/>
+            <input type="password" name="password"/>
+        </p>
+        ${errorLoginPassMessage}
+        ${shortLoginPassMessage}
+        ${wrongAction}
+        ${nullPage}
+        <br/>
+        <tr>
+            <td colspan="2">
+                <input type="reset" value="Clear form"/>
+                <input type="submit" value="Sign In"/>
+            </td>
+        </tr>
+    </form>
 </div>
-
-<hr/>
-
-<form name="loginForm" method="POST" action="controller">
-    <input type="hidden" name="command" value="sign_in" />
-    Login:<br/>
-    <input type="text" name="login" value=""/>
-    <br/>Password:<br/>
-    <input type="password" name="password" value=""/>
-    <br/>
-    ${errorLoginPassMessage}
-    <br/>
-    ${wrongAction}
-    <br/>
-    ${nullPage}
-    <br/>
-    <tr>
-        <td colspan="2">
-            <input type="reset" value="Reset"/>
-            <input type="submit" value="Log in"/>
-        </td>
-    </tr>
-</form><hr/>
+<jsp:include page="footer/footer.jsp"/>
 
 </body>
 </html>

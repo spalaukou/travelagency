@@ -4,6 +4,8 @@ import model.entity.UserTour;
 import model.logic.dal.dao.ShowAllToursDAO;
 import model.logic.dal.db_connection.DBRequestContainer;
 import model.logic.dal.db_connection.connection_pool.ConnectionPool;
+import model.logic.dal.db_connection.connection_pool.TourConnectionPool;
+import model.logic.exception.technical.TourConnectionPoolException;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -21,6 +23,14 @@ public class ShowAllToursDAOImpl implements ShowAllToursDAO {
 
     @Override
     public List<UserTour> getList() {
+//        TourConnectionPool tourConnectionPool = TourConnectionPool.getInstance();
+//        Connection connection = null;
+//        try {
+//            connection = tourConnectionPool.getConnection();
+//        } catch (TourConnectionPoolException e) {
+//            e.printStackTrace();
+//        }
+
         Connection connection = ConnectionPool.getConnection();
         List<UserTour> list;
 

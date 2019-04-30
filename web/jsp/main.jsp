@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: Admin
@@ -11,22 +12,24 @@
     <title>Welcome</title>
 </head>
 <body>
-<div style="overflow:hidden">
-    <div style="float:left">
-        <a href ="${pageContext.request.contextPath}">GoTravel</a>
-    </div>
-    <div style="float:right">
-        <a href ="${pageContext.request.contextPath}/jsp/sign_in.jsp">Sing In</a>
-        <a href ="${pageContext.request.contextPath}">Sing Up</a>
-    </div>
+
+<div class="content">
+    <c:if test="${requestScope.login == null}">
+        <jsp:include page="header/GuestHeader.jsp"/>
+    </c:if>
+
+    <c:if test="${requestScope.login != null}">
+        <jsp:include page="header/CustomerHeader.jsp"/>
+    </c:if>
 </div>
 
-    <h3>
-        Welcome
-    </h3>
-    <hr/>
-        ${user}, hello!
-    <hr/>
-    <a href="controller?command=logout">Logout</a>
+    <div>
+        <div style="text-align: center;">
+            Content for registered user.
+        </div>
+    </div>
+
+<jsp:include page="footer/footer.jsp"/>
+
 </body>
 </html>

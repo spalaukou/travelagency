@@ -91,4 +91,16 @@ public class User extends BaseEntity {
     public int hashCode() {
         return Objects.hash(type, login, password, balance, discount);
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "type=" + type +
+                ", login='" + login + '\'' +
+                ", password='" + password + '\'' +
+                ", balance=" + balance +
+                ", discount=" + discount +
+                ", id=" + id +
+                '}';
+    }
 }

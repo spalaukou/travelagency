@@ -14,7 +14,8 @@ public class CommandManager {
 
     public enum CommandType {
         DEFAULT,
-        SIGN_IN, SIGN_UP,
+
+        SIGN_IN, SIGN_UP, SIGN_OUT,
 
         SHOW_ALL_TOURS,
         SHOW_TURKEY_TOURS,
@@ -33,6 +34,7 @@ public class CommandManager {
         map.put(CommandType.DEFAULT, new EmptyCommand());
         map.put(CommandType.SIGN_IN, new SignInCommand());
         map.put(CommandType.SIGN_UP, new SignUpCommand());
+        map.put(CommandType.SIGN_OUT, new SignOutCommand());
         map.put(CommandType.SHOW_ALL_TOURS, new ShowAllToursCommand());
         //del
         map.put(CommandType.CALCULATE, new CalculateCommand());
