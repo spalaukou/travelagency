@@ -17,7 +17,7 @@
 <div style="text-align: center;">
     <form name="loginForm" method="POST" action="${pageContext.request.contextPath}\start">
         <input type="hidden" name="command" value="sign_in"/>
-        <p>Please, sign in</p>
+        <p>Please, Sign In.</p>
         <p>Login:<br/>
             <input type="text" name="login"/>
         </p>

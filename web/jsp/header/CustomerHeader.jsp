@@ -18,7 +18,7 @@
         <td width="70%" style="text-align: center;">Welcome to GoTravel, ${login}!</td>
         <td>
             <div style="text-align: right;">
-                <a href="mainController?command=sign_out">Sign out</a>
+                <a href="start?command=sign_out">Sign out</a>
             </div>
         </td>
     </tr>

@@ -1,14 +1,13 @@
 package model.logic.dal.dao.implementation;
 
-import model.ConstantContainer;
 import model.entity.User;
 import model.logic.dal.dao.UserDAO;
 import model.logic.dal.db_connection.DBConstantContainer;
 import model.logic.dal.db_connection.DBRequestContainer;
-import model.logic.dal.db_connection.connection_pool.ConnectionPool;
+import model.logic.dal.db_connection.connection_pool.TourConnectionPool;
 import model.logic.exception.technical.DAOSQLException;
+import model.logic.exception.technical.TourConnectionPoolException;
 
-import javax.servlet.http.HttpServletRequest;
 import java.sql.*;
 
 /**
@@ -18,57 +17,58 @@ import java.sql.*;
 
 public class UserDAOImpl implements UserDAO {
 
-    Connection connection = ConnectionPool.getConnection();
-
     @Override
-    public int signUp(String login, String password) throws DAOSQLException {
+    public void signUp(String login, String password) throws DAOSQLException, TourConnectionPoolException {
 
-        int userID = DBConstantContainer.WRONG_RESPONSE;
+        TourConnectionPool tourConnectionPool = TourConnectionPool.getInstance();
+        Connection connection = tourConnectionPool.getConnection();
 
-        try {
-            CallableStatement statement = connection.prepareCall(DBRequestContainer.USER_SIGN_UP_REQUEST);
-            statement.setString(1, login);
-            statement.setString(2, password);
-            statement.execute();
+        if (connection != null) {
+            try (PreparedStatement statement =
+                         connection.prepareStatement(DBRequestContainer.USER_SIGN_UP_REQUEST)) {
 
-            Statement get = connection.createStatement();
-            String sql = DBRequestContainer.CHECK_LOGIN_BEGIN + login + DBRequestContainer.SQL_END;
-            ResultSet resultSet = get.executeQuery(sql);
+                statement.setString(1, login);
+                statement.setString(2, password);
+                statement.executeUpdate();
 
-            while(resultSet.next()) {
-                userID = resultSet.getInt(DBConstantContainer.ID_USER);
+            } catch (SQLException e) {
+                throw new DAOSQLException(e);
+            } finally {
+                tourConnectionPool.returnConnection(connection);
             }
-
-            return userID;
-        } catch (SQLException e) {
-            throw new DAOSQLException(e);
         }
     }
 
     @Override
-    public User signIn(HttpServletRequest request) {
+    public User signIn(String login, String password) throws TourConnectionPoolException, DAOSQLException {
         User user = null;
 
-        String login = request.getParameter(ConstantContainer.LOGIN);
+        TourConnectionPool tourConnectionPool = TourConnectionPool.getInstance();
+        Connection connection = tourConnectionPool.getConnection();
 
-        try {
-            Statement statement = connection.createStatement();
-            String sql = DBRequestContainer.GET_USER + login + DBRequestContainer.SQL_END;
-            ResultSet resultSet = statement.executeQuery(sql);
+        if(connection != null) {
+            try (PreparedStatement statement =
+                         connection.prepareStatement(DBRequestContainer.GET_USER)) {
 
-            while(resultSet.next()) {
-                user = new User();
-                user.setId(resultSet.getInt(DBConstantContainer.ID_USER));
-                user.setType(User.Type.valueOf(resultSet.getString(DBConstantContainer.USER_TYPE).toUpperCase()));
-                user.setLogin(resultSet.getString(DBConstantContainer.USER_LOGIN));
-                user.setPassword(resultSet.getString(DBConstantContainer.USER_PASSWORD));
-                user.setBalance(resultSet.getInt(DBConstantContainer.USER_BALANCE));
-                user.setDiscount(resultSet.getFloat(DBConstantContainer.USER_DISCOUNT));
+                statement.setString(1, login);
+                ResultSet resultSet = statement.executeQuery();
+
+                while (resultSet.next()) {
+                    user = new User();
+                    user.setId(resultSet.getInt(DBConstantContainer.ID_USER));
+                    user.setType(User.Type.valueOf(resultSet.getString(DBConstantContainer.USER_TYPE).toUpperCase()));
+                    user.setLogin(resultSet.getString(DBConstantContainer.USER_LOGIN));
+                    user.setPassword(resultSet.getString(DBConstantContainer.USER_PASSWORD));
+                    user.setBalance(resultSet.getInt(DBConstantContainer.USER_BALANCE));
+                    user.setDiscount(resultSet.getFloat(DBConstantContainer.USER_DISCOUNT));
+                }
+
+            } catch (SQLException e) {
+                throw new DAOSQLException(e);
+            } finally {
+                tourConnectionPool.returnConnection(connection);
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
-
         return user;
     }
 }

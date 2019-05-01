@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 
 public interface UserDAO {
 
-    int signUp(String login, String password) throws TourConnectionPoolException, DAOSQLException;
+    void signUp(String login, String password) throws TourConnectionPoolException, DAOSQLException;
 
-    User signIn(HttpServletRequest request);
+    User signIn(String login, String password) throws TourConnectionPoolException, DAOSQLException;
 }

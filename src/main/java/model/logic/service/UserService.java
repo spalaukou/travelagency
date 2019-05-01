@@ -1,8 +1,10 @@
 package model.logic.service;
 
 import model.entity.User;
+import model.logic.exception.logical.ServiceSQLException;
 import model.logic.exception.technical.DAOSQLException;
 import model.logic.exception.technical.DBconnectionException;
+import model.logic.exception.technical.DataSourceException;
 import model.logic.exception.technical.TourConnectionPoolException;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,8 +16,8 @@ import javax.servlet.http.HttpServletRequest;
 
 public interface UserService {
 
-    int signUp(String login, String password);
+    void signUp(String login, String password);
 
-    User signIn(HttpServletRequest request);
+    User signIn(String login, String password) throws DataSourceException, ServiceSQLException;
 
 }

@@ -21,7 +21,7 @@ public class CommandManager {
         SHOW_TURKEY_TOURS,
         SHOW_SPAIN_TOURS,
 
-        CALCULATE, ALL_TOURS;
+        CALCULATE;
     }
 
     private CommandManager() {
