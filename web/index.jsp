@@ -12,6 +12,8 @@
 
 <body>
 
+<%--Кодировка запроса: ${pageContext.request.characterEncoding}--%>
+
 <c:if test="${sessionScope.login == null}">
     <jsp:include page="jsp/header/guestHeader.jsp"/>
     <br/>
@@ -27,7 +29,7 @@
     <jsp:include page="jsp/header/userHeader.jsp"/>
     <br/>
     <div style="text-align: center;">
-        Please select tours that interest to buy it:
+        Please select tours that interest to buy:
     </div>
     <br/>
 </c:if>

@@ -1,6 +1,7 @@
 package controller.command.implementation;
 
 import controller.command.Command;
+import model.ConstantContainer;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -13,6 +14,6 @@ public class EmptyCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request) {
-        return "error.jsp";
+        return ConstantContainer.ERROR_PAGE;
     }
 }

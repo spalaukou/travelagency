@@ -50,7 +50,7 @@ public class SignInCommand implements Command {
                 } catch (DataSourceException e) {
                     //log
                 } catch (ServiceSQLException e) {
-                    e.printStackTrace();
+                    //log
                 }
             } else {
                 request.setAttribute(ConstantContainer.ERR_LOGIN_PASS_MSG, ConstantContainer.MESSAGE_LOGIN_ERROR);

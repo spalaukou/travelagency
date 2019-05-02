@@ -16,6 +16,7 @@ public final class ConstantContainer {
     public final static int PASSWORD_MIN_LENGTH = 3;
     public final static String USER = "user";
     public final static String SHOW_ALL_TOURS = "show_all_tours";
+    public final static String LOCALIZATION = "localization";
 
     //attributes
     public final static String ERR_LOGIN_PASS_MSG = "errorLoginPassMessage";
