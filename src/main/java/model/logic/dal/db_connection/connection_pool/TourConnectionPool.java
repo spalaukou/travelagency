@@ -84,27 +84,4 @@ public final class TourConnectionPool {
         connectionQueue.add(connection);
     }
 
-    /*private static TourConnectionPool INSTANCE = new TourConnectionPool();
-    private static DataSource datasource;
-
-    private TourConnectionPool() {
-    }
-
-    public static TourConnectionPool getInstance() {
-        return INSTANCE;
-    }
-
-    public static synchronized DataSource getConnection() throws DBconnectionException {
-        if (datasource == null) {
-            try {
-                Context initCtx = new InitialContext();
-                Context envCtx = (Context) initCtx.lookup("java:comp/env");
-                datasource = (DataSource) envCtx.lookup("jdbc/tour");
-            } catch (NamingException ex) {
-                throw new DBconnectionException();
-            }
-        }
-        return datasource;
-    }*/
-
 }

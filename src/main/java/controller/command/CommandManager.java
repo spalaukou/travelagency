@@ -19,9 +19,7 @@ public class CommandManager {
 
         SHOW_ALL_TOURS,
         SHOW_TURKEY_TOURS,
-        SHOW_SPAIN_TOURS,
-
-        CALCULATE;
+        SHOW_SPAIN_TOURS;
     }
 
     private CommandManager() {
@@ -36,8 +34,6 @@ public class CommandManager {
         map.put(CommandType.SIGN_UP, new SignUpCommand());
         map.put(CommandType.SIGN_OUT, new SignOutCommand());
         map.put(CommandType.SHOW_ALL_TOURS, new ShowAllToursCommand());
-        //del
-        map.put(CommandType.CALCULATE, new CalculateCommand());
     }
 
     public static Command getCommand(String cmd) {

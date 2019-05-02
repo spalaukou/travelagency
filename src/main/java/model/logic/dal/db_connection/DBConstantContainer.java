@@ -17,7 +17,6 @@ public final class DBConstantContainer {
     public static final int MAX_CONNECTIONS = 10;
 
     //DB constants
-    public static final int WRONG_RESPONSE = -1;
     public static final String ID_USER = "iduser";
     public static final String USER_TYPE = "user.type";
     public static final String USER_LOGIN = "user.login";
@@ -25,5 +24,4 @@ public final class DBConstantContainer {
     public static final String USER_BALANCE = "user.balance";
     public static final String USER_DISCOUNT = "user.discount";
 
-    public static final String USER_TOUR = "user_tour";
 }

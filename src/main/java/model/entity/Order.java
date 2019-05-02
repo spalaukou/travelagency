@@ -3,8 +3,13 @@ package model.entity;
 import java.util.Objects;
 
 /**
+ * Order is a class, that contains information
+ * about User and what Tour he has bought.
+ *
  * @author Stanislau Palaukou on 28.04.2019
  * @project TravelAgency
+ * @see User
+ * @see Tour
  */
 
 public class Order extends BaseEntity {

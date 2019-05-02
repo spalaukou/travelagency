@@ -3,9 +3,6 @@ package controller;
 import controller.command.Command;
 import controller.command.CommandManager;
 import model.ConstantContainer;
-import model.logic.exception.technical.DAOSQLException;
-import model.logic.exception.technical.DBconnectionException;
-import model.logic.exception.technical.TourConnectionPoolException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -31,7 +28,7 @@ public class AgencyServlet extends HttpServlet {
             processRequest(request, response);
     }
 
-    public void processRequest(HttpServletRequest request, HttpServletResponse response) {
+    private void processRequest(HttpServletRequest request, HttpServletResponse response) {
 
         String cmd = request.getParameter(ConstantContainer.COMMAND);
 

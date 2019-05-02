@@ -1,18 +1,17 @@
 package model.entity;
 
-import model.entity.old.Customer;
 
 import java.util.Objects;
 
 /**
- * Tour is a entity, that can buy a Customer.
+ * Tour is an entity, that can buy a Customer, and manage an Agent.
  * Tour has a price (USD), can be a hot(Tour Agent can change this variable,
  * is 1.0 by default), has a type(vacation, excursion, shopping) and
  * description(info about hotel is String).
  *
  * @author Stanislau Palaukou on 21.04.2019
  * @project TravelAgency
- * @see Customer
+ * @see User
  */
 
 public class Tour extends BaseEntity {

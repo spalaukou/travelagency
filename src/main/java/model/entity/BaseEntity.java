@@ -1,7 +1,7 @@
 package model.entity;
 
 /**
- * Basic class for all entities.
+ * Basic class for all entities of project.
  *
  * @author Stanislau Palaukou on 21.04.2019
  * @project TravelAgency

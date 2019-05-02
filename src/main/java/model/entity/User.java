@@ -3,9 +3,9 @@ package model.entity;
 import java.util.Objects;
 
 /**
- * User is a User, that can be a Travel Agent(can manage Tours
- * (create, change, delete) and set 'hot' variable in double
- * to special Tours) and can be a Customer(can buy Tours).
+ * User can be a Travel Agent(can manage Tours - create, change
+ * and delete) and set 'hot' variable in float to special Tours)
+ * and can be a Customer(can buy Tours).
  *
  * @author Stanislau Palaukou on 21.04.2019
  * @project TravelAgency

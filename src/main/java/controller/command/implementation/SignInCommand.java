@@ -38,14 +38,15 @@ public class SignInCommand implements Command {
                     UserService userService = serviceFactory.getUserService();
 
                     User user = userService.signIn(login, password);
-                    request.setAttribute(ConstantContainer.USER_ID, user.getId());
-                    request.setAttribute(ConstantContainer.USER_TYPE, user.getType());
-                    request.setAttribute(ConstantContainer.LOGIN, user.getLogin());
-                    request.setAttribute(ConstantContainer.PASSWORD, user.getPassword());
-                    request.setAttribute(ConstantContainer.BALANCE, user.getBalance());
-                    request.setAttribute(ConstantContainer.DISCOUNT, user.getDiscount());
+                    request.getSession().setAttribute(ConstantContainer.LOGIN, user.getLogin());
+                    request.getSession().setAttribute(ConstantContainer.USER_ID, user.getId());
+                    request.getSession().setAttribute(ConstantContainer.USER_TYPE, user.getType());
+                    request.getSession().setAttribute(ConstantContainer.LOGIN, user.getLogin());
+                    request.getSession().setAttribute(ConstantContainer.PASSWORD, user.getPassword());
+                    request.getSession().setAttribute(ConstantContainer.BALANCE, user.getBalance());
+                    request.getSession().setAttribute(ConstantContainer.DISCOUNT, user.getDiscount());
 
-                    page = ConstantContainer.MAIN_PAGE;
+                    page = ConstantContainer.INDEX_PAGE;
                 } catch (DataSourceException e) {
                     //log
                 } catch (ServiceSQLException e) {

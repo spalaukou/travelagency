@@ -3,8 +3,12 @@ package model.entity;
 import java.util.Objects;
 
 /**
+ * Hotel is a an entity, that contains in a Tour
+ * and contains Hotel characteristics.
+ *
  * @author Stanislau Palaukou on 28.04.2019
  * @project TravelAgency
+ * @see Tour
  */
 
 public class Hotel extends BaseEntity {
