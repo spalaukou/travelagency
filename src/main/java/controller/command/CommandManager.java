@@ -17,6 +17,8 @@ public class CommandManager {
 
         SIGN_IN, SIGN_UP, SIGN_OUT,
 
+        SHOW_TOURS,
+
         SHOW_ALL_TOURS,
         SHOW_TURKEY_TOURS,
         SHOW_SPAIN_TOURS,
@@ -37,6 +39,7 @@ public class CommandManager {
         map.put(CommandType.SIGN_OUT, new SignOutCommand());
         map.put(CommandType.SHOW_ALL_TOURS, new ShowAllToursCommand());
         map.put(CommandType.CHANGE_LOCALE, new ChangeLocaleCommand());
+        map.put(CommandType.SHOW_TOURS, new ShowToursCommand());
     }
 
     public static Command getCommand(String cmd) {

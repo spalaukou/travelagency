@@ -30,7 +30,7 @@ public class AccessValidator implements Validator {
             connection = tourConnectionPool.getConnection();
             if(connection != null) {
                 try (PreparedStatement statement =
-                             connection.prepareStatement(DBRequestContainer.GET_PASSWORD)) {
+                             connection.prepareStatement(DBRequestContainer.GET_PASSWORD_REQUEST)) {
                     statement.setString(1, login);
                     ResultSet resultSet = statement.executeQuery();
 

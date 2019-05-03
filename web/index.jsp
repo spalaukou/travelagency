@@ -43,6 +43,14 @@
     </tr>
 </table>
 <br/>
+<table width="100%" cellspacing="0" cellpadding="4">
+    <tr>
+        <td width="25%" bgcolor="#A9DFBF"><a href="start?command=show_tours&country=all" class="button">Show all Tours</a></td>
+        <td width="25%" bgcolor="#F9E79F"><a href="start?command=show_tours&country=spain" class="button">Travel to Spain</a></td>
+        <td width="25%" bgcolor="#F1948A"><a href="start?command=show_tours&country=turkey" class="button">Rest in Turkey</a></td>
+        <td width="25%" bgcolor="#D3EDF6"><a href="start?command=show_tours&country=greece" class="button">Vacation in Greece</a></td>
+    </tr>
+</table>
 
 <jsp:include page="jsp/footer/footer.jsp"/>
 

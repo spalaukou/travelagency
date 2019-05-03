@@ -15,6 +15,7 @@ public final class ConstantContainer {
     public final static String PASSWORD = "password";
     public final static int PASSWORD_MIN_LENGTH = 3;
     public final static String USER = "user";
+    public final static String COUNTRY = "country";
     public final static String SHOW_ALL_TOURS = "show_all_tours";
     public final static String LOCALIZATION = "localization";
 
@@ -24,6 +25,7 @@ public final class ConstantContainer {
     public final static String USER_TYPE = "userType";
     public final static String BALANCE = "balance";
     public final static String DISCOUNT = "discount";
+    public final static String ENTITES = "entities";
 
     //pages
     public final static String GUEST_HEADER = "header/guestHeader.jsp";

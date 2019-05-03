@@ -48,7 +48,7 @@ public class UserDAOImpl implements UserDAO {
 
         if(connection != null) {
             try (PreparedStatement statement =
-                         connection.prepareStatement(DBRequestContainer.GET_USER)) {
+                         connection.prepareStatement(DBRequestContainer.GET_USER_REQUEST)) {
 
                 statement.setString(1, login);
                 ResultSet resultSet = statement.executeQuery();

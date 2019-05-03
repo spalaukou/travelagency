@@ -28,7 +28,7 @@ public class LoginValidator implements Validator {
             connection = tourConnectionPool.getConnection();
             if(connection != null) {
                 try (PreparedStatement statement =
-                             connection.prepareStatement(DBRequestContainer.CHECK_LOGIN)) {
+                             connection.prepareStatement(DBRequestContainer.CHECK_LOGIN_REQUEST)) {
                     statement.setString(1, login);
                     ResultSet resultSet = statement.executeQuery();
 
@@ -41,6 +41,7 @@ public class LoginValidator implements Validator {
                     e.printStackTrace();
                 }
             } else {
+                //log
                 return false;
             }
         } catch (TourConnectionPoolException e) {
@@ -49,30 +50,4 @@ public class LoginValidator implements Validator {
         return true;
     }
 
-    /*@Override
-    public boolean validate(HttpServletRequest request) {
-        String login = request.getParameter(ConstantContainer.LOGIN);
-
-        if (login.length() >= ConstantContainer.LOGIN_MIN_LENGTH) {
-            Connection connection = ConnectionPool.getConnection();
-
-            try {
-                Statement statement = connection.createStatement();
-
-                String sql = DBRequestContainer.CHECK_LOGIN_BEGIN + login + DBRequestContainer.SQL_END;
-                ResultSet resultSet = statement.executeQuery(sql);
-
-                while(resultSet.next()) {
-                    if(resultSet.getInt(DBConstantContainer.ID_USER) > 0) {
-                        return false;
-                    }
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        } else {
-            return false;
-        }
-        return true;
-    }*/
 }
