@@ -17,17 +17,13 @@ public final class DBRequestContainer {
             "FROM tour, hotel, transport " +
             "WHERE idhotel = hotel_id AND idtransport = transport_id; ";
 
-    public static final String GET_ALL_TOURS_REQUEST = "SELECT " +
-            "hotel.country, hotel.city, hotel.name, hotel.star, hotel.meal, hotel.person, " +
-            "tour.night, transport.type, tour.cost, tour.hot " +
-            "FROM tour, hotel, transport " +
-            "WHERE idhotel = hotel_id AND idtransport = transport_id; ";
+    public static final String GET_ALL_TOURS_REQUEST = "SELECT *\n" +
+            "FROM tour inner join hotel inner join transport\n" +
+            "WHERE  idhotel = hotel_id AND idtransport = transport_id;";
 
-    public static final String GET_TOURS_BY_COUNTRY_REQUEST = "SELECT " +
-            "hotel.country, hotel.city, hotel.name, hotel.star, hotel.meal, hotel.person, " +
-            "tour.night, transport.type, tour.cost, tour.hot " +
-            "FROM tour, hotel, transport " +
-            "WHERE idhotel = hotel_id AND idtransport = transport_id; ";
+    public static final String GET_TOURS_BY_COUNTRY_REQUEST = "SELECT *\n" +
+            "FROM tour inner join hotel inner join transport\n" +
+            "WHERE  idhotel = hotel_id AND idtransport = transport_id AND country = ?;";
 
     public static final String GET_USER_REQUEST = "SELECT * FROM user WHERE login = ?";
 
