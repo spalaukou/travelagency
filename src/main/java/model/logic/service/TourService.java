@@ -12,4 +12,7 @@ import java.util.List;
 public interface TourService {
 
     List<Tour> getToursByCountry(String country);
+
+    List<Tour> getAllTours();
+
 }

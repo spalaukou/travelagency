@@ -13,4 +13,6 @@ import java.util.List;
 public interface TourDAO {
 
     List<Tour> getToursByCountry(String country) throws DAOSQLException;
+
+    List<Tour> getAllTours() throws DAOSQLException;
 }

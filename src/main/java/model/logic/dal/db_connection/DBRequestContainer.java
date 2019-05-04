@@ -23,7 +23,7 @@ public final class DBRequestContainer {
 
     public static final String GET_TOURS_BY_COUNTRY_REQUEST = "SELECT *\n" +
             "FROM tour inner join hotel inner join transport\n" +
-            "WHERE  idhotel = hotel_id AND idtransport = transport_id AND country = ?;";
+            "WHERE idhotel = hotel_id AND idtransport = transport_id AND country LIKE ?;";
 
     public static final String GET_USER_REQUEST = "SELECT * FROM user WHERE login = ?";
 

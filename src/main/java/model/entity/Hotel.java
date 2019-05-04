@@ -13,21 +13,32 @@ import java.util.Objects;
 
 public class Hotel extends BaseEntity {
 
-    public enum Meal {
-        RO, BB, HB, FB, AI, UAI;
-    }
+//    public enum Meal {
+//        RO, BB, HB, FB, AI, UAI;
+//    }
 
     private String name;
     private String country;
     private String city;
     private int star;
-    private Meal meal;
+    private String meal;
+//    private Meal meal;
     private int person;
 
     public Hotel() {
     }
 
-    public Hotel(String name, String country, String city, int star, Meal meal, int person) {
+//    public Hotel(String name, String country, String city, int star, Meal meal, int person) {
+////        this.name = name;
+////        this.country = country;
+////        this.city = city;
+////        this.star = star;
+////        this.meal = meal;
+////        this.person = person;
+////    }
+
+
+    public Hotel(String name, String country, String city, int star, String meal, int person) {
         this.name = name;
         this.country = country;
         this.city = city;
@@ -68,11 +79,20 @@ public class Hotel extends BaseEntity {
         this.star = star;
     }
 
-    public Meal getMeal() {
+//    public Meal getMeal() {
+//        return meal;
+//    }
+//
+//    public void setMeal(Meal meal) {
+//        this.meal = meal;
+//    }
+
+
+    public String getMeal() {
         return meal;
     }
 
-    public void setMeal(Meal meal) {
+    public void setMeal(String meal) {
         this.meal = meal;
     }
 
@@ -84,6 +104,25 @@ public class Hotel extends BaseEntity {
         this.person = person;
     }
 
+//    @Override
+//    public boolean equals(Object o) {
+//        if (this == o) return true;
+//        if (o == null || getClass() != o.getClass()) return false;
+//        Hotel hotel = (Hotel) o;
+//        return star == hotel.star &&
+//                person == hotel.person &&
+//                Objects.equals(name, hotel.name) &&
+//                Objects.equals(country, hotel.country) &&
+//                Objects.equals(city, hotel.city) &&
+//                meal == hotel.meal;
+//    }
+//
+//    @Override
+//    public int hashCode() {
+//        return Objects.hash(name, country, city, star, meal, person);
+//    }
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -94,11 +133,23 @@ public class Hotel extends BaseEntity {
                 Objects.equals(name, hotel.name) &&
                 Objects.equals(country, hotel.country) &&
                 Objects.equals(city, hotel.city) &&
-                meal == hotel.meal;
+                Objects.equals(meal, hotel.meal);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(name, country, city, star, meal, person);
+    }
+
+    @Override
+    public String toString() {
+        return "Hotel{" +
+                "name='" + name + '\'' +
+                ", country='" + country + '\'' +
+                ", city='" + city + '\'' +
+                ", star=" + star +
+                ", meal='" + meal + '\'' +
+                ", person=" + person +
+                '}';
     }
 }

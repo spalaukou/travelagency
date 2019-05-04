@@ -18,6 +18,7 @@ public class Tour extends BaseEntity {
     private String name;
     private Hotel hotel;
     private int night;
+    private Transport transport;
     private Transport.Type transportType;
     private int cost;
     private float hot;
@@ -25,10 +26,21 @@ public class Tour extends BaseEntity {
     public Tour() {
     }
 
-    public Tour(String name, Hotel hotel, int night, Transport.Type transportType, int cost, float hot) {
+//    public Tour(String name, Hotel hotel, int night, Transport.Type transportType, int cost, float hot) {
+//        this.name = name;
+//        this.hotel = hotel;
+//        this.night = night;
+//        this.transportType = transportType;
+//        this.cost = cost;
+//        this.hot = hot;
+//    }
+
+
+    public Tour(String name, Hotel hotel, int night, Transport transport, Transport.Type transportType, int cost, float hot) {
         this.name = name;
         this.hotel = hotel;
         this.night = night;
+        this.transport = transport;
         this.transportType = transportType;
         this.cost = cost;
         this.hot = hot;
@@ -58,6 +70,14 @@ public class Tour extends BaseEntity {
         this.night = night;
     }
 
+    public Transport getTransport() {
+        return transport;
+    }
+
+    public void setTransport(Transport transport) {
+        this.transport = transport;
+    }
+
     public Transport.Type getTransportType() {
         return transportType;
     }
@@ -82,6 +102,25 @@ public class Tour extends BaseEntity {
         this.hot = hot;
     }
 
+//    @Override
+//    public boolean equals(Object o) {
+//        if (this == o) return true;
+//        if (o == null || getClass() != o.getClass()) return false;
+//        Tour tour = (Tour) o;
+//        return night == tour.night &&
+//                cost == tour.cost &&
+//                Float.compare(tour.hot, hot) == 0 &&
+//                Objects.equals(name, tour.name) &&
+//                Objects.equals(hotel, tour.hotel) &&
+//                transportType == tour.transportType;
+//    }
+//
+//    @Override
+//    public int hashCode() {
+//        return Objects.hash(name, hotel, night, transportType, cost, hot);
+//    }
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -92,11 +131,25 @@ public class Tour extends BaseEntity {
                 Float.compare(tour.hot, hot) == 0 &&
                 Objects.equals(name, tour.name) &&
                 Objects.equals(hotel, tour.hotel) &&
+                Objects.equals(transport, tour.transport) &&
                 transportType == tour.transportType;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, hotel, night, transportType, cost, hot);
+        return Objects.hash(name, hotel, night, transport, transportType, cost, hot);
+    }
+
+    @Override
+    public String toString() {
+        return "Tour{" +
+                "name='" + name + '\'' +
+                ", hotel=" + hotel +
+                ", night=" + night +
+                ", transport=" + transport +
+                ", transportType=" + transportType +
+                ", cost=" + cost +
+                ", hot=" + hot +
+                '}';
     }
 }

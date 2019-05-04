@@ -19,14 +19,27 @@ public class TourServiceImpl implements TourService {
 
     @Override
     public List<Tour> getToursByCountry(String country) {
-        List<Tour> tours;
+        List<Tour> tours = null;
 
         try {
             tours = tourDAO.getToursByCountry(country);
         } catch (DAOSQLException e) {
+            //log
+        }
+
+        return tours;
+    }
+
+    @Override
+    public List<Tour> getAllTours() {
+        List<Tour> tours = null;
+
+        try {
+            tours = tourDAO.getAllTours();
+        } catch (DAOSQLException e) {
             e.printStackTrace();
         }
 
-        return null;
+        return tours;
     }
 }

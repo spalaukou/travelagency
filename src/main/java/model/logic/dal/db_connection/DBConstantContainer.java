@@ -24,4 +24,29 @@ public final class DBConstantContainer {
     public static final String USER_BALANCE = "user.balance";
     public static final String USER_DISCOUNT = "user.discount";
 
+    public static final String TOUR_ID_TOUR = "tour.idtour";
+    public static final String TOUR_NAME = "tour.name";
+    public static final String TOUR_HOTEL_ID = "tour.hotel_id";
+    public static final String TOUR_NIGHT = "tour.night";
+    public static final String TOUR_TRANSPORT_ID = "tour.transport_id";
+    public static final String TOUR_COST = "tour.cost";
+    public static final String TOUR_HOT = "tour.hot";
+    public static final String HOTEL_ID_HOTEL = "hotel.idhotel";
+    public static final String HOTEL_NAME = "hotel.name";
+    public static final String HOTEL_COUNTRY = "hotel.country";
+    public static final String HOTEL_CITY = "hotel.city";
+    public static final String HOTEL_STAR = "hotel.star";
+    public static final String HOTEL_MEAL = "hotel.meal";
+    public static final String HOTEL_PERSON = "hotel.person";
+    public static final String TRANSPORT_ID_TRANSPORT = "transport.idtransport";
+    public static final String TRANSPORT_TYPE = "transport.type";
+
+
+
+    //countries
+    public final static String ALL = "%";
+    public final static String TURKEY = "turkey";
+    public final static String SPAIN = "spain";
+    public final static String GREECE = "greece";
+
 }

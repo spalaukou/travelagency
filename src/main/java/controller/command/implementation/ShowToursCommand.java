@@ -25,10 +25,14 @@ public class ShowToursCommand implements Command {
 
         String country = request.getParameter(ConstantContainer.COUNTRY);
 
-        tours = tourService.getToursByCountry(country);
+        if(country == null) {
+            tours = tourService.getAllTours();
+        } else {
+            tours = tourService.getToursByCountry(country);
+        }
 
-        request.setAttribute(ConstantContainer.ENTITES, tours);
+        request.setAttribute(ConstantContainer.TOURS, tours);
 
-        return null;
+        return ConstantContainer.TOURS_PAGE;
     }
 }

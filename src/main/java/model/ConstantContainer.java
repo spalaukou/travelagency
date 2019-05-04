@@ -19,13 +19,14 @@ public final class ConstantContainer {
     public final static String SHOW_ALL_TOURS = "show_all_tours";
     public final static String LOCALIZATION = "localization";
 
+
     //attributes
     public final static String ERR_LOGIN_PASS_MSG = "errorLoginPassMessage";
     public final static String USER_ID = "userid";
     public final static String USER_TYPE = "userType";
     public final static String BALANCE = "balance";
     public final static String DISCOUNT = "discount";
-    public final static String ENTITES = "entities";
+    public final static String TOURS = "tours";
 
     //pages
     public final static String GUEST_HEADER = "header/guestHeader.jsp";
