@@ -1,5 +1,6 @@
 package model.logic.dal.dao.implementation;
 
+import model.ConstantContainer;
 import model.entity.Tour;
 import model.logic.dal.dao.TourDAO;
 import model.logic.dal.db_connection.DBRequestContainer;
@@ -29,7 +30,13 @@ public class TourDAOImpl implements TourDAO {
         try {
             Connection connection = tourConnectionPool.getConnection();
 
-            String param = country.toUpperCase();
+            String query;
+
+            if(country.equals("all")) {
+                query = DBRequestContainer.GET_ALL_TOURS_REQUEST;
+            } else {
+                query = DBRequestContainer.GET_TOURS_BY_COUNTRY_REQUEST;
+            }
 
             try (PreparedStatement statement =
                          connection.prepareStatement(DBRequestContainer.GET_TOURS_BY_COUNTRY_REQUEST)) {
