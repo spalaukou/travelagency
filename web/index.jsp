@@ -43,7 +43,7 @@
     </tr>
 </table>
 <br/>
-<table width="100%" cellspacing="0" cellpadding="4">
+<table width="100%" cellspacing="0" cellpadding="4" border="1">
     <tr>
         <td width="25%" bgcolor="#A9DFBF"><a href="start?command=show_tours" class="button">Show all Tours</a></td>
         <td width="25%" bgcolor="#F9E79F"><a href="start?command=show_tours&country=spain" class="button">Travel to Spain</a></td>
