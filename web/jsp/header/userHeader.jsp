@@ -11,12 +11,6 @@
     <fmt:message key="locale.discountText" var="discountText"/>
 </fmt:bundle>
 
-<html>
-<head>
-    <title>Header</title>
-</head>
-<body>
-
 <table width="100%" cellspacing="0" cellpadding="4">
     <tr>
         <td width="15%"><a href="${pageContext.request.contextPath}">${agencyName}</a></td>
@@ -33,15 +27,13 @@
 
 <table width="100%" cellspacing="0" cellpadding="4" border="1">
     <tr>
-        <td width="20%" style="text-align: center;">${profileInfo}</td>
-        <td width="20%" style="text-align: center;">${role}: ${userType}</td>
-        <td width="20%" style="text-align: center;">ID: ${userid}</td>
-        <td width="20%" style="text-align: center;">${balanceText}: ${balance}</td>
-        <td width="20%" style="text-align: center;">${discountText}: ${discount}</td>
+        <td style="text-align: center;">${profileInfo}</td>
+        <td style="text-align: center;">${role}: ${userType}</td>
+        <td style="text-align: center;">ID: ${userid}</td>
+        <td style="text-align: center;">${balanceText}: ${balance}</td>
+        <td style="text-align: center;">${discountText}: ${discount}</td>
+        <td style="text-align: center;"><a href="start?command=show_orders">My orders</a></td>
     </tr>
 </table>
 
 <hr/>
-
-</body>
-</html>

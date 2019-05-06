@@ -1,9 +1,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Tours</title>
+    <title>Orders</title>
 </head>
 <body>
 
@@ -19,7 +18,7 @@
 <br/>
 
 <div style="text-align: center;">
-    We offer you next tours:
+    There are your orders:
 </div>
 
 <br/>
@@ -38,8 +37,8 @@
         <td>Cost</td>
         <td>Hot</td>
         <td>Your disc.</td>
-        <td>Total price</td>
-        <td>Click to buy</td>
+        <td>You paid</td>
+        <td>Click to cancel</td>
     </tr>
     <c:forEach var="tour" items="${tours}" varStatus="status">
         <tr>
@@ -64,8 +63,8 @@
                 <c:out value="${tour.totalPrice}"/>
             </td>
             <td>
-                <a href="start?command=buy_tour&tour_id=${tour.id}" class="button">
-                    <button>Buy Tour</button>
+                <a href="start?command=buy_tour&id=${tour.id}" class="button">
+                    <button>Cancel Tour</button>
                 </a>
             </td>
         </tr>
@@ -73,6 +72,7 @@
 </table>
 
 <jsp:include page="footer/footer.jsp"/>
+
 
 </body>
 </html>

@@ -17,13 +17,13 @@ public class CommandManager {
 
         SIGN_IN, SIGN_UP, SIGN_OUT,
 
+        CHANGE_LOCALE,
+
         SHOW_TOURS,
+        SHOW_ORDERS,
 
-        SHOW_ALL_TOURS,
-        SHOW_TURKEY_TOURS,
-        SHOW_SPAIN_TOURS,
-
-        CHANGE_LOCALE;
+        BUY_TOUR,
+        CANCEL_TOUR
     }
 
     private CommandManager() {
@@ -37,9 +37,11 @@ public class CommandManager {
         map.put(CommandType.SIGN_IN, new SignInCommand());
         map.put(CommandType.SIGN_UP, new SignUpCommand());
         map.put(CommandType.SIGN_OUT, new SignOutCommand());
-        map.put(CommandType.SHOW_ALL_TOURS, new ShowAllToursCommand());
         map.put(CommandType.CHANGE_LOCALE, new ChangeLocaleCommand());
         map.put(CommandType.SHOW_TOURS, new ShowToursCommand());
+        map.put(CommandType.SHOW_ORDERS, new ShowOrdersCommand());
+        map.put(CommandType.BUY_TOUR, new BuyTourCommand());
+        map.put(CommandType.CANCEL_TOUR, new CancelTourCommand());
     }
 
     public static Command getCommand(String cmd) {

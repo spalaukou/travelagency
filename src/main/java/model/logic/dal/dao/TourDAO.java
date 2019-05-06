@@ -12,7 +12,7 @@ import java.util.List;
 
 public interface TourDAO {
 
-    List<Tour> getToursByCountry(String country) throws DAOSQLException;
+    List<Tour> getToursByCountry(String country, float discount) throws DAOSQLException;
 
-    List<Tour> getAllTours() throws DAOSQLException;
+    List<Tour> getAllTours(float discount) throws DAOSQLException;
 }

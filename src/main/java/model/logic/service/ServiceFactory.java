@@ -1,6 +1,6 @@
 package model.logic.service;
 
-import model.logic.service.implementation.ShowAllToursServiceImpl;
+import model.logic.service.implementation.OrderServiceImpl;
 import model.logic.service.implementation.TourServiceImpl;
 import model.logic.service.implementation.UserServiceImpl;
 
@@ -13,9 +13,7 @@ public class ServiceFactory {
     private static final ServiceFactory INSTANCE = new ServiceFactory();
     private final UserService userService = new UserServiceImpl();
     private final TourService tourService = new TourServiceImpl();
-
-    //del
-    private final ShowAllToursService showAllToursService = new ShowAllToursServiceImpl();
+    private final OrderService orderService = new OrderServiceImpl();
 
     private ServiceFactory() {}
 
@@ -31,8 +29,7 @@ public class ServiceFactory {
         return tourService;
     }
 
-    //del
-    public ShowAllToursService getShowAllToursService() {
-        return showAllToursService;
+    public OrderService getOrderService() {
+        return orderService;
     }
 }

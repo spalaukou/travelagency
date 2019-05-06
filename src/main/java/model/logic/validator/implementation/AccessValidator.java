@@ -43,8 +43,11 @@ public class AccessValidator implements Validator {
                     }
                 } catch (SQLException e) {
                     e.printStackTrace();
+                } finally {
+                    tourConnectionPool.returnConnection(connection);
                 }
             } else {
+                //tourconnectionpoolexception
                 return false;
             }
         } catch (TourConnectionPoolException e) {

@@ -6,6 +6,7 @@ package model;
  */
 
 public final class ConstantContainer {
+
     //command
     public final static String COMMAND = "command";
 
@@ -16,9 +17,14 @@ public final class ConstantContainer {
     public final static int PASSWORD_MIN_LENGTH = 3;
     public final static String USER = "user";
     public final static String COUNTRY = "country";
-    public final static String SHOW_ALL_TOURS = "show_all_tours";
     public final static String LOCALIZATION = "localization";
-
+    public final static String TOUR_ID = "tour_id";
+    public final static float DEFAULT_DISCOUNT = 1.0f;
+    public final static float LEVEL1_DISCOUNT = 0.95f;
+    public final static float LEVEL2_DISCOUNT = 0.9f;
+    public final static float LEVEL3_DISCOUNT = 0.8f;
+    public final static int WRONG_BALANCE = -1;
+    public final static int WRONG_PRICE = 0;
 
     //attributes
     public final static String ERR_LOGIN_PASS_MSG = "errorLoginPassMessage";
@@ -35,6 +41,7 @@ public final class ConstantContainer {
     public final static String SIGN_UP_RESULT_PAGE = "jsp/sign_up_result.jsp";
     public final static String SIGN_IN_PAGE = "jsp/sign_in.jsp";
     public final static String TOURS_PAGE = "jsp/tours_table.jsp";
+    public final static String ORDERS_PAGE = "jsp/orders_table.jsp";
     public final static String MAIN_PAGE = "jsp/main.jsp";
     public final static String ERROR_PAGE = "jsp/error.jsp";
 

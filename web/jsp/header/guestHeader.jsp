@@ -8,12 +8,6 @@
     <fmt:message key="locale.signUp" var="signUp"/>
 </fmt:bundle>
 
-<html>
-<head>
-    <title>Header</title>
-</head>
-<body>
-
 <table width="100%" cellspacing="0" cellpadding="4">
     <tr>
         <td width="15%"><a href="${pageContext.request.contextPath}">${agencyName}</a></td>
@@ -28,6 +22,3 @@
 </table>
 
 <hr/>
-
-</body>
-</html>

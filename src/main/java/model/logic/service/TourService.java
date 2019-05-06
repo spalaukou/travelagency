@@ -11,8 +11,8 @@ import java.util.List;
 
 public interface TourService {
 
-    List<Tour> getToursByCountry(String country);
+    List<Tour> getToursByCountry(String country, float discount);
 
-    List<Tour> getAllTours();
+    List<Tour> getAllTours(float discount);
 
 }

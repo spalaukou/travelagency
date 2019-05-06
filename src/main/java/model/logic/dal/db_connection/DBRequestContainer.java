@@ -11,12 +11,6 @@ public final class DBRequestContainer {
 
     public static final String CHECK_LOGIN_REQUEST = "SELECT `iduser` FROM `tour`.`user` WHERE login = ?";
 
-    public static final String GET_ALL_TOURS = "SELECT " +
-            "hotel.country, hotel.city, hotel.name, hotel.star, hotel.meal, hotel.person, " +
-            "tour.night, transport.type, tour.cost, tour.hot " +
-            "FROM tour, hotel, transport " +
-            "WHERE idhotel = hotel_id AND idtransport = transport_id; ";
-
     public static final String GET_ALL_TOURS_REQUEST = "SELECT *\n" +
             "FROM tour inner join hotel inner join transport\n" +
             "WHERE  idhotel = hotel_id AND idtransport = transport_id;";
@@ -30,4 +24,12 @@ public final class DBRequestContainer {
     public static final String GET_PASSWORD_REQUEST = "SELECT user.password " +
             "FROM user " +
             "WHERE user.login = ?";
+
+    public static final String GET_USER_BALANCE_REQUEST = "SELECT balance\n" +
+            "FROM tour.user\n" +
+            "WHERE login = ?";
+
+    public static final String GET_TOUR_COST_HOT_REQUEST = "SELECT cost, hot\n" +
+            "FROM tour\n" +
+            "WHERE idtour = ?;";
 }

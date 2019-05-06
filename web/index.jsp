@@ -31,26 +31,30 @@
     <div style="text-align: center;">
         Please select tours that interest to buy:
     </div>
-    <br/>
 </c:if>
 
-<table width="100%" cellspacing="0" cellpadding="4">
-    <tr>
-        <td width="25%" bgcolor="#A9DFBF"><a href="start?command=show_all_tours" class="button">Show all Tours</a></td>
-        <td width="25%" bgcolor="#F9E79F"><a href="start?command=show_spain_tours" class="button">Travel to Spain</a></td>
-        <td width="25%" bgcolor="#F1948A"><a href="start?command=show_turkey_tours" class="button">Rest in Turkey</a></td>
-        <td width="25%" bgcolor="#D3EDF6"><a href="start?command=show_greece_tours" class="button">Vacation in Greece</a></td>
-    </tr>
-</table>
 <br/>
+
 <table width="100%" cellspacing="0" cellpadding="4" border="1">
     <tr>
         <td width="25%" bgcolor="#A9DFBF"><a href="start?command=show_tours" class="button">Show all Tours</a></td>
         <td width="25%" bgcolor="#F9E79F"><a href="start?command=show_tours&country=spain" class="button">Travel to Spain</a></td>
         <td width="25%" bgcolor="#F1948A"><a href="start?command=show_tours&country=turkey" class="button">Rest in Turkey</a></td>
-        <td width="25%" bgcolor="#D3EDF6"><a href="start?command=show_tours&country=greece" class="button">Vacation in Greece</a></td>
+        <td width="25%" bgcolor="#D3EDF6"><a href="start?command=show_tours&country=egypt" class="button">Vacation in Egypt</a></td>
     </tr>
 </table>
+
+<br/>
+
+<div style="text-align: center;">
+    Travel with us, get great offers and personal discounts!<br/><br/><br/>
+    We offer next personal discounts:<br/>
+    After purchase on $1000 - 5%.<br/>
+    After purchase on $2000 - 10%.<br/>
+    After purchase on $5000 - 20%.
+</div>
+
+<br/>
 
 <jsp:include page="jsp/footer/footer.jsp"/>
 

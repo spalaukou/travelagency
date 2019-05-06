@@ -18,11 +18,11 @@ public class TourServiceImpl implements TourService {
     private TourDAO tourDAO = daoFactory.getTourDAO();
 
     @Override
-    public List<Tour> getToursByCountry(String country) {
+    public List<Tour> getToursByCountry(String country, float discount) {
         List<Tour> tours = null;
 
         try {
-            tours = tourDAO.getToursByCountry(country);
+            tours = tourDAO.getToursByCountry(country, discount);
         } catch (DAOSQLException e) {
             //log
         }
@@ -31,11 +31,11 @@ public class TourServiceImpl implements TourService {
     }
 
     @Override
-    public List<Tour> getAllTours() {
+    public List<Tour> getAllTours(float discount) {
         List<Tour> tours = null;
 
         try {
-            tours = tourDAO.getAllTours();
+            tours = tourDAO.getAllTours(discount);
         } catch (DAOSQLException e) {
             e.printStackTrace();
         }

@@ -1,6 +1,5 @@
 package model.logic.dal.dao.implementation;
 
-import model.ConstantContainer;
 import model.entity.Hotel;
 import model.entity.Tour;
 import model.entity.Transport;
@@ -26,7 +25,7 @@ import java.util.List;
 public class TourDAOImpl implements TourDAO {
 
     @Override
-    public List<Tour> getToursByCountry(String country) throws DAOSQLException {
+    public List<Tour> getToursByCountry(String country, float discount) throws DAOSQLException {
         List<Tour> tours;
 
         TourConnectionPool tourConnectionPool = TourConnectionPool.getInstance();
@@ -40,7 +39,7 @@ public class TourDAOImpl implements TourDAO {
                 statement.setString(1, country);
                 ResultSet resultSet = statement.executeQuery();
 
-                tours = createTourList(resultSet);
+                tours = createTourList(resultSet, discount);
 
             } catch (SQLException e) {
                 throw new DAOSQLException(e);
@@ -55,7 +54,7 @@ public class TourDAOImpl implements TourDAO {
     }
 
     @Override
-    public List<Tour> getAllTours() throws DAOSQLException {
+    public List<Tour> getAllTours(float discount) throws DAOSQLException {
         List<Tour> tours;
 
         TourConnectionPool tourConnectionPool = TourConnectionPool.getInstance();
@@ -68,7 +67,7 @@ public class TourDAOImpl implements TourDAO {
 
                 ResultSet resultSet = statement.executeQuery();
 
-                tours = createTourList(resultSet);
+                tours = createTourList(resultSet, discount);
 
             } catch (SQLException e) {
                 throw new DAOSQLException(e);
@@ -82,7 +81,7 @@ public class TourDAOImpl implements TourDAO {
         return tours;
     }
 
-    private List<Tour> createTourList(ResultSet resultSet) throws SQLException {
+    private List<Tour> createTourList(ResultSet resultSet, float discount) throws SQLException {
         List<Tour> tours = new ArrayList<>();
 
         while (resultSet.next()) {
@@ -109,6 +108,7 @@ public class TourDAOImpl implements TourDAO {
 
             tour.setCost(resultSet.getInt(DBConstantContainer.TOUR_COST));
             tour.setHot(resultSet.getFloat(DBConstantContainer.TOUR_HOT));
+            tour.setTotalPrice((int) (tour.getCost() * tour.getHot() * discount));
 
             tours.add(tour);
         }

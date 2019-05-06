@@ -39,9 +39,12 @@ public class LoginValidator implements Validator {
                     }
                 } catch (SQLException e) {
                     e.printStackTrace();
+                } finally {
+                    tourConnectionPool.returnConnection(connection);
                 }
             } else {
                 //log
+                //tourconnectionppolexception
                 return false;
             }
         } catch (TourConnectionPoolException e) {

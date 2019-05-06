@@ -6,14 +6,6 @@
     <fmt:message key="locale.selectLanguage" var="selectLanguage"/>
 </fmt:bundle>
 
-
-
-<html>
-<head>
-    <title>Footer</title>
-</head>
-<body>
-
 <hr/>
 
 <table width="100%" cellspacing="0" cellpadding="4">
@@ -25,6 +17,3 @@
         </td>
     </tr>
 </table>
-
-</body>
-</html>

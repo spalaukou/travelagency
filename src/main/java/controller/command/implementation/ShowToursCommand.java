@@ -19,16 +19,23 @@ public class ShowToursCommand implements Command {
     @Override
     public String execute(HttpServletRequest request) {
         List<Tour> tours;
+        float discount;
 
         ServiceFactory serviceFactory = ServiceFactory.getInstance();
         TourService tourService = serviceFactory.getTourService();
 
+        if(request.getSession().getAttribute(ConstantContainer.DISCOUNT) != null) {
+            discount = (float) request.getSession().getAttribute(ConstantContainer.DISCOUNT);
+        } else {
+            discount = ConstantContainer.DEFAULT_DISCOUNT;
+        }
+
         String country = request.getParameter(ConstantContainer.COUNTRY);
 
         if(country == null) {
-            tours = tourService.getAllTours();
+            tours = tourService.getAllTours(discount);
         } else {
-            tours = tourService.getToursByCountry(country);
+            tours = tourService.getToursByCountry(country, discount);
         }
 
         request.setAttribute(ConstantContainer.TOURS, tours);

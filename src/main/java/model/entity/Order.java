@@ -15,13 +15,15 @@ import java.util.Objects;
 public class Order extends BaseEntity {
     private User user;
     private Tour tour;
+    private int totalPrice;
 
     public Order() {
     }
 
-    public Order(User user, Tour tour) {
+    public Order(User user, Tour tour, int totalPrice) {
         this.user = user;
         this.tour = tour;
+        this.totalPrice = totalPrice;
     }
 
     public User getUser() {
@@ -40,17 +42,35 @@ public class Order extends BaseEntity {
         this.tour = tour;
     }
 
+    public int getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(int totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Order order = (Order) o;
-        return Objects.equals(user, order.user) &&
+        return totalPrice == order.totalPrice &&
+                Objects.equals(user, order.user) &&
                 Objects.equals(tour, order.tour);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(user, tour);
+        return Objects.hash(user, tour, totalPrice);
+    }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "user=" + user +
+                ", tour=" + tour +
+                ", totalPrice=" + totalPrice +
+                '}';
     }
 }

@@ -30,6 +30,7 @@
         </tr>
     </form>
 </div>
+
 <jsp:include page="footer/footer.jsp"/>
 
 </body>

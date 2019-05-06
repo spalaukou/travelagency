@@ -10,21 +10,21 @@ import java.util.Objects;
  */
 
 public class Transport extends BaseEntity {
-    public String Type;
+    private String type;
 
     public Transport() {
     }
 
     public Transport(String type) {
-        Type = type;
+        this.type = type;
     }
 
     public String getType() {
-        return Type;
+        return type;
     }
 
     public void setType(String type) {
-        Type = type;
+        this.type = type;
     }
 
     @Override
@@ -32,22 +32,19 @@ public class Transport extends BaseEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Transport transport = (Transport) o;
-        return Objects.equals(Type, transport.Type);
+        return Objects.equals(type, transport.type);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(Type);
+        return Objects.hash(type);
     }
 
     @Override
     public String toString() {
         return "Transport{" +
-                "Type='" + Type + '\'' +
+                "type='" + type + '\'' +
                 '}';
     }
 
-    public enum Type {
-        CAR, TRAIN, AIRPLANE, SHIP;
-    }
 }

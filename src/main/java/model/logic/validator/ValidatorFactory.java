@@ -1,6 +1,7 @@
 package model.logic.validator;
 
 import model.logic.validator.implementation.AccessValidator;
+import model.logic.validator.implementation.BalanceValidator;
 import model.logic.validator.implementation.LoginPassLengthValidator;
 import model.logic.validator.implementation.LoginValidator;
 
@@ -11,9 +12,10 @@ import model.logic.validator.implementation.LoginValidator;
 
 public class ValidatorFactory {
     private static final ValidatorFactory INSTANCE = new ValidatorFactory();
-    private final LoginValidator loginValidator = new LoginValidator();
-    private final LoginPassLengthValidator loginPassLengthValidator = new LoginPassLengthValidator();
-    private final AccessValidator accessValidator = new AccessValidator();
+    private final Validator loginValidator = new LoginValidator();
+    private final Validator loginPassLengthValidator = new LoginPassLengthValidator();
+    private final Validator accessValidator = new AccessValidator();
+    private final Validator balanceValidator = new BalanceValidator();
 
     private ValidatorFactory() {}
 
@@ -21,15 +23,19 @@ public class ValidatorFactory {
         return INSTANCE;
     }
 
-    public LoginValidator getLoginValidator() {
+    public Validator getLoginValidator() {
         return loginValidator;
     }
 
-    public LoginPassLengthValidator getLoginPassLengthValidator() {
+    public Validator getLoginPassLengthValidator() {
         return loginPassLengthValidator;
     }
 
-    public AccessValidator getAccessValidator() {
+    public Validator getAccessValidator() {
         return accessValidator;
+    }
+
+    public Validator getBalanceValidator() {
+        return balanceValidator;
     }
 }

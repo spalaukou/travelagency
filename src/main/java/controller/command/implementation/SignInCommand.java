@@ -38,6 +38,7 @@ public class SignInCommand implements Command {
                     UserService userService = serviceFactory.getUserService();
 
                     User user = userService.signIn(login, password);
+
                     request.getSession().setAttribute(ConstantContainer.LOGIN, user.getLogin());
                     request.getSession().setAttribute(ConstantContainer.USER_ID, user.getId());
                     request.getSession().setAttribute(ConstantContainer.USER_TYPE, user.getType());
