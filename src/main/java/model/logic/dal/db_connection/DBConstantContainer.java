@@ -30,6 +30,9 @@ public final class DBConstantContainer {
     public static final String TOUR_COST = "tour.cost";
     public static final String TOUR_HOT = "tour.hot";
 
+    public static final String ORDER_ID_ORDER = "order.idorder";
+    public static final String ORDER_TOTAL_PRICE = "order.totalPrice";
+
     public static final String HOTEL_ID_HOTEL = "hotel.idhotel";
     public static final String HOTEL_NAME = "hotel.name";
     public static final String HOTEL_COUNTRY = "hotel.country";
@@ -40,5 +43,17 @@ public final class DBConstantContainer {
 
     public static final String TRANSPORT_ID_TRANSPORT = "transport.idtransport";
     public static final String TRANSPORT_TYPE = "transport.type";
+
+    public static final float DEFAULT_DISCOUNT = 1.0f;
+    public static final float LEVEL1_DISCOUNT = 0.95f;
+    public static final float LEVEL2_DISCOUNT = 0.9f;
+    public static final float LEVEL3_DISCOUNT = 0.8f;
+
+    public static final int LEVEL1_DISCOUNT_BORDER = 1000;
+    public static final int LEVEL2_DISCOUNT_BORDER = 2000;
+    public static final int LEVEL3_DISCOUNT_BORDER = 5000;
+
+
+
 
 }

@@ -27,6 +27,7 @@ public class BalanceValidator implements Validator {
         String tourID = request.getParameter(ConstantContainer.TOUR_ID);
         String login = (String) request.getSession().getAttribute(ConstantContainer.LOGIN);
         float discount = (float) request.getSession().getAttribute(ConstantContainer.DISCOUNT);
+        int tp = Integer.parseInt(request.getParameter(ConstantContainer.TOTAL_PRICE));
 
         try {
             connection = tourConnectionPool.getConnection();
@@ -36,7 +37,7 @@ public class BalanceValidator implements Validator {
 
                 int totalPrice = (int) (price * discount);
 
-                if(totalPrice <= balance) {
+                if(totalPrice <= balance && totalPrice == tp) {
                     return true;
                 }
 
@@ -69,7 +70,7 @@ public class BalanceValidator implements Validator {
         return balance;
     }
 
-    private int getPrice(String tourID) throws TourConnectionPoolException {
+    public int getPrice(String tourID) throws TourConnectionPoolException {
         int price = ConstantContainer.WRONG_PRICE;
 
         try (PreparedStatement statement =

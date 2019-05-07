@@ -2,6 +2,8 @@ package controller.command.implementation;
 
 import controller.command.Command;
 import model.ConstantContainer;
+import model.logic.exception.technical.DAOSQLException;
+import model.logic.exception.technical.TourConnectionPoolException;
 import model.logic.service.OrderService;
 import model.logic.service.ServiceFactory;
 import model.logic.validator.Validator;
@@ -29,12 +31,24 @@ public class BuyTourCommand implements Command {
             ValidatorFactory validatorFactory = ValidatorFactory.getInstance();
             Validator balanceValidator = validatorFactory.getBalanceValidator();
             if (balanceValidator.validate(request)) {
+                String userID = request.getSession().getAttribute(ConstantContainer.USER_ID).toString();
                 String tourID = request.getParameter(ConstantContainer.TOUR_ID);
+                int totalPrice = Integer.parseInt(request.getParameter(ConstantContainer.TOTAL_PRICE));
+                int balance = (int) request.getSession().getAttribute(ConstantContainer.BALANCE);
 
-                orderService.createOrder(login, tourID);
-
-                page = ConstantContainer.ORDERS_PAGE;
+                try {
+                    orderService.createOrder(userID, tourID, totalPrice, balance);
+                    request.getSession().setAttribute(ConstantContainer.BALANCE, (balance - totalPrice));
+                } catch (TourConnectionPoolException e) {
+                    e.printStackTrace();
+                } catch (DAOSQLException e) {
+                    e.printStackTrace();
+                }
+                request.setAttribute(ConstantContainer.AFTER_PURCHASE_MSG, ConstantContainer.MESSAGE_AFTER_PURCHASE);
+                page = ConstantContainer.MY_ORDERS_PAGE;
             } else {
+                request.setAttribute(ConstantContainer.ERR_NOT_ENOUGH_MONEY_MSG, ConstantContainer.MESSAGE_NOT_ENOUGH_MONEY_ERROR);
+                page = ConstantContainer.INDEX_PAGE;
                 //not enough money message
             }
         }

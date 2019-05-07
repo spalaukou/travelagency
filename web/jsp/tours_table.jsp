@@ -64,7 +64,7 @@
                 <c:out value="${tour.totalPrice}"/>
             </td>
             <td>
-                <a href="start?command=buy_tour&tour_id=${tour.id}" class="button">
+                <a href="start?command=buy_tour&tour_id=${tour.id}&tp=${tour.totalPrice}" class="button">
                     <button>Buy Tour</button>
                 </a>
             </td>

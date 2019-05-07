@@ -27,9 +27,9 @@
 
 <c:if test="${sessionScope.login != null}">
     <jsp:include page="jsp/header/userHeader.jsp"/>
-    <br/>
     <div style="text-align: center;">
-        Please select tours that interest to buy:
+            ${errorNotEnoughMoneyMessage}<br/>
+                Please select tours that interest to buy:
     </div>
 </c:if>
 

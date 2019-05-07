@@ -71,102 +71,140 @@ public class UserDAOImpl implements UserDAO {
         }
         return user;
     }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/////////////////////////////////////////////////////////
-    /*@Override
-    public int signUp(String login, String password) throws TourConnectionPoolException, DAOSQLException {
-
-        TourConnectionPool tourConnectionPool = TourConnectionPool.getInstance();
-        Connection connection = tourConnectionPool.getConnection();
-
-        int userID;
-
-        try {
-            CallableStatement statement = connection.prepareCall(DBRequestContainer.USER_SIGN_UP_REQUEST);
-            statement.setString(1, login);
-            statement.setString(2, password);
-            statement.execute();
-
-            Statement get = connection.createStatement();
-            ResultSet resultSet = get.executeQuery(DBRequestContainer.GET_USER_ID_REQUEST);
-
-            if(resultSet.next()) {
-                userID = resultSet.getInt(DBConstantContainer.ID_USER);
-                System.out.println(userID);
-            } else {
-                userID = DBConstantContainer.WRONG_RESPONSE;
-            }
-
-            return userID;
-        } catch (SQLException e) {
-            throw new DAOSQLException(e);
-        }
-        finally {
-            tourConnectionPool.returnConnection(connection);
-        }
-    }
-}*/
-////////////////////////////////////
-
-
-    /*private static String JDBC_MYSQL_DRIVER = "com.mysql.cj.jdbc.Driver";
-    private static String DATABASE_URL = "jdbc:mysql://127.0.0.1:3306/tour?useTimezone=true&serverTimezone=UTC";
-    private static String DATABASE_USER = "root";
-    private static String DATABASE_PASSWORD = "root";
-
-    private static String SQL = "INSERT INTO `tour`.`user` (`login`, `password`) VALUES (?, ?);";
-    private static String SQL2 = "SELECT `iduser` FROM `tour`.`user` WHERE login = `?`;";
 
     @Override
-    public int signUp(String login, String password) throws TourConnectionPoolException, DAOSQLException {
+    public void setBalance(String userID, int balance) {
+        TourConnectionPool tourConnectionPool = TourConnectionPool.getInstance();
         Connection connection = null;
-
-        int userID = 0;
-
         try {
-            Class.forName(JDBC_MYSQL_DRIVER);
+            connection = tourConnectionPool.getConnection();
+            if(connection != null) {
+                try (PreparedStatement preparedStatement =
+                             connection.prepareStatement(DBRequestContainer.SET_BALANCE_REQUEST)) {
 
-            connection = DriverManager.getConnection(DATABASE_URL, DATABASE_USER, DATABASE_PASSWORD);
+                    preparedStatement.setInt(1, balance);
+                    preparedStatement.setString(2, userID);
 
-            CallableStatement statement = connection.prepareCall(SQL);
+                    preparedStatement.executeUpdate();
 
-            statement.setString(1, login);
-            statement.setString(2, password);
-
-            statement.execute();
-
-            Statement get = connection.createStatement();
-            String sql = "SELECT `iduser` FROM `tour`.`user` WHERE login = '" + login + "';";
-            ResultSet resultSet = get.executeQuery(sql);
-
-            if(resultSet.next()) {
-                userID = resultSet.getInt("iduser");
+                } catch (SQLException e) {
+                    throw new DAOSQLException(e);
+                } finally {
+                    tourConnectionPool.returnConnection(connection);
+                }
             }
-
-            return userID;
-
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
+        } catch (TourConnectionPoolException | DAOSQLException e) {
             e.printStackTrace();
         }
-
-        return 0;
     }
-}*/
+
+    @Override
+    public void setDiscount(String userID) {
+        int allOrdersCost = getAllOrdersCost(userID);
+        float userDiscount = getUserDiscount(userID);
+        float newDiscount = DBConstantContainer.DEFAULT_DISCOUNT;
+
+        if (allOrdersCost < DBConstantContainer.LEVEL1_DISCOUNT_BORDER) {
+            if(userDiscount != DBConstantContainer.DEFAULT_DISCOUNT) {
+                newDiscount = DBConstantContainer.DEFAULT_DISCOUNT;
+            }
+        } else if(allOrdersCost < DBConstantContainer.LEVEL2_DISCOUNT_BORDER) {
+            if(userDiscount != DBConstantContainer.LEVEL1_DISCOUNT) {
+                newDiscount = DBConstantContainer.LEVEL1_DISCOUNT;
+            }
+        } else if (allOrdersCost < DBConstantContainer.LEVEL3_DISCOUNT_BORDER) {
+            if(userDiscount != DBConstantContainer.LEVEL2_DISCOUNT) {
+                newDiscount = DBConstantContainer.LEVEL2_DISCOUNT;
+            }
+        } else {
+            if(userDiscount != DBConstantContainer.LEVEL3_DISCOUNT) {
+                newDiscount = DBConstantContainer.LEVEL3_DISCOUNT;
+            }
+        }
+
+        TourConnectionPool tourConnectionPool = TourConnectionPool.getInstance();
+        Connection connection = null;
+        try {
+            connection = tourConnectionPool.getConnection();
+            if(connection != null) {
+                try (PreparedStatement preparedStatement =
+                             connection.prepareStatement(DBRequestContainer.SET_DISCOUNT_REQUEST)) {
+
+                    preparedStatement.setFloat(1, newDiscount);
+                    preparedStatement.setString(2, userID);
+
+                    preparedStatement.executeUpdate();
+
+                } catch (SQLException e) {
+                    throw new DAOSQLException(e);
+                } finally {
+                    tourConnectionPool.returnConnection(connection);
+                }
+            }
+        } catch (TourConnectionPoolException | DAOSQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private int getAllOrdersCost(String userID) {
+        int allOrdersCost = 0;
+
+        TourConnectionPool tourConnectionPool = TourConnectionPool.getInstance();
+        Connection connection = null;
+        try {
+            connection = tourConnectionPool.getConnection();
+            if(connection != null) {
+                try (PreparedStatement preparedStatement =
+                             connection.prepareStatement(DBRequestContainer.GET_ALL_ORDERS_COST)) {
+
+                    preparedStatement.setString(1, userID);
+
+                    ResultSet resultSet = preparedStatement.executeQuery();
+
+                    while (resultSet.next()) {
+                        allOrdersCost += resultSet.getInt(DBConstantContainer.ORDER_TOTAL_PRICE);
+                    }
+
+                } catch (SQLException e) {
+                    throw new DAOSQLException(e);
+                } finally {
+                    tourConnectionPool.returnConnection(connection);
+                }
+            }
+        } catch (TourConnectionPoolException | DAOSQLException e) {
+            e.printStackTrace();
+        }
+        return allOrdersCost;
+    }
+
+    private float getUserDiscount(String userID) {
+        float userDiscount = 0;
+
+        TourConnectionPool tourConnectionPool = TourConnectionPool.getInstance();
+        Connection connection = null;
+        try {
+            connection = tourConnectionPool.getConnection();
+            if(connection != null) {
+                try (PreparedStatement preparedStatement =
+                             connection.prepareStatement(DBRequestContainer.GET_USER_DISCOUNT_REQUEST)) {
+
+                    preparedStatement.setString(1, userID);
+
+                    ResultSet resultSet = preparedStatement.executeQuery();
+
+                    while (resultSet.next()) {
+                        userDiscount = resultSet.getFloat(DBConstantContainer.USER_DISCOUNT);
+                    }
+
+                } catch (SQLException e) {
+                    throw new DAOSQLException(e);
+                } finally {
+                    tourConnectionPool.returnConnection(connection);
+                }
+            }
+        } catch (TourConnectionPoolException | DAOSQLException e) {
+            e.printStackTrace();
+        }
+        return userDiscount;
+    }
+}

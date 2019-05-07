@@ -18,6 +18,7 @@
 <br/>
 
 <div style="text-align: center;">
+    ${afterPurchaseMessage}<br/>
     There are your orders:
 </div>
 
@@ -40,30 +41,23 @@
         <td>You paid</td>
         <td>Click to cancel</td>
     </tr>
-    <c:forEach var="tour" items="${tours}" varStatus="status">
+    <c:forEach var="order" items="${orders}" varStatus="status">
         <tr>
             <td><c:out value="${status.count}"/></td>
-            <td><c:out value="${tour.hotel.country}"/></td>
-            <td><c:out value="${tour.hotel.city}"/></td>
-            <td><c:out value="${tour.hotel.name}"/></td>
-            <td><c:out value="${tour.hotel.star}"/></td>
-            <td><c:out value="${tour.hotel.meal}"/></td>
-            <td><c:out value="${tour.hotel.person}"/></td>
-            <td><c:out value="${tour.night}"/></td>
-            <td><c:out value="${tour.transport.type}"/></td>
-            <td><c:out value="${tour.cost}"/></td>
-            <td><c:out value="${tour.hot}"/></td>
+            <td><c:out value="${order.tour.hotel.country}"/></td>
+            <td><c:out value="${order.tour.hotel.city}"/></td>
+            <td><c:out value="${order.tour.hotel.name}"/></td>
+            <td><c:out value="${order.tour.hotel.star}"/></td>
+            <td><c:out value="${order.tour.hotel.meal}"/></td>
+            <td><c:out value="${order.tour.hotel.person}"/></td>
+            <td><c:out value="${order.tour.night}"/></td>
+            <td><c:out value="${order.tour.transport.type}"/></td>
+            <td><c:out value="${order.tour.cost}"/></td>
+            <td><c:out value="${order.tour.hot}"/></td>
+            <td><c:out value="${discount}"/></td>
+            <td><c:out value="${order.totalPrice}"/></td>
             <td>
-                <c:choose>
-                    <c:when test="${sessionScope.login != null}"><c:out value="${discount}"/></c:when>
-                    <c:otherwise>1.0</c:otherwise>
-                </c:choose>
-            </td>
-            <td>
-                <c:out value="${tour.totalPrice}"/>
-            </td>
-            <td>
-                <a href="start?command=buy_tour&id=${tour.id}" class="button">
+                <a href="start?command=cancel_tour&id=${order.id}" class="button">
                     <button>Cancel Tour</button>
                 </a>
             </td>
@@ -72,7 +66,6 @@
 </table>
 
 <jsp:include page="footer/footer.jsp"/>
-
 
 </body>
 </html>

@@ -37,7 +37,7 @@ public class TourServiceImpl implements TourService {
         try {
             tours = tourDAO.getAllTours(discount);
         } catch (DAOSQLException e) {
-            e.printStackTrace();
+            //log
         }
 
         return tours;
