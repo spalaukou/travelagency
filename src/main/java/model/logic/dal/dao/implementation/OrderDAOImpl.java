@@ -2,14 +2,19 @@ package model.logic.dal.dao.implementation;
 
 import model.ConstantContainer;
 import model.entity.*;
-import model.logic.dal.dao.DAOFactory;
+import model.entity.builder.BuilderFactory;
+import model.entity.builder.EntityBuilder;
+import model.entity.builder.TourBuilder;
 import model.logic.dal.dao.OrderDAO;
-import model.logic.dal.dao.UserDAO;
 import model.logic.dal.db_connection.DBConstantContainer;
 import model.logic.dal.db_connection.DBRequestContainer;
 import model.logic.dal.db_connection.connection_pool.TourConnectionPool;
+import model.logic.exception.logical.ServiceSQLException;
 import model.logic.exception.technical.DAOSQLException;
+import model.logic.exception.technical.DataSourceException;
 import model.logic.exception.technical.TourConnectionPoolException;
+import model.logic.service.ServiceFactory;
+import model.logic.service.UserService;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -26,10 +31,11 @@ import java.util.List;
 public class OrderDAOImpl implements OrderDAO {
 
     @Override
-    public float createOrder(String userID, String tourID, int totalPrice, int balance) throws TourConnectionPoolException, DAOSQLException {
+    public float createOrder(String userID, String tourID, int totalPrice, int balance)
+            throws TourConnectionPoolException, DAOSQLException {
+
         TourConnectionPool tourConnectionPool = TourConnectionPool.getInstance();
         Connection connection = tourConnectionPool.getConnection();
-        UserDAO userDAO = DAOFactory.getInstance().getUserDAO();
         float newDiscount = ConstantContainer.WRONG_DISCOUNT;
 
         if (connection != null) {
@@ -42,11 +48,16 @@ public class OrderDAOImpl implements OrderDAO {
 
                 statement.executeUpdate();
 
-                userDAO.setBalance(userID, balance - totalPrice);
-                newDiscount = userDAO.setDiscount(userID);
+                ServiceFactory serviceFactory = ServiceFactory.getInstance();
+                UserService userService = serviceFactory.getUserService();
 
-            } catch (SQLException e) {
+                userService.setBalance(userID, balance - totalPrice);
+                newDiscount = userService.setDiscount(userID);
+
+            } catch (SQLException | ServiceSQLException e) {
                 throw new DAOSQLException(e);
+            } catch (DataSourceException e) {
+                throw new TourConnectionPoolException(e);
             } finally {
                 tourConnectionPool.returnConnection(connection);
             }
@@ -55,10 +66,11 @@ public class OrderDAOImpl implements OrderDAO {
     }
 
     @Override
-    public float cancelOrder(String userID, String orderID, int totalPrice, int balance) throws TourConnectionPoolException, DAOSQLException {
+    public float cancelOrder(String userID, String orderID, int totalPrice, int balance)
+            throws TourConnectionPoolException, DAOSQLException {
+
         TourConnectionPool tourConnectionPool = TourConnectionPool.getInstance();
         Connection connection = tourConnectionPool.getConnection();
-        UserDAO userDAO = DAOFactory.getInstance().getUserDAO();
         float newDiscount = ConstantContainer.WRONG_DISCOUNT;
 
         if (connection != null) {
@@ -67,13 +79,18 @@ public class OrderDAOImpl implements OrderDAO {
 
                 statement.setString(1, orderID);
 
-                userDAO.setBalance(userID, balance + totalPrice);
-                newDiscount = userDAO.setDiscount(userID);
+                ServiceFactory serviceFactory = ServiceFactory.getInstance();
+                UserService userService = serviceFactory.getUserService();
+
+                userService.setBalance(userID, balance + totalPrice);
+                newDiscount = userService.setDiscount(userID);
 
                 statement.executeUpdate();
 
-            } catch (SQLException e) {
+            } catch (SQLException | ServiceSQLException e) {
                 throw new DAOSQLException(e);
+            } catch (DataSourceException e) {
+                throw new TourConnectionPoolException(e);
             } finally {
                 tourConnectionPool.returnConnection(connection);
             }
@@ -82,12 +99,11 @@ public class OrderDAOImpl implements OrderDAO {
     }
 
     @Override
-    public List<Order> getOrdersByID(String userID) throws DAOSQLException {
+    public List<Order> getOrdersByID(String userID) throws DAOSQLException, TourConnectionPoolException {
         List<Order> orders;
 
         TourConnectionPool tourConnectionPool = TourConnectionPool.getInstance();
 
-        try {
             Connection connection = tourConnectionPool.getConnection();
 
             try (PreparedStatement statement =
@@ -103,59 +119,20 @@ public class OrderDAOImpl implements OrderDAO {
             } finally {
                 tourConnectionPool.returnConnection(connection);
             }
-        } catch (TourConnectionPoolException e) {
-            throw new DAOSQLException(e);
-        }
 
         return orders;
     }
 
     private List<Order> createOrderList(ResultSet resultSet) throws SQLException {
         List<Order> orders = new ArrayList<>();
+        BuilderFactory builderFactory = BuilderFactory.getInstance();
+        EntityBuilder<Order> orderBuilder = builderFactory.getOrderBuilder();
 
         while (resultSet.next()) {
-            Order order = new Order();
-            order.setId(resultSet.getInt(DBConstantContainer.ORDER_ID_ORDER));
-
-            //user
-            User user = new User();
-            user.setId(resultSet.getInt(DBConstantContainer.ID_USER));
-            user.setLogin(resultSet.getString(DBConstantContainer.USER_LOGIN));
-            user.setDiscount(resultSet.getFloat(DBConstantContainer.USER_DISCOUNT));
-            order.setUser(user);
-
-            Tour tour = new Tour();
-            tour.setId(resultSet.getInt(DBConstantContainer.TOUR_ID_TOUR));
-            tour.setName(resultSet.getString(DBConstantContainer.TOUR_NAME));
-
-            Hotel hotel = new Hotel();
-            hotel.setId(resultSet.getInt(DBConstantContainer.HOTEL_ID_HOTEL));
-            hotel.setName(resultSet.getString(DBConstantContainer.HOTEL_NAME));
-            hotel.setCountry(resultSet.getString(DBConstantContainer.HOTEL_COUNTRY));
-            hotel.setCity(resultSet.getString(DBConstantContainer.HOTEL_CITY));
-            hotel.setStar(resultSet.getInt(DBConstantContainer.HOTEL_STAR));
-            hotel.setMeal(resultSet.getString(DBConstantContainer.HOTEL_MEAL));
-            hotel.setPerson(resultSet.getInt(DBConstantContainer.HOTEL_PERSON));
-            tour.setHotel(hotel);
-
-            tour.setNight(resultSet.getInt(DBConstantContainer.TOUR_NIGHT));
-
-            Transport transport = new Transport();
-            transport.setId(resultSet.getInt(DBConstantContainer.TRANSPORT_ID_TRANSPORT));
-            transport.setType(resultSet.getString(DBConstantContainer.TRANSPORT_TYPE));
-            tour.setTransport(transport);
-
-            tour.setCost(resultSet.getInt(DBConstantContainer.TOUR_COST));
-            tour.setHot(resultSet.getFloat(DBConstantContainer.TOUR_HOT));
-//            tour.setTotalPrice((int) (tour.getCost() * tour.getHot() * user.getDiscount()));
-            order.setTour(tour);
-
-            order.setTotalPrice(resultSet.getInt(DBConstantContainer.ORDER_TOTAL_PRICE));
+            Order order = orderBuilder.build(resultSet);
 
             orders.add(order);
         }
         return orders;
     }
-
-
 }

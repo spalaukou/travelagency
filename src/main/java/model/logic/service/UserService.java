@@ -16,8 +16,17 @@ import javax.servlet.http.HttpServletRequest;
 
 public interface UserService {
 
-    void signUp(String login, String password);
+    void signUp(String login, String password) throws ServiceSQLException, DataSourceException;
 
     User signIn(String login, String password) throws DataSourceException, ServiceSQLException;
 
+    int getID(String login) throws DataSourceException, ServiceSQLException;
+
+    String getPassword(String login) throws DataSourceException, ServiceSQLException;
+
+    int getBalance(String login) throws DataSourceException, ServiceSQLException;
+
+    void setBalance(String userID, int balance) throws DataSourceException, ServiceSQLException;
+
+    float setDiscount(String userID) throws DataSourceException, ServiceSQLException;
 }

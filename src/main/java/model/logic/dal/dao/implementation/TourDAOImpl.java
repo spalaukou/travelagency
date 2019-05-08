@@ -1,8 +1,9 @@
 package model.logic.dal.dao.implementation;
 
-import model.entity.Hotel;
 import model.entity.Tour;
-import model.entity.Transport;
+import model.entity.builder.BuilderFactory;
+import model.entity.builder.EntityBuilder;
+import model.entity.builder.TourBuilder;
 import model.logic.dal.dao.TourDAO;
 import model.logic.dal.db_connection.DBConstantContainer;
 import model.logic.dal.db_connection.DBRequestContainer;
@@ -25,89 +26,90 @@ import java.util.List;
 public class TourDAOImpl implements TourDAO {
 
     @Override
-    public List<Tour> getToursByCountry(String country, float discount) throws DAOSQLException {
+    public List<Tour> getToursByCountry(String country, float discount)
+            throws DAOSQLException, TourConnectionPoolException {
         List<Tour> tours;
 
         TourConnectionPool tourConnectionPool = TourConnectionPool.getInstance();
+        Connection connection = tourConnectionPool.getConnection();
 
-        try {
-            Connection connection = tourConnectionPool.getConnection();
+        try (PreparedStatement statement =
+                     connection.prepareStatement(DBRequestContainer.GET_TOURS_BY_COUNTRY_REQUEST)) {
 
-            try (PreparedStatement statement =
-                         connection.prepareStatement(DBRequestContainer.GET_TOURS_BY_COUNTRY_REQUEST)) {
+            statement.setString(1, country);
+            ResultSet resultSet = statement.executeQuery();
 
-                statement.setString(1, country);
-                ResultSet resultSet = statement.executeQuery();
+            tours = createTourList(resultSet, discount);
 
-                tours = createTourList(resultSet, discount);
-
-            } catch (SQLException e) {
-                throw new DAOSQLException(e);
-            } finally {
-                tourConnectionPool.returnConnection(connection);
-            }
-        } catch (TourConnectionPoolException e) {
+        } catch (SQLException e) {
             throw new DAOSQLException(e);
+        } finally {
+            tourConnectionPool.returnConnection(connection);
         }
 
         return tours;
     }
 
     @Override
-    public List<Tour> getAllTours(float discount) throws DAOSQLException {
+    public List<Tour> getAllTours(float discount)
+            throws DAOSQLException, TourConnectionPoolException {
         List<Tour> tours;
 
         TourConnectionPool tourConnectionPool = TourConnectionPool.getInstance();
+        Connection connection = tourConnectionPool.getConnection();
 
-        try {
-            Connection connection = tourConnectionPool.getConnection();
+        try (PreparedStatement statement =
+                     connection.prepareStatement(DBRequestContainer.GET_ALL_TOURS_REQUEST)) {
 
-            try (PreparedStatement statement =
-                         connection.prepareStatement(DBRequestContainer.GET_ALL_TOURS_REQUEST)) {
+            ResultSet resultSet = statement.executeQuery();
 
-                ResultSet resultSet = statement.executeQuery();
+            tours = createTourList(resultSet, discount);
 
-                tours = createTourList(resultSet, discount);
-
-            } catch (SQLException e) {
-                throw new DAOSQLException(e);
-            } finally {
-                tourConnectionPool.returnConnection(connection);
-            }
-        } catch (TourConnectionPoolException e) {
+        } catch (SQLException e) {
             throw new DAOSQLException(e);
+        } finally {
+            tourConnectionPool.returnConnection(connection);
         }
 
         return tours;
     }
 
+    @Override
+    public int getPrice(String tourID) throws DAOSQLException, TourConnectionPoolException {
+        int price = DBConstantContainer.WRONG_TOUR_PRICE;
+
+        TourConnectionPool tourConnectionPool = TourConnectionPool.getInstance();
+        Connection connection = tourConnectionPool.getConnection();
+
+        try (PreparedStatement statement =
+                     connection.prepareStatement(DBRequestContainer.GET_TOUR_COST_HOT_REQUEST)) {
+            statement.setString(1, tourID);
+            ResultSet resultSet = statement.executeQuery();
+
+            int cost;
+            float hot;
+
+            while (resultSet.next()) {
+                cost = Integer.parseInt(resultSet.getString(DBConstantContainer.TOUR_COST));
+                hot = Float.parseFloat(resultSet.getString(DBConstantContainer.TOUR_HOT));
+
+                price = (int) (cost * hot);
+            }
+        } catch (SQLException e) {
+            throw new DAOSQLException(e);
+        } finally {
+            tourConnectionPool.returnConnection(connection);
+        }
+        return price;
+    }
+
     private List<Tour> createTourList(ResultSet resultSet, float discount) throws SQLException {
         List<Tour> tours = new ArrayList<>();
+        BuilderFactory builderFactory = BuilderFactory.getInstance();
+        EntityBuilder<Tour> tourBuilder = builderFactory.getTourBuilder();
 
         while (resultSet.next()) {
-            Tour tour = new Tour();
-            tour.setId(resultSet.getInt(DBConstantContainer.TOUR_ID_TOUR));
-            tour.setName(resultSet.getString(DBConstantContainer.TOUR_NAME));
-
-            Hotel hotel = new Hotel();
-            hotel.setId(resultSet.getInt(DBConstantContainer.HOTEL_ID_HOTEL));
-            hotel.setName(resultSet.getString(DBConstantContainer.HOTEL_NAME));
-            hotel.setCountry(resultSet.getString(DBConstantContainer.HOTEL_COUNTRY));
-            hotel.setCity(resultSet.getString(DBConstantContainer.HOTEL_CITY));
-            hotel.setStar(resultSet.getInt(DBConstantContainer.HOTEL_STAR));
-            hotel.setMeal(resultSet.getString(DBConstantContainer.HOTEL_MEAL));
-            hotel.setPerson(resultSet.getInt(DBConstantContainer.HOTEL_PERSON));
-            tour.setHotel(hotel);
-
-            tour.setNight(resultSet.getInt(DBConstantContainer.TOUR_NIGHT));
-
-            Transport transport = new Transport();
-            transport.setId(resultSet.getInt(DBConstantContainer.TRANSPORT_ID_TRANSPORT));
-            transport.setType(resultSet.getString(DBConstantContainer.TRANSPORT_TYPE));
-            tour.setTransport(transport);
-
-            tour.setCost(resultSet.getInt(DBConstantContainer.TOUR_COST));
-            tour.setHot(resultSet.getFloat(DBConstantContainer.TOUR_HOT));
+            Tour tour = tourBuilder.build(resultSet);
             tour.setTotalPrice((int) (tour.getCost() * tour.getHot() * discount));
 
             tours.add(tour);

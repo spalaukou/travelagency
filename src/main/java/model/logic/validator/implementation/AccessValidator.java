@@ -4,7 +4,11 @@ import model.ConstantContainer;
 import model.logic.dal.db_connection.DBConstantContainer;
 import model.logic.dal.db_connection.DBRequestContainer;
 import model.logic.dal.db_connection.connection_pool.TourConnectionPool;
+import model.logic.exception.logical.ServiceSQLException;
+import model.logic.exception.technical.DataSourceException;
 import model.logic.exception.technical.TourConnectionPoolException;
+import model.logic.service.ServiceFactory;
+import model.logic.service.UserService;
 import model.logic.validator.Validator;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,37 +25,20 @@ public class AccessValidator implements Validator {
     public boolean validate(HttpServletRequest request) {
         String login = request.getParameter(ConstantContainer.LOGIN);
         String password = request.getParameter(ConstantContainer.PASSWORD);
-        String expectedPassword = null;
 
-        TourConnectionPool tourConnectionPool = TourConnectionPool.getInstance();
-        Connection connection;
+        ServiceFactory serviceFactory = ServiceFactory.getInstance();
+        UserService userService = serviceFactory.getUserService();
 
         try {
-            connection = tourConnectionPool.getConnection();
-            if(connection != null) {
-                try (PreparedStatement statement =
-                             connection.prepareStatement(DBRequestContainer.GET_PASSWORD_REQUEST)) {
-                    statement.setString(1, login);
-                    ResultSet resultSet = statement.executeQuery();
+            String expectedPassword = userService.getPassword(login);
 
-                    while (resultSet.next()) {
-                        expectedPassword = resultSet.getString(DBConstantContainer.USER_PASSWORD);
-                    }
-
-                    if (password.equals(expectedPassword)) {
-                        return true;
-                    }
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                } finally {
-                    tourConnectionPool.returnConnection(connection);
-                }
-            } else {
-                //tourconnectionpoolexception
-                return false;
+            if (password.equals(expectedPassword)) {
+                return true;
             }
-        } catch (TourConnectionPoolException e) {
-            //log
+        } catch (DataSourceException e) {
+            //log.error("Problems with data source", e);
+        } catch (ServiceSQLException e) {
+            //log.error("SQL error", e);
         }
         return false;
     }

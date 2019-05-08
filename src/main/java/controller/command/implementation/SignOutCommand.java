@@ -14,10 +14,9 @@ public class SignOutCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request) {
-        String page = ConstantContainer.INDEX_PAGE;
 
         request.getSession().invalidate();
 
-        return page;
+        return ConstantContainer.INDEX_PAGE;
     }
 }

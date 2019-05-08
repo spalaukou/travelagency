@@ -49,9 +49,9 @@ public class SignInCommand implements Command {
 
                     page = ConstantContainer.INDEX_PAGE;
                 } catch (DataSourceException e) {
-                    //log
+                    //log.error("Problems with data source", e);
                 } catch (ServiceSQLException e) {
-                    //log
+                    //log.error("SQL error", e);
                 }
             } else {
                 request.setAttribute(ConstantContainer.ERR_LOGIN_PASS_MSG, ConstantContainer.MESSAGE_LOGIN_ERROR);

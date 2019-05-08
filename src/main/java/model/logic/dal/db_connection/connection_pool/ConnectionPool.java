@@ -17,17 +17,18 @@ public class ConnectionPool {
         Connection connection = null;
 
         try {
+
             Class.forName(DBConstantContainer.JDBC_MYSQL_DRIVER);
 
             connection = DriverManager.getConnection(
                     DBConstantContainer.DATABASE_URL,
-                    DBConstantContainer.DATABASE_USER,
+                    DBConstantContainer.DATABASE_LOGIN,
                     DBConstantContainer.DATABASE_PASSWORD);
 
         } catch (ClassNotFoundException | SQLException e) {
-            e.printStackTrace();
             //log
         }
+
         return connection;
     }
 }

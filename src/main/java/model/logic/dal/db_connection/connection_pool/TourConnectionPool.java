@@ -16,28 +16,27 @@ import java.util.concurrent.BlockingQueue;
 
 public final class TourConnectionPool {
     private static TourConnectionPool INSTANCE = new TourConnectionPool();
-    private BlockingQueue<Connection> connectionQueue;
-    private BlockingQueue<Connection> givenConnections;
-    private String driverName;
+    private BlockingQueue<Connection> allConnections;
+    private String driver;
     private String url;
-    private String user;
+    private String login;
     private String password;
-    private int poolSize;
+    private int connectionPoolSize;
     private boolean isBlocked;
 
     private TourConnectionPool() {
-        this.driverName = DBConstantContainer.JDBC_MYSQL_DRIVER;
+        this.driver = DBConstantContainer.JDBC_MYSQL_DRIVER;
         this.url = DBConstantContainer.DATABASE_URL;
 
-        this.user = DBConstantContainer.DATABASE_USER;
+        this.login = DBConstantContainer.DATABASE_LOGIN;
         this.password = DBConstantContainer.DATABASE_PASSWORD;
 
-        this.poolSize = DBConstantContainer.MAX_CONNECTIONS;
+        this.connectionPoolSize = DBConstantContainer.CONNECTIONS_COUNT;
 
         try {
             initializePool();
         } catch (TourConnectionPoolException e) {
-            //log
+            //log.error("TourConnectionPool initialization problem", e);
         }
     }
 
@@ -45,15 +44,14 @@ public final class TourConnectionPool {
         return INSTANCE;
     }
 
-    public void initializePool() throws TourConnectionPoolException {
+    private void initializePool() throws TourConnectionPoolException {
         isBlocked = false;
         try {
-            Class.forName(driverName);
-            connectionQueue = new ArrayBlockingQueue<>(poolSize);
-            givenConnections = new ArrayBlockingQueue<>(poolSize);
-            for (int i = 0; i < poolSize; i++) {
-                Connection connection = DriverManager.getConnection(url, user, password);
-                connectionQueue.add(connection);
+            Class.forName(driver);
+            allConnections = new ArrayBlockingQueue<>(connectionPoolSize);
+            for (int i = 0; i < connectionPoolSize; i++) {
+                Connection connection = DriverManager.getConnection(url, login, password);
+                allConnections.add(connection);
             }
         } catch (SQLException | ClassNotFoundException e) {
             throw new TourConnectionPoolException(e);
@@ -66,22 +64,19 @@ public final class TourConnectionPool {
             return null;
         }
         try {
-            connection = connectionQueue.take();
-            givenConnections.add(connection);
+            connection = allConnections.take();
         } catch (InterruptedException e) {
             throw new TourConnectionPoolException(e);
         }
         return connection;
     }
 
-    public void returnConnection(Connection connection) {
+    public void returnConnection(Connection connection) throws TourConnectionPoolException {
         try {
             connection.setAutoCommit(true);
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new TourConnectionPoolException(e);
         }
-        givenConnections.remove(connection);
-        connectionQueue.add(connection);
+        allConnections.add(connection);
     }
-
 }

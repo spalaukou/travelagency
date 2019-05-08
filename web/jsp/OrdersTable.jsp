@@ -28,6 +28,7 @@
 <table cellspacing="0" cellpadding="4" border="1" align="center">
     <tr>
         <td>#</td>
+        <td>Type</td>
         <td>Country</td>
         <td>City</td>
         <td>Hotel</td>
@@ -45,6 +46,7 @@
     <c:forEach var="order" items="${orders}" varStatus="status">
         <tr>
             <td><c:out value="${status.count}"/></td>
+            <td><c:out value="${order.tour.name}"/></td>
             <td><c:out value="${order.tour.hotel.country}"/></td>
             <td><c:out value="${order.tour.hotel.city}"/></td>
             <td><c:out value="${order.tour.hotel.name}"/></td>

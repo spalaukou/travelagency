@@ -3,7 +3,10 @@ package model.logic.service.implementation;
 import model.entity.Tour;
 import model.logic.dal.dao.DAOFactory;
 import model.logic.dal.dao.TourDAO;
+import model.logic.exception.logical.ServiceSQLException;
 import model.logic.exception.technical.DAOSQLException;
+import model.logic.exception.technical.DataSourceException;
+import model.logic.exception.technical.TourConnectionPoolException;
 import model.logic.service.TourService;
 
 import java.util.List;
@@ -18,28 +21,47 @@ public class TourServiceImpl implements TourService {
     private TourDAO tourDAO = daoFactory.getTourDAO();
 
     @Override
-    public List<Tour> getToursByCountry(String country, float discount) {
-        List<Tour> tours = null;
+    public List<Tour> getToursByCountry(String country, float discount)
+            throws ServiceSQLException, DataSourceException {
+        List<Tour> tours;
 
         try {
             tours = tourDAO.getToursByCountry(country, discount);
         } catch (DAOSQLException e) {
-            //log
+            throw new ServiceSQLException(e);
+        } catch (TourConnectionPoolException e) {
+            throw new DataSourceException(e);
+        }
+        return tours;
+    }
+
+    @Override
+    public List<Tour> getAllTours(float discount) throws ServiceSQLException, DataSourceException {
+        List<Tour> tours;
+
+        try {
+            tours = tourDAO.getAllTours(discount);
+        } catch (DAOSQLException e) {
+            throw new ServiceSQLException(e);
+        } catch (TourConnectionPoolException e) {
+            throw new DataSourceException(e);
         }
 
         return tours;
     }
 
     @Override
-    public List<Tour> getAllTours(float discount) {
-        List<Tour> tours = null;
+    public int getPrice(String tourID) throws ServiceSQLException, DataSourceException {
+        int price;
 
         try {
-            tours = tourDAO.getAllTours(discount);
+            price = tourDAO.getPrice(tourID);
         } catch (DAOSQLException e) {
-            //log
+            throw new ServiceSQLException(e);
+        } catch (TourConnectionPoolException e) {
+            throw new DataSourceException(e);
         }
 
-        return tours;
+        return price;
     }
 }

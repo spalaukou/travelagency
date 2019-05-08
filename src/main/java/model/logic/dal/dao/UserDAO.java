@@ -15,7 +15,18 @@ public interface UserDAO {
 
     User signIn(String login, String password) throws TourConnectionPoolException, DAOSQLException;
 
-    void setBalance(String userID, int balance);
+    int getID(String login) throws TourConnectionPoolException, DAOSQLException;
 
-    float setDiscount(String userID);
+    String getPassword(String login) throws TourConnectionPoolException, DAOSQLException;
+
+    int getBalance(String login) throws DAOSQLException, TourConnectionPoolException;
+
+
+
+    void setBalance(String userID, int balance) throws TourConnectionPoolException, DAOSQLException;
+
+    float setDiscount(String userID) throws TourConnectionPoolException, DAOSQLException;
+
+
+
 }

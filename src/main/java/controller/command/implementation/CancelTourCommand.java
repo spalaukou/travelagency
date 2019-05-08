@@ -2,7 +2,9 @@ package controller.command.implementation;
 
 import controller.command.Command;
 import model.ConstantContainer;
+import model.logic.exception.logical.ServiceSQLException;
 import model.logic.exception.technical.DAOSQLException;
+import model.logic.exception.technical.DataSourceException;
 import model.logic.exception.technical.TourConnectionPoolException;
 import model.logic.service.OrderService;
 import model.logic.service.ServiceFactory;
@@ -42,10 +44,10 @@ public class CancelTourCommand implements Command {
 
                 request.setAttribute(ConstantContainer.AFTER_CANCEL_MSG, ConstantContainer.MESSAGE_AFTER_CANCEL);
                 page = ConstantContainer.MY_ORDERS_PAGE;
-            } catch (TourConnectionPoolException e) {
-                e.printStackTrace();
-            } catch (DAOSQLException e) {
-                e.printStackTrace();
+            } catch (DataSourceException e) {
+                //log.error("Problems with data source", e);
+            } catch (ServiceSQLException e) {
+                //log.error("SQL error", e);
             }
         }
 

@@ -17,5 +17,5 @@ public interface OrderDAO {
 
     float cancelOrder(String userID, String orderID, int totalPrice, int balance) throws TourConnectionPoolException, DAOSQLException;
 
-    List<Order> getOrdersByID(String userID) throws DAOSQLException;
+    List<Order> getOrdersByID(String userID) throws DAOSQLException, TourConnectionPoolException;
 }

@@ -4,7 +4,11 @@ import model.ConstantContainer;
 import model.logic.dal.db_connection.DBConstantContainer;
 import model.logic.dal.db_connection.DBRequestContainer;
 import model.logic.dal.db_connection.connection_pool.TourConnectionPool;
+import model.logic.exception.logical.ServiceSQLException;
+import model.logic.exception.technical.DataSourceException;
 import model.logic.exception.technical.TourConnectionPoolException;
+import model.logic.service.ServiceFactory;
+import model.logic.service.UserService;
 import model.logic.validator.Validator;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,36 +25,18 @@ public class LoginValidator implements Validator {
     public boolean validate(HttpServletRequest request) {
         String login = request.getParameter(ConstantContainer.LOGIN);
 
-        TourConnectionPool tourConnectionPool = TourConnectionPool.getInstance();
-        Connection connection;
+        ServiceFactory serviceFactory = ServiceFactory.getInstance();
+        UserService userService = serviceFactory.getUserService();
 
         try {
-            connection = tourConnectionPool.getConnection();
-            if(connection != null) {
-                try (PreparedStatement statement =
-                             connection.prepareStatement(DBRequestContainer.CHECK_LOGIN_REQUEST)) {
-                    statement.setString(1, login);
-                    ResultSet resultSet = statement.executeQuery();
-
-                    while(resultSet.next()) {
-                        if(resultSet.getInt(DBConstantContainer.ID_USER) > 0) {
-                            return false;
-                        }
-                    }
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                } finally {
-                    tourConnectionPool.returnConnection(connection);
-                }
-            } else {
-                //log
-                //tourconnectionppolexception
-                return false;
-            }
-        } catch (TourConnectionPoolException e) {
-            //log
+            int userID = userService.getID(login);
+            return userID <= 0;
+        } catch (DataSourceException e) {
+            //log.error("Problems with data source", e);
+        } catch (ServiceSQLException e) {
+            //log.error("SQL error", e);
         }
-        return true;
-    }
 
+        return false;
+    }
 }

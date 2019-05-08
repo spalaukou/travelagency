@@ -10,9 +10,9 @@ public final class DBConstantContainer {
     //DB properties
     public static final String JDBC_MYSQL_DRIVER = "com.mysql.cj.jdbc.Driver";
     public static final String DATABASE_URL = "jdbc:mysql://127.0.0.1:3306/tour?useTimezone=true&serverTimezone=UTC";
-    public static final String DATABASE_USER = "root";
+    public static final String DATABASE_LOGIN = "root";
     public static final String DATABASE_PASSWORD = "root";
-    public static final int MAX_CONNECTIONS = 10;
+    public static final int CONNECTIONS_COUNT = 10;
 
     //DB constants
     public static final String ID_USER = "iduser";
@@ -44,6 +44,14 @@ public final class DBConstantContainer {
     public static final String TRANSPORT_ID_TRANSPORT = "transport.idtransport";
     public static final String TRANSPORT_TYPE = "transport.type";
 
+    public static final int WRONG_USER_ID = 0;
+    public static final String WRONG_USER_PASSWORD = "";
+    public static final int WRONG_USER_BALANCE = -1;
+    public static final int WRONG_USER_DISCOUNT = 0;
+    public static final int WRONG_TOUR_PRICE = 0;
+    public static final int WRONG_ALL_ORDERS_COST = 0;
+
+    //discounts
     public static final float DEFAULT_DISCOUNT = 1.0f;
     public static final float LEVEL1_DISCOUNT = 0.95f;
     public static final float LEVEL2_DISCOUNT = 0.9f;
@@ -52,8 +60,5 @@ public final class DBConstantContainer {
     public static final int LEVEL1_DISCOUNT_BORDER = 1000;
     public static final int LEVEL2_DISCOUNT_BORDER = 2000;
     public static final int LEVEL3_DISCOUNT_BORDER = 5000;
-
-
-
 
 }

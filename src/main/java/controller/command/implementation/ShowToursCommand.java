@@ -3,6 +3,8 @@ package controller.command.implementation;
 import controller.command.Command;
 import model.ConstantContainer;
 import model.entity.Tour;
+import model.logic.exception.logical.ServiceSQLException;
+import model.logic.exception.technical.DataSourceException;
 import model.logic.service.ServiceFactory;
 import model.logic.service.TourService;
 
@@ -18,7 +20,6 @@ public class ShowToursCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request) {
-        List<Tour> tours;
         float discount;
 
         ServiceFactory serviceFactory = ServiceFactory.getInstance();
@@ -30,15 +31,24 @@ public class ShowToursCommand implements Command {
             discount = ConstantContainer.DEFAULT_DISCOUNT;
         }
 
-        String country = request.getParameter(ConstantContainer.COUNTRY);
+        try {
 
-        if(country == null) {
-            tours = tourService.getAllTours(discount);
-        } else {
-            tours = tourService.getToursByCountry(country, discount);
+            List<Tour> tours;
+            String country = request.getParameter(ConstantContainer.COUNTRY);
+
+            if (country == null) {
+                tours = tourService.getAllTours(discount);
+            } else {
+                tours = tourService.getToursByCountry(country, discount);
+            }
+
+            request.setAttribute(ConstantContainer.TOURS, tours);
+
+        } catch (DataSourceException e) {
+            //log.error("Problems with data source", e);
+        } catch (ServiceSQLException e) {
+            //log.error("SQL error", e);
         }
-
-        request.setAttribute(ConstantContainer.TOURS, tours);
 
         return ConstantContainer.TOURS_PAGE;
     }

@@ -2,8 +2,8 @@ package controller.command.implementation;
 
 import controller.command.Command;
 import model.ConstantContainer;
-import model.logic.exception.technical.DAOSQLException;
-import model.logic.exception.technical.TourConnectionPoolException;
+import model.logic.exception.logical.ServiceSQLException;
+import model.logic.exception.technical.DataSourceException;
 import model.logic.service.OrderService;
 import model.logic.service.ServiceFactory;
 import model.logic.validator.Validator;
@@ -48,16 +48,16 @@ public class BuyTourCommand implements Command {
 
                     request.setAttribute(ConstantContainer.AFTER_PURCHASE_MSG, ConstantContainer.MESSAGE_AFTER_PURCHASE);
                     page = ConstantContainer.MY_ORDERS_PAGE;
-                } catch (TourConnectionPoolException e) {
-                    e.printStackTrace();
-                } catch (DAOSQLException e) {
-                    e.printStackTrace();
+
+                } catch (DataSourceException e) {
+                    //log.error("Problems with data source", e);
+                } catch (ServiceSQLException e) {
+                    //log.error("SQL error", e);
                 }
 
             } else {
                 request.setAttribute(ConstantContainer.ERR_NOT_ENOUGH_MONEY_MSG, ConstantContainer.MESSAGE_NOT_ENOUGH_MONEY_ERROR);
                 page = ConstantContainer.INDEX_PAGE;
-                //not enough money message
             }
         }
 
