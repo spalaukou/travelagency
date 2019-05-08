@@ -13,9 +13,9 @@ import java.util.List;
 
 public interface OrderService {
 
-    void createOrder(String userID, String tourID, int totalPrice, int balance) throws TourConnectionPoolException, DAOSQLException;
+    float createOrder(String userID, String tourID, int totalPrice, int balance) throws TourConnectionPoolException, DAOSQLException;
 
-    void cancelOrder();
+    float cancelOrder(String userID, String orderID, int totalPrice, int balance) throws TourConnectionPoolException, DAOSQLException;
 
     List<Order> getOrdersByID(String userID);
 

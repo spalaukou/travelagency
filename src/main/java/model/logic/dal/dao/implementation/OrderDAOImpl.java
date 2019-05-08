@@ -26,10 +26,11 @@ import java.util.List;
 public class OrderDAOImpl implements OrderDAO {
 
     @Override
-    public void createOrder(String userID, String tourID, int totalPrice, int balance) throws TourConnectionPoolException, DAOSQLException {
+    public float createOrder(String userID, String tourID, int totalPrice, int balance) throws TourConnectionPoolException, DAOSQLException {
         TourConnectionPool tourConnectionPool = TourConnectionPool.getInstance();
         Connection connection = tourConnectionPool.getConnection();
         UserDAO userDAO = DAOFactory.getInstance().getUserDAO();
+        float newDiscount = ConstantContainer.WRONG_DISCOUNT;
 
         if (connection != null) {
             try (PreparedStatement statement =
@@ -42,7 +43,7 @@ public class OrderDAOImpl implements OrderDAO {
                 statement.executeUpdate();
 
                 userDAO.setBalance(userID, balance - totalPrice);
-                userDAO.setDiscount(userID);
+                newDiscount = userDAO.setDiscount(userID);
 
             } catch (SQLException e) {
                 throw new DAOSQLException(e);
@@ -50,11 +51,34 @@ public class OrderDAOImpl implements OrderDAO {
                 tourConnectionPool.returnConnection(connection);
             }
         }
+        return newDiscount;
     }
 
     @Override
-    public void cancelOrder() {
+    public float cancelOrder(String userID, String orderID, int totalPrice, int balance) throws TourConnectionPoolException, DAOSQLException {
+        TourConnectionPool tourConnectionPool = TourConnectionPool.getInstance();
+        Connection connection = tourConnectionPool.getConnection();
+        UserDAO userDAO = DAOFactory.getInstance().getUserDAO();
+        float newDiscount = ConstantContainer.WRONG_DISCOUNT;
 
+        if (connection != null) {
+            try (PreparedStatement statement =
+                         connection.prepareStatement(DBRequestContainer.CANCEL_ORDER_REQUEST)) {
+
+                statement.setString(1, orderID);
+
+                userDAO.setBalance(userID, balance + totalPrice);
+                newDiscount = userDAO.setDiscount(userID);
+
+                statement.executeUpdate();
+
+            } catch (SQLException e) {
+                throw new DAOSQLException(e);
+            } finally {
+                tourConnectionPool.returnConnection(connection);
+            }
+        }
+        return newDiscount;
     }
 
     @Override

@@ -75,7 +75,7 @@ public class UserDAOImpl implements UserDAO {
     @Override
     public void setBalance(String userID, int balance) {
         TourConnectionPool tourConnectionPool = TourConnectionPool.getInstance();
-        Connection connection = null;
+        Connection connection;
         try {
             connection = tourConnectionPool.getConnection();
             if(connection != null) {
@@ -99,31 +99,31 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public void setDiscount(String userID) {
+    public float setDiscount(String userID) {
         int allOrdersCost = getAllOrdersCost(userID);
         float userDiscount = getUserDiscount(userID);
-        float newDiscount = DBConstantContainer.DEFAULT_DISCOUNT;
+        float newDiscount;
 
         if (allOrdersCost < DBConstantContainer.LEVEL1_DISCOUNT_BORDER) {
-            if(userDiscount != DBConstantContainer.DEFAULT_DISCOUNT) {
-                newDiscount = DBConstantContainer.DEFAULT_DISCOUNT;
-            }
-        } else if(allOrdersCost < DBConstantContainer.LEVEL2_DISCOUNT_BORDER) {
-            if(userDiscount != DBConstantContainer.LEVEL1_DISCOUNT) {
-                newDiscount = DBConstantContainer.LEVEL1_DISCOUNT;
-            }
+            newDiscount = DBConstantContainer.DEFAULT_DISCOUNT;
+        } else if (allOrdersCost < DBConstantContainer.LEVEL2_DISCOUNT_BORDER) {
+            newDiscount = DBConstantContainer.LEVEL1_DISCOUNT;
         } else if (allOrdersCost < DBConstantContainer.LEVEL3_DISCOUNT_BORDER) {
-            if(userDiscount != DBConstantContainer.LEVEL2_DISCOUNT) {
-                newDiscount = DBConstantContainer.LEVEL2_DISCOUNT;
-            }
+            newDiscount = DBConstantContainer.LEVEL2_DISCOUNT;
         } else {
-            if(userDiscount != DBConstantContainer.LEVEL3_DISCOUNT) {
-                newDiscount = DBConstantContainer.LEVEL3_DISCOUNT;
-            }
+            newDiscount = DBConstantContainer.LEVEL3_DISCOUNT;
         }
 
+        if(userDiscount != newDiscount) {
+            insertNewDiscount(userID, newDiscount);
+        }
+
+        return newDiscount;
+    }
+
+    private void insertNewDiscount(String userID, float newDiscount) {
         TourConnectionPool tourConnectionPool = TourConnectionPool.getInstance();
-        Connection connection = null;
+        Connection connection;
         try {
             connection = tourConnectionPool.getConnection();
             if(connection != null) {
@@ -142,7 +142,7 @@ public class UserDAOImpl implements UserDAO {
                 }
             }
         } catch (TourConnectionPoolException | DAOSQLException e) {
-            e.printStackTrace();
+            //log
         }
     }
 
@@ -150,7 +150,7 @@ public class UserDAOImpl implements UserDAO {
         int allOrdersCost = 0;
 
         TourConnectionPool tourConnectionPool = TourConnectionPool.getInstance();
-        Connection connection = null;
+        Connection connection;
         try {
             connection = tourConnectionPool.getConnection();
             if(connection != null) {
@@ -181,7 +181,7 @@ public class UserDAOImpl implements UserDAO {
         float userDiscount = 0;
 
         TourConnectionPool tourConnectionPool = TourConnectionPool.getInstance();
-        Connection connection = null;
+        Connection connection;
         try {
             connection = tourConnectionPool.getConnection();
             if(connection != null) {

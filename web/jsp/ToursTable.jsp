@@ -9,10 +9,10 @@
 
 <c:choose>
     <c:when test="${sessionScope.login != null}">
-        <jsp:include page="header/userHeader.jsp"/>
+        <jsp:include page="header/UserHeader.jsp"/>
     </c:when>
     <c:otherwise>
-        <jsp:include page="header/guestHeader.jsp"/>
+        <jsp:include page="header/GuestHeader.jsp"/>
     </c:otherwise>
 </c:choose>
 
@@ -72,7 +72,7 @@
     </c:forEach>
 </table>
 
-<jsp:include page="footer/footer.jsp"/>
+<jsp:include page="footer/Footer.jsp"/>
 
 </body>
 </html>

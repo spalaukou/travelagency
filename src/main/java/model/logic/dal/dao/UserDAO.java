@@ -2,10 +2,7 @@ package model.logic.dal.dao;
 
 import model.entity.User;
 import model.logic.exception.technical.DAOSQLException;
-import model.logic.exception.technical.DBconnectionException;
 import model.logic.exception.technical.TourConnectionPoolException;
-
-import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author Stanislau Palaukou on 24.04.2019
@@ -20,5 +17,5 @@ public interface UserDAO {
 
     void setBalance(String userID, int balance);
 
-    void setDiscount(String userID);
+    float setDiscount(String userID);
 }

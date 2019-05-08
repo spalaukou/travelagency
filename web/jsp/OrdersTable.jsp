@@ -8,17 +8,18 @@
 
 <c:choose>
     <c:when test="${sessionScope.login != null}">
-        <jsp:include page="header/userHeader.jsp"/>
+        <jsp:include page="header/UserHeader.jsp"/>
     </c:when>
     <c:otherwise>
-        <jsp:include page="header/guestHeader.jsp"/>
+        <jsp:include page="header/GuestHeader.jsp"/>
     </c:otherwise>
 </c:choose>
 
 <br/>
 
 <div style="text-align: center;">
-    ${afterPurchaseMessage}<br/>
+    ${afterPurchaseMessage}
+    ${afterCancelMessage}<br/>
     There are your orders:
 </div>
 
@@ -57,7 +58,7 @@
             <td><c:out value="${discount}"/></td>
             <td><c:out value="${order.totalPrice}"/></td>
             <td>
-                <a href="start?command=cancel_tour&id=${order.id}" class="button">
+                <a href="start?command=cancel_tour&id=${order.id}&tp=${order.totalPrice}" class="button">
                     <button>Cancel Tour</button>
                 </a>
             </td>
@@ -65,7 +66,7 @@
     </c:forEach>
 </table>
 
-<jsp:include page="footer/footer.jsp"/>
+<jsp:include page="footer/Footer.jsp"/>
 
 </body>
 </html>

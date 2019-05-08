@@ -70,7 +70,7 @@ public class BalanceValidator implements Validator {
         return balance;
     }
 
-    public int getPrice(String tourID) throws TourConnectionPoolException {
+    private int getPrice(String tourID) throws TourConnectionPoolException {
         int price = ConstantContainer.WRONG_PRICE;
 
         try (PreparedStatement statement =

@@ -6,18 +6,18 @@
 </head>
 <body>
 
-<jsp:include page="header/guestHeader.jsp"/>
+<jsp:include page="header/GuestHeader.jsp"/>
 
 <div style="text-align: center;">
     You are successfully signed up, ${param.login}!<br/>
 
-    Now you can <a href="${pageContext.request.contextPath}/jsp/sign_in.jsp">Sign In</a> and buy a tour.<br/>
+    Now you can <a href="${pageContext.request.contextPath}/jsp/Sign_in.jsp">Sign In</a> and buy a tour.<br/>
 
     <br/>
     <a href="${pageContext.request.contextPath}">Back to main page</a>
 </div>
 
-<jsp:include page="footer/footer.jsp"/>
+<jsp:include page="footer/Footer.jsp"/>
 
 </body>
 </html>

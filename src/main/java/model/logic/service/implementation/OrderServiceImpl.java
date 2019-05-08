@@ -19,13 +19,13 @@ public class OrderServiceImpl implements OrderService {
     private OrderDAO orderDAO = daoFactory.getOrderDAO();
 
     @Override
-    public void createOrder(String userID, String tourID, int totalPrice, int balance) throws TourConnectionPoolException, DAOSQLException {
-        orderDAO.createOrder(userID, tourID, totalPrice, balance);
+    public float createOrder(String userID, String tourID, int totalPrice, int balance) throws TourConnectionPoolException, DAOSQLException {
+        return orderDAO.createOrder(userID, tourID, totalPrice, balance);
     }
 
     @Override
-    public void cancelOrder() {
-        orderDAO.cancelOrder();
+    public float cancelOrder(String userID, String orderID, int totalPrice, int balance) throws TourConnectionPoolException, DAOSQLException {
+        return orderDAO.cancelOrder(userID, orderID, totalPrice, balance);
     }
 
     @Override

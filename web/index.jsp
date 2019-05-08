@@ -15,18 +15,18 @@
 <%--Кодировка запроса: ${pageContext.request.characterEncoding}--%>
 
 <c:if test="${sessionScope.login == null}">
-    <jsp:include page="jsp/header/guestHeader.jsp"/>
+    <jsp:include page="jsp/header/GuestHeader.jsp"/>
     <br/>
     <div style="text-align: center;">
-        Please <a href="${pageContext.request.contextPath}/jsp/sign_in.jsp">Sign In</a>
-        (do not have an account? <a href="${pageContext.request.contextPath}/jsp/sign_up.jsp">Sign Up</a>)
+        Please <a href="${pageContext.request.contextPath}/jsp/SignIn.jsp">Sign In</a>
+        (do not have an account? <a href="${pageContext.request.contextPath}/jsp/SignUp.jsp">Sign Up</a>)
         to buy a tour, or select tours that interest you:
     </div>
     <br/>
 </c:if>
 
 <c:if test="${sessionScope.login != null}">
-    <jsp:include page="jsp/header/userHeader.jsp"/>
+    <jsp:include page="jsp/header/UserHeader.jsp"/>
     <div style="text-align: center;">
             ${errorNotEnoughMoneyMessage}<br/>
                 Please select tours that interest to buy:
@@ -56,7 +56,7 @@
 
 <br/>
 
-<jsp:include page="jsp/footer/footer.jsp"/>
+<jsp:include page="jsp/footer/Footer.jsp"/>
 
 </body>
 </html>

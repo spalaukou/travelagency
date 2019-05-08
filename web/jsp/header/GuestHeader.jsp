@@ -13,10 +13,10 @@
         <td width="15%"><a href="${pageContext.request.contextPath}">${agencyName}</a></td>
         <td width="70%" style="text-align: center;">${welcomeMessage}</td>
         <td>
-            <a href="${pageContext.request.contextPath}/jsp/sign_in.jsp">${signIn}</a>
+            <a href="${pageContext.request.contextPath}/jsp/SignIn.jsp">${signIn}</a>
         </td>
         <td>
-            <a href="${pageContext.request.contextPath}/jsp/sign_up.jsp">${signUp}</a>
+            <a href="${pageContext.request.contextPath}/jsp/SignUp.jsp">${signUp}</a>
         </td>
     </tr>
 </table>

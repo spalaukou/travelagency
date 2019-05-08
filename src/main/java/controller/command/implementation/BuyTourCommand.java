@@ -31,21 +31,29 @@ public class BuyTourCommand implements Command {
             ValidatorFactory validatorFactory = ValidatorFactory.getInstance();
             Validator balanceValidator = validatorFactory.getBalanceValidator();
             if (balanceValidator.validate(request)) {
+
                 String userID = request.getSession().getAttribute(ConstantContainer.USER_ID).toString();
                 String tourID = request.getParameter(ConstantContainer.TOUR_ID);
                 int totalPrice = Integer.parseInt(request.getParameter(ConstantContainer.TOTAL_PRICE));
                 int balance = (int) request.getSession().getAttribute(ConstantContainer.BALANCE);
 
                 try {
-                    orderService.createOrder(userID, tourID, totalPrice, balance);
+
+                    float newDiscount = orderService.createOrder(userID, tourID, totalPrice, balance);
                     request.getSession().setAttribute(ConstantContainer.BALANCE, (balance - totalPrice));
+
+                    if(newDiscount != ConstantContainer.WRONG_DISCOUNT) {
+                        request.getSession().setAttribute(ConstantContainer.DISCOUNT, newDiscount);
+                    }
+
+                    request.setAttribute(ConstantContainer.AFTER_PURCHASE_MSG, ConstantContainer.MESSAGE_AFTER_PURCHASE);
+                    page = ConstantContainer.MY_ORDERS_PAGE;
                 } catch (TourConnectionPoolException e) {
                     e.printStackTrace();
                 } catch (DAOSQLException e) {
                     e.printStackTrace();
                 }
-                request.setAttribute(ConstantContainer.AFTER_PURCHASE_MSG, ConstantContainer.MESSAGE_AFTER_PURCHASE);
-                page = ConstantContainer.MY_ORDERS_PAGE;
+
             } else {
                 request.setAttribute(ConstantContainer.ERR_NOT_ENOUGH_MONEY_MSG, ConstantContainer.MESSAGE_NOT_ENOUGH_MONEY_ERROR);
                 page = ConstantContainer.INDEX_PAGE;
