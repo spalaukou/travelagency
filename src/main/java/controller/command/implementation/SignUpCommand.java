@@ -8,6 +8,7 @@ package controller.command.implementation;
         import model.logic.service.UserService;
         import model.logic.validator.Validator;
         import model.logic.validator.ValidatorFactory;
+        import org.apache.log4j.Logger;
 
         import javax.servlet.http.HttpServletRequest;
 
@@ -17,6 +18,8 @@ package controller.command.implementation;
  */
 
 public class SignUpCommand implements Command {
+
+    private static final Logger LOGGER = Logger.getLogger(SignUpCommand.class);
 
     @Override
     public String execute(HttpServletRequest request) {
@@ -40,10 +43,10 @@ public class SignUpCommand implements Command {
                     request.setAttribute(ConstantContainer.USER, login);
 
                     page = ConstantContainer.SIGN_UP_RESULT_PAGE;
-                } catch (ServiceSQLException e) {
-                    //log.error("SQL error", e);
                 } catch (DataSourceException e) {
-                    //log.error("Problems with data source", e);
+                    LOGGER.error(ConstantContainer.DATA_SOURCE_ERR_MSG, e);
+                } catch (ServiceSQLException e) {
+                    LOGGER.error(ConstantContainer.SQL_ERR_MSG, e);
                 }
             } else {
                 request.setAttribute(ConstantContainer.ERR_LOGIN_PASS_MSG, ConstantContainer.MESSAGE_USER_EXISTS);

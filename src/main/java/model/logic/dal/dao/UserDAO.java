@@ -21,8 +21,6 @@ public interface UserDAO {
 
     int getBalance(String login) throws DAOSQLException, TourConnectionPoolException;
 
-
-
     void setBalance(String userID, int balance) throws TourConnectionPoolException, DAOSQLException;
 
     float setDiscount(String userID) throws TourConnectionPoolException, DAOSQLException;

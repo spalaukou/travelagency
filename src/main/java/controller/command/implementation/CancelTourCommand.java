@@ -3,11 +3,10 @@ package controller.command.implementation;
 import controller.command.Command;
 import model.ConstantContainer;
 import model.logic.exception.logical.ServiceSQLException;
-import model.logic.exception.technical.DAOSQLException;
 import model.logic.exception.technical.DataSourceException;
-import model.logic.exception.technical.TourConnectionPoolException;
 import model.logic.service.OrderService;
 import model.logic.service.ServiceFactory;
+import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -17,6 +16,8 @@ import javax.servlet.http.HttpServletRequest;
  */
 
 public class CancelTourCommand implements Command {
+
+    private static final Logger LOGGER = Logger.getLogger(CancelTourCommand.class);
 
     @Override
     public String execute(HttpServletRequest request) {
@@ -45,9 +46,9 @@ public class CancelTourCommand implements Command {
                 request.setAttribute(ConstantContainer.AFTER_CANCEL_MSG, ConstantContainer.MESSAGE_AFTER_CANCEL);
                 page = ConstantContainer.MY_ORDERS_PAGE;
             } catch (DataSourceException e) {
-                //log.error("Problems with data source", e);
+                LOGGER.error(ConstantContainer.DATA_SOURCE_ERR_MSG, e);
             } catch (ServiceSQLException e) {
-                //log.error("SQL error", e);
+                LOGGER.error(ConstantContainer.SQL_ERR_MSG, e);
             }
         }
 

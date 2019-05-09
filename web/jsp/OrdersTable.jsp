@@ -1,8 +1,30 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+<fmt:bundle basename="localization">
+    <fmt:message key="locale.orders.orders" var="ordersText"/>
+    <fmt:message key="locale.orders.yourOrders" var="yourOrders"/>
+    <fmt:message key="locale.tours.num" var="num"/>
+    <fmt:message key="locale.tours.type" var="type"/>
+    <fmt:message key="locale.tours.country" var="country"/>
+    <fmt:message key="locale.tours.city" var="city"/>
+    <fmt:message key="locale.tours.hotel" var="hotel"/>
+    <fmt:message key="locale.tours.stars" var="stars"/>
+    <fmt:message key="locale.tours.meals" var="meals"/>
+    <fmt:message key="locale.tours.persons" var="persons"/>
+    <fmt:message key="locale.tours.nights" var="nights"/>
+    <fmt:message key="locale.tours.transport" var="transport"/>
+    <fmt:message key="locale.tours.cost" var="cost"/>
+    <fmt:message key="locale.tours.hot" var="hot"/>
+    <fmt:message key="locale.tours.yourDisc" var="yourDisc"/>
+    <fmt:message key="locale.orders.youPaid" var="youPaid"/>
+    <fmt:message key="locale.orders.click" var="click"/>
+    <fmt:message key="locale.orders.cancel" var="cancel"/>
+</fmt:bundle>
 <html>
 <head>
-    <title>Orders</title>
+    <title>${ordersText}</title>
 </head>
 <body>
 
@@ -20,28 +42,28 @@
 <div style="text-align: center;">
     ${afterPurchaseMessage}
     ${afterCancelMessage}<br/>
-    There are your orders:
+    ${yourOrders}
 </div>
 
 <br/>
 
 <table cellspacing="0" cellpadding="4" border="1" align="center">
     <tr>
-        <td>#</td>
-        <td>Type</td>
-        <td>Country</td>
-        <td>City</td>
-        <td>Hotel</td>
-        <td>Stars</td>
-        <td>Meals</td>
-        <td>Persons</td>
-        <td>Nights</td>
-        <td>Transport</td>
-        <td>Cost</td>
-        <td>Hot</td>
-        <td>Your disc.</td>
-        <td>You paid</td>
-        <td>Click to cancel</td>
+        <td>${num}</td>
+        <td>${type}</td>
+        <td>${country}</td>
+        <td>${city}</td>
+        <td>${hotel}</td>
+        <td>${stars}</td>
+        <td>${meals}</td>
+        <td>${persons}</td>
+        <td>${nights}</td>
+        <td>${transport}</td>
+        <td>${cost}</td>
+        <td>${hot}</td>
+        <td>${yourDisc}</td>
+        <td>${youPaid}</td>
+        <td>${click}</td>
     </tr>
     <c:forEach var="order" items="${orders}" varStatus="status">
         <tr>
@@ -61,7 +83,7 @@
             <td><c:out value="${order.totalPrice}"/></td>
             <td>
                 <a href="start?command=cancel_tour&id=${order.id}&tp=${order.totalPrice}" class="button">
-                    <button>Cancel Tour</button>
+                    <button>${cancel}</button>
                 </a>
             </td>
         </tr>

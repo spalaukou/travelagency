@@ -7,6 +7,7 @@ import model.logic.exception.logical.ServiceSQLException;
 import model.logic.exception.technical.DataSourceException;
 import model.logic.service.ServiceFactory;
 import model.logic.service.TourService;
+import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -17,6 +18,8 @@ import java.util.List;
  */
 
 public class ShowToursCommand implements Command {
+
+    private static final Logger LOGGER = Logger.getLogger(ShowToursCommand.class);
 
     @Override
     public String execute(HttpServletRequest request) {
@@ -45,9 +48,9 @@ public class ShowToursCommand implements Command {
             request.setAttribute(ConstantContainer.TOURS, tours);
 
         } catch (DataSourceException e) {
-            //log.error("Problems with data source", e);
+            LOGGER.error(ConstantContainer.DATA_SOURCE_ERR_MSG, e);
         } catch (ServiceSQLException e) {
-            //log.error("SQL error", e);
+            LOGGER.error(ConstantContainer.SQL_ERR_MSG, e);
         }
 
         return ConstantContainer.TOURS_PAGE;

@@ -18,7 +18,6 @@ public class OrderBuilder implements EntityBuilder<Order> {
         Order order = new Order();
         order.setId(resultSet.getInt(DBConstantContainer.ORDER_ID_ORDER));
 
-        //user
         User user = new User();
         user.setId(resultSet.getInt(DBConstantContainer.ID_USER));
         user.setLogin(resultSet.getString(DBConstantContainer.USER_LOGIN));

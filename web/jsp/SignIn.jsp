@@ -1,7 +1,16 @@
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+<fmt:bundle basename="localization">
+    <fmt:message key="locale.signIn" var="signIn"/>
+    <fmt:message key="locale.sign.signIn" var="signInText"/>
+    <fmt:message key="locale.sign.login" var="login"/>
+    <fmt:message key="locale.sign.password" var="password"/>
+    <fmt:message key="locale.sign.clear" var="clear"/>
+</fmt:bundle>
 <html>
 <head>
-    <title>Sign In</title>
+    <title>${signIn}</title>
 </head>
 <body>
 
@@ -10,11 +19,11 @@
 <div style="text-align: center;">
     <form name="loginForm" method="POST" action="${pageContext.request.contextPath}\start">
         <input type="hidden" name="command" value="sign_in"/>
-        <p>Please, Sign In.</p>
-        <p>Login:<br/>
+        <p>${signInText}</p>
+        <p>${login}<br/>
             <input type="text" name="login"/>
         </p>
-        <p>Password:<br/>
+        <p>${password}<br/>
             <input type="password" name="password"/>
         </p>
         ${errorLoginPassMessage}
@@ -24,8 +33,8 @@
         <br/>
         <tr>
             <td colspan="2">
-                <input type="reset" value="Clear form"/>
-                <input type="submit" value="Sign In"/>
+                <input type="reset" value="${clear}"/>
+                <input type="submit" value="${signIn}"/>
             </td>
         </tr>
     </form>

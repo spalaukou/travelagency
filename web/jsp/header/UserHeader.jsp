@@ -9,6 +9,7 @@
     <fmt:message key="locale.role" var="role"/>
     <fmt:message key="locale.balanceText" var="balanceText"/>
     <fmt:message key="locale.discountText" var="discountText"/>
+    <fmt:message key="locale.myOrders" var="myOrders"/>
 </fmt:bundle>
 
 <table width="100%" cellspacing="0" cellpadding="4">
@@ -32,7 +33,7 @@
         <td style="text-align: center;">ID: ${userid}</td>
         <td style="text-align: center;">${balanceText}: ${balance}</td>
         <td style="text-align: center;">${discountText}: ${discount}</td>
-        <td style="text-align: center;"><a href="start?command=show_orders">My orders</a></td>
+        <td style="text-align: center;"><a href="start?command=show_orders">${myOrders}</a></td>
     </tr>
 </table>
 

@@ -41,7 +41,6 @@ public final class ConstantContainer {
     public static final String ORDERS = "orders";
 
     //pages
-    public static final String GUEST_HEADER = "header/GuestHeader.jsp";
     public static final String INDEX_PAGE = "index.jsp";
     public static final String SIGN_UP_PAGE = "jsp/SignUp.jsp";
     public static final String SIGN_UP_RESULT_PAGE = "jsp/SignUpResult.jsp";
@@ -49,7 +48,6 @@ public final class ConstantContainer {
     public static final String TOURS_PAGE = "jsp/ToursTable.jsp";
     public static final String ORDERS_PAGE = "jsp/OrdersTable.jsp";
     public static final String MY_ORDERS_PAGE = "/start?command=show_orders";
-    public static final String MAIN_PAGE = "jsp/main.jsp";
     public static final String ERROR_PAGE = "jsp/Error.jsp";
 
     //messages
@@ -61,5 +59,12 @@ public final class ConstantContainer {
     public static final String MESSAGE_NOT_ENOUGH_MONEY_ERROR = "Sorry, you have not enough money to buy this tour! Please, select another one or fund your account.";
     public static final String MESSAGE_AFTER_PURCHASE = "Thank you for your purchase!";
     public static final String MESSAGE_AFTER_CANCEL = "Your order has been cancelled!";
+
+    //logger messages
+    public static final String DATA_SOURCE_ERR_MSG = "Data source error.";
+    public static final String SQL_ERR_MSG = "SQL error.";
+    public static final String CONNECTION_POOL_ERR_MSG = "TourConnectionPool initialization error.";
+    public static final String IO_ERR_MSG = "I/O error.";
+    public static final String SERVLET_ERR_MSG = "Agency Servlet error.";
 
 }

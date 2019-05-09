@@ -3,7 +3,6 @@ package model.logic.dal.dao.implementation;
 import model.entity.Tour;
 import model.entity.builder.BuilderFactory;
 import model.entity.builder.EntityBuilder;
-import model.entity.builder.TourBuilder;
 import model.logic.dal.dao.TourDAO;
 import model.logic.dal.db_connection.DBConstantContainer;
 import model.logic.dal.db_connection.DBRequestContainer;

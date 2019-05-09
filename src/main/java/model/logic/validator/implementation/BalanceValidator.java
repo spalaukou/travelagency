@@ -7,6 +7,7 @@ import model.logic.service.ServiceFactory;
 import model.logic.service.TourService;
 import model.logic.service.UserService;
 import model.logic.validator.Validator;
+import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -16,6 +17,8 @@ import javax.servlet.http.HttpServletRequest;
  */
 
 public class BalanceValidator implements Validator {
+
+    private static final Logger LOGGER = Logger.getLogger(BalanceValidator.class);
 
     @Override
     public boolean validate(HttpServletRequest request) {
@@ -38,9 +41,9 @@ public class BalanceValidator implements Validator {
                 return true;
             }
         } catch (DataSourceException e) {
-            //log.error("Problems with data source", e);
+            LOGGER.error(ConstantContainer.DATA_SOURCE_ERR_MSG, e);
         } catch (ServiceSQLException e) {
-            //log.error("SQL error", e);
+            LOGGER.error(ConstantContainer.SQL_ERR_MSG, e);
         }
         return false;
     }

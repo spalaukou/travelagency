@@ -8,6 +8,7 @@ import model.logic.service.OrderService;
 import model.logic.service.ServiceFactory;
 import model.logic.validator.Validator;
 import model.logic.validator.ValidatorFactory;
+import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -17,6 +18,8 @@ import javax.servlet.http.HttpServletRequest;
  */
 
 public class BuyTourCommand implements Command {
+
+    private static final Logger LOGGER = Logger.getLogger(BuyTourCommand.class);
 
     @Override
     public String execute(HttpServletRequest request) {
@@ -50,9 +53,9 @@ public class BuyTourCommand implements Command {
                     page = ConstantContainer.MY_ORDERS_PAGE;
 
                 } catch (DataSourceException e) {
-                    //log.error("Problems with data source", e);
+                    LOGGER.error(ConstantContainer.DATA_SOURCE_ERR_MSG, e);
                 } catch (ServiceSQLException e) {
-                    //log.error("SQL error", e);
+                    LOGGER.error(ConstantContainer.SQL_ERR_MSG, e);
                 }
 
             } else {

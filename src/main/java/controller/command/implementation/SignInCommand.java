@@ -9,6 +9,7 @@ import model.logic.service.ServiceFactory;
 import model.logic.service.UserService;
 import model.logic.validator.Validator;
 import model.logic.validator.ValidatorFactory;
+import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -18,6 +19,8 @@ import javax.servlet.http.HttpServletRequest;
  */
 
 public class SignInCommand implements Command {
+
+    private static final Logger LOGGER = Logger.getLogger(SignInCommand.class);
 
     @Override
     public String execute(HttpServletRequest request) {
@@ -49,9 +52,9 @@ public class SignInCommand implements Command {
 
                     page = ConstantContainer.INDEX_PAGE;
                 } catch (DataSourceException e) {
-                    //log.error("Problems with data source", e);
+                    LOGGER.error(ConstantContainer.DATA_SOURCE_ERR_MSG, e);
                 } catch (ServiceSQLException e) {
-                    //log.error("SQL error", e);
+                    LOGGER.error(ConstantContainer.SQL_ERR_MSG, e);
                 }
             } else {
                 request.setAttribute(ConstantContainer.ERR_LOGIN_PASS_MSG, ConstantContainer.MESSAGE_LOGIN_ERROR);

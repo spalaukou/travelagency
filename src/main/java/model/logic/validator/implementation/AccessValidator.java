@@ -1,18 +1,14 @@
 package model.logic.validator.implementation;
 
 import model.ConstantContainer;
-import model.logic.dal.db_connection.DBConstantContainer;
-import model.logic.dal.db_connection.DBRequestContainer;
-import model.logic.dal.db_connection.connection_pool.TourConnectionPool;
 import model.logic.exception.logical.ServiceSQLException;
 import model.logic.exception.technical.DataSourceException;
-import model.logic.exception.technical.TourConnectionPoolException;
 import model.logic.service.ServiceFactory;
 import model.logic.service.UserService;
 import model.logic.validator.Validator;
+import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
-import java.sql.*;
 
 /**
  * @author Stanislau Palaukou on 30.04.2019
@@ -20,6 +16,8 @@ import java.sql.*;
  */
 
 public class AccessValidator implements Validator {
+
+    private static final Logger LOGGER = Logger.getLogger(AccessValidator.class);
 
     @Override
     public boolean validate(HttpServletRequest request) {
@@ -36,9 +34,9 @@ public class AccessValidator implements Validator {
                 return true;
             }
         } catch (DataSourceException e) {
-            //log.error("Problems with data source", e);
+            LOGGER.error(ConstantContainer.DATA_SOURCE_ERR_MSG, e);
         } catch (ServiceSQLException e) {
-            //log.error("SQL error", e);
+            LOGGER.error(ConstantContainer.SQL_ERR_MSG, e);
         }
         return false;
     }

@@ -3,6 +3,7 @@ package controller;
 import controller.command.Command;
 import controller.command.CommandManager;
 import model.ConstantContainer;
+import org.apache.log4j.Logger;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -20,6 +21,8 @@ import java.io.IOException;
 @WebServlet("/start")
 public class AgencyServlet extends HttpServlet {
 
+    private static final Logger LOGGER = Logger.getLogger(AgencyServlet.class);
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) {
             processRequest(request, response);
     }
@@ -29,20 +32,20 @@ public class AgencyServlet extends HttpServlet {
     }
 
     private void processRequest(HttpServletRequest request, HttpServletResponse response) {
-
         String cmd = request.getParameter(ConstantContainer.COMMAND);
-
         Command command = CommandManager.getCommand(cmd);
 
-        String page;
-        page = command.execute(request);
-
+        String page = command.execute(request);
         RequestDispatcher dispatcher = request.getRequestDispatcher(page);
 
         try {
+
             dispatcher.forward(request, response);
-        } catch (ServletException | IOException e) {
-            e.printStackTrace();
+
+        } catch (ServletException e) {
+            LOGGER.error(ConstantContainer.SERVLET_ERR_MSG, e);
+        } catch (IOException e) {
+            LOGGER.error(ConstantContainer.IO_ERR_MSG, e);
         }
     }
 }

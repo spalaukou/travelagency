@@ -1,9 +1,30 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+<fmt:bundle basename="localization">
+    <fmt:message key="locale.tours.tours" var="toursText"/>
+    <fmt:message key="locale.tours.weOffer" var="weOffer"/>
+    <fmt:message key="locale.tours.num" var="num"/>
+    <fmt:message key="locale.tours.type" var="type"/>
+    <fmt:message key="locale.tours.country" var="country"/>
+    <fmt:message key="locale.tours.city" var="city"/>
+    <fmt:message key="locale.tours.hotel" var="hotel"/>
+    <fmt:message key="locale.tours.stars" var="stars"/>
+    <fmt:message key="locale.tours.meals" var="meals"/>
+    <fmt:message key="locale.tours.persons" var="persons"/>
+    <fmt:message key="locale.tours.nights" var="nights"/>
+    <fmt:message key="locale.tours.transport" var="transport"/>
+    <fmt:message key="locale.tours.cost" var="cost"/>
+    <fmt:message key="locale.tours.hot" var="hot"/>
+    <fmt:message key="locale.tours.yourDisc" var="yourDisc"/>
+    <fmt:message key="locale.tours.total" var="total"/>
+    <fmt:message key="locale.tours.click" var="click"/>
+    <fmt:message key="locale.tours.buy" var="buy"/>
+</fmt:bundle>
 <html>
 <head>
-    <title>Tours</title>
+    <title>${toursText}</title>
 </head>
 <body>
 
@@ -19,28 +40,28 @@
 <br/>
 
 <div style="text-align: center;">
-    We offer you next tours:
+    ${weOffer}
 </div>
 
 <br/>
 
 <table cellspacing="0" cellpadding="4" border="1" align="center">
     <tr>
-        <td>#</td>
-        <td>Type</td>
-        <td>Country</td>
-        <td>City</td>
-        <td>Hotel</td>
-        <td>Stars</td>
-        <td>Meals</td>
-        <td>Persons</td>
-        <td>Nights</td>
-        <td>Transport</td>
-        <td>Cost</td>
-        <td>Hot</td>
-        <td>Your disc.</td>
-        <td>Total price</td>
-        <td>Click to buy</td>
+        <td>${num}</td>
+        <td>${type}</td>
+        <td>${country}</td>
+        <td>${city}</td>
+        <td>${hotel}</td>
+        <td>${stars}</td>
+        <td>${meals}</td>
+        <td>${persons}</td>
+        <td>${nights}</td>
+        <td>${transport}</td>
+        <td>${cost}</td>
+        <td>${hot}</td>
+        <td>${yourDisc}</td>
+        <td>${total}</td>
+        <td>${click}</td>
     </tr>
     <c:forEach var="tour" items="${tours}" varStatus="status">
         <tr>
@@ -67,7 +88,7 @@
             </td>
             <td>
                 <a href="start?command=buy_tour&tour_id=${tour.id}&tp=${tour.totalPrice}" class="button">
-                    <button>Buy Tour</button>
+                    <button>${buy}</button>
                 </a>
             </td>
         </tr>

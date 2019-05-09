@@ -1,7 +1,9 @@
 package model.logic.dal.db_connection.connection_pool;
 
+import model.ConstantContainer;
 import model.logic.dal.db_connection.DBConstantContainer;
 import model.logic.exception.technical.TourConnectionPoolException;
+import org.apache.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -15,6 +17,7 @@ import java.util.concurrent.BlockingQueue;
  */
 
 public final class TourConnectionPool {
+    private static final Logger LOGGER = Logger.getLogger(TourConnectionPool.class);
     private static TourConnectionPool INSTANCE = new TourConnectionPool();
     private BlockingQueue<Connection> allConnections;
     private String driver;
@@ -36,7 +39,7 @@ public final class TourConnectionPool {
         try {
             initializePool();
         } catch (TourConnectionPoolException e) {
-            //log.error("TourConnectionPool initialization problem", e);
+            LOGGER.error(ConstantContainer.CONNECTION_POOL_ERR_MSG, e);
         }
     }
 
