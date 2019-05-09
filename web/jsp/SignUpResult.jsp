@@ -3,7 +3,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <fmt:bundle basename="localization">
-    <fmt:message key="locale.sign.regRes" var="regRes"/>
+    <fmt:message key="locale.sign.signUpResult" var="regRes"/>
     <fmt:message key="locale.sign.success" var="success"/>
     <fmt:message key="locale.sign.nowYouCan" var="nowYouCan"/>
     <fmt:message key="locale.sign.toSignIn" var="toSignIn"/>

@@ -1,4 +1,5 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <fmt:bundle basename="localization">
@@ -7,6 +8,10 @@
     <fmt:message key="locale.sign.login" var="login"/>
     <fmt:message key="locale.sign.password" var="password"/>
     <fmt:message key="locale.sign.clear" var="clear"/>
+    <fmt:message key="locale.sign.errorLoginPassMessage" var="errorLoginPassMessageLocale"/>
+    <fmt:message key="locale.sign.shortLoginPassMessage" var="shortLoginPassMessageLocale"/>
+    <fmt:message key="locale.sign.wrongAction" var="wrongActionLocale"/>
+    <fmt:message key="locale.sign.nullPage" var="nullPageLocale"/>
 </fmt:bundle>
 <html>
 <head>
@@ -26,10 +31,12 @@
         <p>${password}<br/>
             <input type="password" name="password"/>
         </p>
-        ${errorLoginPassMessage}
-        ${shortLoginPassMessage}
-        ${wrongAction}
-        ${nullPage}
+        <c:choose>
+            <c:when test="${errorLoginPassMessage != null}"><c:out value="${errorLoginPassMessageLocale}"/></c:when>
+            <c:when test="${shortLoginPassMessage != null}"><c:out value="${shortLoginPassMessageLocale}"/></c:when>
+            <c:when test="${wrongAction != null}"><c:out value="${wrongActionLocale}"/></c:when>
+            <c:when test="${nullPage != null}"><c:out value="${nullPageLocale}"/></c:when>
+        </c:choose>
         <br/>
         <tr>
             <td colspan="2">

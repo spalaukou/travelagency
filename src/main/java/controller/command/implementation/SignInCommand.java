@@ -48,6 +48,7 @@ public class SignInCommand implements Command {
                     request.getSession().setAttribute(ConstantContainer.LOGIN, user.getLogin());
                     request.getSession().setAttribute(ConstantContainer.PASSWORD, user.getPassword());
                     request.getSession().setAttribute(ConstantContainer.BALANCE, user.getBalance());
+//                    int disc = (int) ((1 - user.getDiscount())*100) + 1;
                     request.getSession().setAttribute(ConstantContainer.DISCOUNT, user.getDiscount());
 
                     page = ConstantContainer.INDEX_PAGE;
@@ -60,7 +61,7 @@ public class SignInCommand implements Command {
                 request.setAttribute(ConstantContainer.ERR_LOGIN_PASS_MSG, ConstantContainer.MESSAGE_LOGIN_ERROR);
             }
         } else {
-            request.setAttribute(ConstantContainer.ERR_LOGIN_PASS_MSG, ConstantContainer.MESSAGE_SHORT_LOGIN_PASS);
+            request.setAttribute(ConstantContainer.SHORT_LOGIN_PASS_MSG, ConstantContainer.MESSAGE_SHORT_LOGIN_PASS);
         }
 
         return page;

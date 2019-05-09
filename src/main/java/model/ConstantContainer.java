@@ -29,6 +29,7 @@ public final class ConstantContainer {
 
     //attributes
     public static final String ERR_LOGIN_PASS_MSG = "errorLoginPassMessage";
+    public static final String SHORT_LOGIN_PASS_MSG = "shortLoginPassMessage";
     public static final String ERR_NOT_ENOUGH_MONEY_MSG = "errorNotEnoughMoneyMessage";
     public static final String AFTER_PURCHASE_MSG = "afterPurchaseMessage";
     public static final String AFTER_CANCEL_MSG = "afterCancelMessage";
@@ -39,6 +40,7 @@ public final class ConstantContainer {
     public static final String DISCOUNT = "discount";
     public static final String TOURS = "tours";
     public static final String ORDERS = "orders";
+    public static final String AGENT = "AGENT";
 
     //pages
     public static final String INDEX_PAGE = "index.jsp";
@@ -46,6 +48,7 @@ public final class ConstantContainer {
     public static final String SIGN_UP_RESULT_PAGE = "jsp/SignUpResult.jsp";
     public static final String SIGN_IN_PAGE = "jsp/SignIn.jsp";
     public static final String TOURS_PAGE = "jsp/ToursTable.jsp";
+    public static final String MANAGE_TOURS_PAGE = "jsp/ManageToursTable.jsp";
     public static final String ORDERS_PAGE = "jsp/OrdersTable.jsp";
     public static final String MY_ORDERS_PAGE = "/start?command=show_orders";
     public static final String ERROR_PAGE = "jsp/Error.jsp";

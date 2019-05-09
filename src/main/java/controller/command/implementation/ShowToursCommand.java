@@ -23,6 +23,7 @@ public class ShowToursCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request) {
+        String page = ConstantContainer.TOURS_PAGE;
         float discount;
 
         ServiceFactory serviceFactory = ServiceFactory.getInstance();
@@ -47,12 +48,17 @@ public class ShowToursCommand implements Command {
 
             request.setAttribute(ConstantContainer.TOURS, tours);
 
+            String manage = request.getParameter(ConstantContainer.PARAM);
+            if(manage != null) {
+                page = ConstantContainer.MANAGE_TOURS_PAGE;
+            }
+
         } catch (DataSourceException e) {
             LOGGER.error(ConstantContainer.DATA_SOURCE_ERR_MSG, e);
         } catch (ServiceSQLException e) {
             LOGGER.error(ConstantContainer.SQL_ERR_MSG, e);
         }
 
-        return ConstantContainer.TOURS_PAGE;
+        return page;
     }
 }

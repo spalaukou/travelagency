@@ -19,12 +19,12 @@
     <fmt:message key="locale.index.lvl_1_discount" var="lvl_1_discount"/>
     <fmt:message key="locale.index.lvl_2_discount" var="lvl_2_discount"/>
     <fmt:message key="locale.index.lvl_3_discount" var="lvl_3_discount"/>
+    <fmt:message key="locale.buy.errorNotEnoughMoneyMessage" var="errorNotEnoughMoneyMessageLocale"/>
 </fmt:bundle>
 <html>
 
 <head>
     <title>${title}</title>
-
     <style type="text/css">
         a.button {display:grid; height:100%; width:100%; text-align: center}
     </style>
@@ -47,8 +47,10 @@
 <c:if test="${sessionScope.login != null}">
     <jsp:include page="jsp/header/UserHeader.jsp"/>
     <div style="text-align: center;">
-            ${errorNotEnoughMoneyMessage}<br/>
-                ${selectToursRegistered}
+        <c:if test="${errorNotEnoughMoneyMessage != null}">
+            ${errorNotEnoughMoneyMessageLocale}
+        </c:if><br/>
+            ${selectToursRegistered}
     </div>
 </c:if>
 

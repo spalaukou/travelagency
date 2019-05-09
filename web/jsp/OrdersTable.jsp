@@ -21,6 +21,8 @@
     <fmt:message key="locale.orders.youPaid" var="youPaid"/>
     <fmt:message key="locale.orders.click" var="click"/>
     <fmt:message key="locale.orders.cancel" var="cancel"/>
+    <fmt:message key="locale.buy.afterPurchaseMessage" var="afterPurchaseMessageLocale"/>
+    <fmt:message key="locale.buy.afterCancelMessage" var="afterCancelMessageLocale"/>
 </fmt:bundle>
 <html>
 <head>
@@ -40,8 +42,11 @@
 <br/>
 
 <div style="text-align: center;">
-    ${afterPurchaseMessage}
-    ${afterCancelMessage}<br/>
+    <c:choose>
+        <c:when test="${afterPurchaseMessage != null}"><c:out value="${afterPurchaseMessageLocale}"/></c:when>
+        <c:when test="${afterCancelMessage != null}"><c:out value="${afterCancelMessageLocale}"/></c:when>
+    </c:choose>
+        <br/>
     ${yourOrders}
 </div>
 

@@ -52,7 +52,7 @@ public class SignUpCommand implements Command {
                 request.setAttribute(ConstantContainer.ERR_LOGIN_PASS_MSG, ConstantContainer.MESSAGE_USER_EXISTS);
             }
         } else {
-            request.setAttribute(ConstantContainer.ERR_LOGIN_PASS_MSG, ConstantContainer.MESSAGE_SHORT_LOGIN_PASS);
+            request.setAttribute(ConstantContainer.SHORT_LOGIN_PASS_MSG, ConstantContainer.MESSAGE_SHORT_LOGIN_PASS);
         }
         return page;
     }
