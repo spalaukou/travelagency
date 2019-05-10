@@ -17,8 +17,11 @@ import java.util.concurrent.BlockingQueue;
  */
 
 public final class TourConnectionPool {
+
     private static final Logger LOGGER = Logger.getLogger(TourConnectionPool.class);
+
     private static TourConnectionPool INSTANCE = new TourConnectionPool();
+
     private BlockingQueue<Connection> allConnections;
     private String driver;
     private String url;
@@ -49,13 +52,17 @@ public final class TourConnectionPool {
 
     private void initializePool() throws TourConnectionPoolException {
         isBlocked = false;
+
         try {
+
             Class.forName(driver);
             allConnections = new ArrayBlockingQueue<>(connectionPoolSize);
+
             for (int i = 0; i < connectionPoolSize; i++) {
                 Connection connection = DriverManager.getConnection(url, login, password);
                 allConnections.add(connection);
             }
+
         } catch (SQLException | ClassNotFoundException e) {
             throw new TourConnectionPoolException(e);
         }
@@ -63,23 +70,32 @@ public final class TourConnectionPool {
 
     public Connection getConnection() throws TourConnectionPoolException {
         Connection connection;
+
         if(this.isBlocked){
             return null;
         }
+
         try {
+
             connection = allConnections.take();
+
         } catch (InterruptedException e) {
             throw new TourConnectionPoolException(e);
         }
+
         return connection;
     }
 
     public void returnConnection(Connection connection) throws TourConnectionPoolException {
+
         try {
+
             connection.setAutoCommit(true);
+
         } catch (SQLException e) {
             throw new TourConnectionPoolException(e);
         }
+
         allConnections.add(connection);
     }
 }
