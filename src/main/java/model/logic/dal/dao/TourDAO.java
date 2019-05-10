@@ -18,4 +18,6 @@ public interface TourDAO {
     List<Tour> getAllTours(float discount) throws DAOSQLException, TourConnectionPoolException;
 
     int getPrice(String tourID) throws DAOSQLException, TourConnectionPoolException;
+
+    void createTour(String tourType, String hotelID, String hotelNight, String transport, String tourCost, String tourHot) throws TourConnectionPoolException, DAOSQLException;
 }

@@ -21,6 +21,10 @@
     <fmt:message key="locale.tours.total" var="total"/>
     <fmt:message key="locale.tours.click" var="click"/>
     <fmt:message key="locale.tours.buy" var="buy"/>
+    <fmt:message key="locale.tours.add" var="afterAddMessageLocale"/>
+    <fmt:message key="locale.tours.addErr" var="errorAddMessageLocale"/>
+    <fmt:message key="locale.tours.upd" var="afterUpdateMessageLocale"/>
+    <fmt:message key="locale.tours.updErr" var="errorUpdateMessageLocale"/>
 </fmt:bundle>
 <html>
 <head>
@@ -28,53 +32,150 @@
 </head>
 <body>
 
-<jsp:include page="header/UserHeader.jsp"/>
+<c:set var="agent" value="AGENT"/>
+<c:if test="${userType eq agent}">
+    <jsp:include page="header/UserHeader.jsp"/>
 
-<br/>
+    <br/>
 
-<table cellspacing="0" cellpadding="4" border="1" align="center">
-    <tr>
-        <td>${num}</td>
-        <td>ID Tour</td>
-        <td>${type}</td>
-        <td>${country}</td>
-        <td>${city}</td>
-        <td>${hotel}</td>
-        <td>${stars}</td>
-        <td>${meals}</td>
-        <td>${persons}</td>
-        <td>${nights}</td>
-        <td>${transport}</td>
-        <td>${cost}</td>
-        <td>${hot}</td>
-        <td>${total}</td>
-        <td>Click to update</td>
-    </tr>
-    <c:forEach var="tour" items="${tours}" varStatus="status">
+    <div style="text-align: center;">
+        Add new Tour:<br/><br/>
+    </div>
+
+    <table cellspacing="0" cellpadding="4" border="1" align="center">
+        <tr>
+            <td></td>
+            <td>${type}</td>
+            <td>Hotel ID(1-18)</td>
+            <td>${nights}</td>
+            <td>${transport}</td>
+            <td>${cost}(1-10k)</td>
+            <td>${hot}</td>
+            <td>Click to add</td>
+        </tr>
         <form name="updateTour" method="POST" action="${pageContext.request.contextPath}\start">
-            <input type="hidden" name="command" value="update_tour&tour_id=${tour.id}"/>
+            <input type="hidden" name="command" value="add_tour"/>
             <tr>
-                <td><c:out value="${status.count}"/></td>
-                <td><c:out value="${tour.id}"/></td>
-                <td><input type="text" size="8" name="type" value="${tour.name}"/></td>
-                <td><input type="text" size="5" name="country" value="${tour.hotel.country}"/></td>
-                <td><input type="text" size="7" name="city" value="${tour.hotel.city}"/></td>
-                <td><input type="text" size="6" name="hotel" value="${tour.hotel.name}"/></td>
-                <td><input type="text" size="2" name="star" value="${tour.hotel.star}"/></td>
-                <td><input type="text" size="2" name="meal" value="${tour.hotel.meal}"/></td>
-                <td><input type="text" size="2" name="person" value="${tour.hotel.person}"/></td>
-                <td><input type="text" size="2" name="night" value="${tour.night}"/></td>
-                <td><input type="text" size="5" name="transport" value="${tour.transport.type}"/></td>
-                <td><input type="text" size="3" name="cost" value="${tour.cost}"/></td>
-                <td><input type="text" size="3" name="hot" value="${tour.hot}"/></td>
-                <td><c:out value="${tour.totalPrice}"/></td>
-                <td><input type="submit" value="Update tour"/></td>
+                <td>Enter data:</td>
+                <td>
+                    <select name="tourType">
+                        <option selected disabled>Type</option>
+                        <option value="excursion">excursion</option>
+                        <option value="shopping">shopping</option>
+                        <option value="rest">rest</option>
+                    </select>
+                </td>
+                <td>
+                    <input type="number" size="1" min="1" max="18" name="hotelID"/>
+                </td>
+                <td>
+                    <select name="tourNight">
+                        <option selected disabled>Night</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                        <option value="13">13</option>
+                        <option value="14">14</option>
+                    </select>
+                </td>
+                <td>
+                    <select name="transport">
+                        <option selected disabled>Transport</option>
+                        <option value="1">car</option>
+                        <option value="2">train</option>
+                        <option value="3">airplane</option>
+                        <option value="4">ship</option>
+                    </select>
+                </td>
+                <td><input type="number" min="1" max="10000" size="1" name="tourCost"/></td>
+                <td>
+                    <select name="tourHot">
+                        <option selected disabled>Hot</option>
+                        <option value="1.0">1.0</option>
+                        <option value="0.9">0.9</option>
+                        <option value="0.8">0.8</option>
+                        <option value="0.7">0.7</option>
+                    </select>
+                </td>
+                <td><input type="submit" value="Add Tour"/></td>
             </tr>
         </form>
-    </c:forEach>
-</table>
+    </table>
 
-<jsp:include page="footer/Footer.jsp"/>
+    <div style="text-align: center;">
+        <c:choose>
+            <c:when test="${afterAddMessage != null}"><c:out value="${afterAddMessageLocale}"/></c:when>
+            <c:when test="${errorAddMessage != null}"><c:out value="${errorAddMessageLocale}"/></c:when>
+        </c:choose>
+        <br/>
+    </div>
+
+    <br/>
+
+    <div style="text-align: center;">
+        Manage Tours:<br/><br/>
+        <c:choose>
+            <c:when test="${afterUpdateMessage != null}"><c:out value="${afterUpdateMessageLocale}"/></c:when>
+            <c:when test="${errorUpdateMessage != null}"><c:out value="${errorUpdateMessageLocale}"/></c:when>
+        </c:choose>
+    </div>
+    <table cellspacing="0" cellpadding="4" border="1" align="center">
+        <tr>
+            <td>${num}</td>
+            <td>ID Tour</td>
+            <td>${type}</td>
+            <td>${country}</td>
+            <td>${city}</td>
+            <td>${hotel}</td>
+            <td>${stars}(1-5)</td>
+            <td>${meals}</td>
+            <td>${persons}(1-5)</td>
+            <td>${nights}(1-20)</td>
+            <td>${transport}</td>
+            <td>${cost}(1-10k)</td>
+            <td>${hot}</td>
+            <td>${total}</td>
+            <td>Click to update</td>
+        </tr>
+        <c:forEach var="tour" items="${tours}" varStatus="status">
+            <form name="updateTour" method="POST" action="${pageContext.request.contextPath}\start?">
+                <input type="hidden" name="command" value="update_tour"/>
+                <input type="hidden" name="tour_id" value="${tour.id}"/>
+                <tr>
+                    <td><c:out value="${status.count}"/></td>
+                    <td><c:out value="${tour.id}"/></td>
+                    <td>${tour.name}</td>
+                    <td>${tour.hotel.country}</td>
+                    <td>${tour.hotel.city}</td>
+                    <td>${tour.hotel.name}</td>
+                    <td>${tour.hotel.star}</td>
+                    <td>${tour.hotel.meal}</td>
+                    <td>${tour.hotel.person}</td>
+                    <td>${tour.night}</td>
+                    <td>${tour.transport.type}</td>
+                    <td><input type="number" size="1" min="1" max="10000" name="tourCost" value="${tour.cost}"/></td>
+                    <td>
+                        <select name="tourHot">
+                            <option selected>${tour.hot}</option>
+                            <option value="1.0">1.0</option>
+                            <option value="0.9">0.9</option>
+                            <option value="0.8">0.8</option>
+                            <option value="0.7">0.7</option>
+                        </select>
+                    </td>
+                    <td><c:out value="${tour.totalPrice}"/></td>
+                    <td><input type="submit" value="Update Tour"/></td>
+                </tr>
+            </form>
+        </c:forEach>
+    </table>
+
+    <jsp:include page="footer/Footer.jsp"/>
+</c:if>
 
 </body>
 </html>

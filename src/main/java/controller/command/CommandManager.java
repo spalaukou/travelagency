@@ -23,7 +23,10 @@ public class CommandManager {
         SHOW_ORDERS,
 
         BUY_TOUR,
-        CANCEL_TOUR
+        CANCEL_TOUR,
+
+        ADD_TOUR,
+        UPDATE_TOUR
     }
 
     private CommandManager() {
@@ -42,12 +45,15 @@ public class CommandManager {
         map.put(CommandType.SHOW_ORDERS, new ShowOrdersCommand());
         map.put(CommandType.BUY_TOUR, new BuyTourCommand());
         map.put(CommandType.CANCEL_TOUR, new CancelTourCommand());
+        map.put(CommandType.ADD_TOUR, new AddTourCommand());
+        map.put(CommandType.UPDATE_TOUR, new UpdateTourCommand());
     }
 
     public static Command getCommand(String cmd) {
         CommandType type;
 
         type = CommandType.valueOf(cmd.toUpperCase());
+        System.out.println(type);
 
         return map.get(type);
     }

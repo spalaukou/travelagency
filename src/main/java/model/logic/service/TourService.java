@@ -2,7 +2,7 @@ package model.logic.service;
 
 import model.entity.Tour;
 import model.logic.exception.logical.ServiceSQLException;
-import model.logic.exception.technical.DataSourceException;
+import model.logic.exception.logical.DataSourceException;
 
 import java.util.List;
 
@@ -18,4 +18,6 @@ public interface TourService {
     List<Tour> getAllTours(float discount) throws ServiceSQLException, DataSourceException;
 
     int getPrice(String tourID) throws ServiceSQLException, DataSourceException;
+
+    void createTour(String tourType, String hotelID, String hotelNight, String transport, String tourCost, String tourHot) throws ServiceSQLException, DataSourceException;
 }

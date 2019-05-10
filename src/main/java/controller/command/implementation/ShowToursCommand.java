@@ -4,7 +4,7 @@ import controller.command.Command;
 import model.ConstantContainer;
 import model.entity.Tour;
 import model.logic.exception.logical.ServiceSQLException;
-import model.logic.exception.technical.DataSourceException;
+import model.logic.exception.logical.DataSourceException;
 import model.logic.service.ServiceFactory;
 import model.logic.service.TourService;
 import org.apache.log4j.Logger;

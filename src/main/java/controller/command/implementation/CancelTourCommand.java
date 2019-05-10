@@ -3,7 +3,7 @@ package controller.command.implementation;
 import controller.command.Command;
 import model.ConstantContainer;
 import model.logic.exception.logical.ServiceSQLException;
-import model.logic.exception.technical.DataSourceException;
+import model.logic.exception.logical.DataSourceException;
 import model.logic.service.OrderService;
 import model.logic.service.ServiceFactory;
 import org.apache.log4j.Logger;

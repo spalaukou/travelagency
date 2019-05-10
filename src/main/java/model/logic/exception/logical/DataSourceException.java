@@ -1,4 +1,4 @@
-package model.logic.exception.technical;
+package model.logic.exception.logical;
 
 import model.logic.exception.TravelAgencyException;
 

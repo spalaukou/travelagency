@@ -25,6 +25,34 @@ import java.util.List;
 public class TourDAOImpl implements TourDAO {
 
     @Override
+    public void createTour(String tourType, String hotelID, String hotelNight, String transport, String tourCost, String tourHot)
+            throws TourConnectionPoolException, DAOSQLException {
+
+        TourConnectionPool tourConnectionPool = TourConnectionPool.getInstance();
+        Connection connection = tourConnectionPool.getConnection();
+
+        if (connection != null) {
+            try (PreparedStatement statement =
+                         connection.prepareStatement(DBRequestContainer.CREATE_TOUR_REQUEST)) {
+
+                statement.setString(1, tourType);
+                statement.setString(2, hotelID);
+                statement.setString(3, hotelNight);
+                statement.setString(4, transport);
+                statement.setString(5, tourCost);
+                statement.setString(6, tourHot);
+
+                statement.executeUpdate();
+
+            } catch (SQLException e) {
+                throw new DAOSQLException(e);
+            } finally {
+                tourConnectionPool.returnConnection(connection);
+            }
+        }
+    }
+
+    @Override
     public List<Tour> getToursByCountry(String country, float discount)
             throws DAOSQLException, TourConnectionPoolException {
         List<Tour> tours;

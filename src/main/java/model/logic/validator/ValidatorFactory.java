@@ -1,9 +1,6 @@
 package model.logic.validator;
 
-import model.logic.validator.implementation.AccessValidator;
-import model.logic.validator.implementation.BalanceValidator;
-import model.logic.validator.implementation.LoginPassLengthValidator;
-import model.logic.validator.implementation.LoginValidator;
+import model.logic.validator.implementation.*;
 
 /**
  * @author Stanislau Palaukou on 27.04.2019
@@ -16,6 +13,8 @@ public class ValidatorFactory {
     private final Validator loginPassLengthValidator = new LoginPassLengthValidator();
     private final Validator accessValidator = new AccessValidator();
     private final Validator balanceValidator = new BalanceValidator();
+    private final Validator addTourDataValidator = new AddTourDataValidator();
+    private final Validator updateTourDataValidator = new UpdateTourDataValidator();
 
     private ValidatorFactory() {}
 
@@ -37,5 +36,13 @@ public class ValidatorFactory {
 
     public Validator getBalanceValidator() {
         return balanceValidator;
+    }
+
+    public Validator getAddTourDataValidator() {
+        return addTourDataValidator;
+    }
+
+    public Validator getUpdateTourDataValidator() {
+        return updateTourDataValidator;
     }
 }

@@ -9,7 +9,7 @@ import model.logic.dal.db_connection.DBRequestContainer;
 import model.logic.dal.db_connection.connection_pool.TourConnectionPool;
 import model.logic.exception.logical.ServiceSQLException;
 import model.logic.exception.technical.DAOSQLException;
-import model.logic.exception.technical.DataSourceException;
+import model.logic.exception.logical.DataSourceException;
 import model.logic.exception.technical.TourConnectionPoolException;
 import model.logic.service.ServiceFactory;
 import model.logic.service.UserService;

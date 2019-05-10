@@ -2,7 +2,7 @@ package model.logic.service;
 
 import model.entity.Order;
 import model.logic.exception.logical.ServiceSQLException;
-import model.logic.exception.technical.DataSourceException;
+import model.logic.exception.logical.DataSourceException;
 
 import java.util.List;
 

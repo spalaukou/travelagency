@@ -5,7 +5,7 @@ import model.logic.dal.dao.DAOFactory;
 import model.logic.dal.dao.UserDAO;
 import model.logic.exception.logical.ServiceSQLException;
 import model.logic.exception.technical.DAOSQLException;
-import model.logic.exception.technical.DataSourceException;
+import model.logic.exception.logical.DataSourceException;
 import model.logic.exception.technical.TourConnectionPoolException;
 import model.logic.service.UserService;
 

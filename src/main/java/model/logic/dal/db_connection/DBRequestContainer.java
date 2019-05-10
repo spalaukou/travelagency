@@ -99,4 +99,6 @@ public final class DBRequestContainer {
             "AND `tour`.`transport_id` = `transport`.`idtransport`\n" +
             "ORDER BY `order`.`idorder` ASC;";
 
+    //Add new Tour
+    public static final String CREATE_TOUR_REQUEST = "INSERT INTO `tour`.`tour` (`name`, `hotel_id`, `night`, `transport_id`, `cost`, `hot`) VALUES (?, ?, ?, ?, ?, ?);";
 }
