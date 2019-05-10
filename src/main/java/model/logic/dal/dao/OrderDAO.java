@@ -13,9 +13,13 @@ import java.util.List;
 
 public interface OrderDAO {
 
-    float createOrder(String userID, String tourID, int totalPrice, int balance) throws TourConnectionPoolException, DAOSQLException;
+    float createOrder(String userID, String tourID, int totalPrice, int balance)
+            throws TourConnectionPoolException, DAOSQLException;
 
-    float cancelOrder(String userID, String orderID, int totalPrice, int balance) throws TourConnectionPoolException, DAOSQLException;
+    float cancelOrder(String userID, String orderID, int totalPrice, int balance)
+            throws TourConnectionPoolException, DAOSQLException;
 
     List<Order> getOrdersByID(String userID) throws DAOSQLException, TourConnectionPoolException;
+
+    int getID(String orderID) throws TourConnectionPoolException, DAOSQLException;
 }

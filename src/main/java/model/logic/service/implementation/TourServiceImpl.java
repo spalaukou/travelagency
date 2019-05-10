@@ -21,9 +21,22 @@ public class TourServiceImpl implements TourService {
     private TourDAO tourDAO = daoFactory.getTourDAO();
 
     @Override
-    public void createTour(String tourType, String hotelID, String hotelNight, String transport, String tourCost, String tourHot) throws ServiceSQLException, DataSourceException {
+    public void createTour(String tourType, String hotelID, String hotelNight, String transport, String tourCost, String tourHot)
+            throws ServiceSQLException, DataSourceException {
         try {
             tourDAO.createTour(tourType, hotelID, hotelNight, transport, tourCost, tourHot);
+        } catch (DAOSQLException e) {
+            throw new ServiceSQLException(e);
+        } catch (TourConnectionPoolException e) {
+            throw new DataSourceException(e);
+        }
+    }
+
+    @Override
+    public void updateTour(String tourID, String tourCost, String tourHot)
+            throws ServiceSQLException, DataSourceException {
+        try {
+            tourDAO.updateTour(tourID, tourCost, tourHot);
         } catch (DAOSQLException e) {
             throw new ServiceSQLException(e);
         } catch (TourConnectionPoolException e) {

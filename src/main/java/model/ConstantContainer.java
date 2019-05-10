@@ -25,6 +25,7 @@ public final class ConstantContainer {
     public static final int WRONG_BALANCE = -1;
     public static final int WRONG_DISCOUNT = -1;
     public static final int WRONG_PRICE = 0;
+    public static final int WRONG_ID = 0;
     public static final String TOTAL_PRICE = "tp";
     public static final String TOUR_TYPE = "tourType";
     public static final String HOTEL_ID = "hotelID";

@@ -6,6 +6,8 @@ import model.logic.exception.logical.ServiceSQLException;
 import model.logic.exception.logical.DataSourceException;
 import model.logic.service.OrderService;
 import model.logic.service.ServiceFactory;
+import model.logic.validator.Validator;
+import model.logic.validator.ValidatorFactory;
 import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
@@ -34,21 +36,26 @@ public class CancelTourCommand implements Command {
             int totalPrice = Integer.parseInt(request.getParameter(ConstantContainer.TOTAL_PRICE));
             int balance = (int) request.getSession().getAttribute(ConstantContainer.BALANCE);
 
-            try {
+            ValidatorFactory validatorFactory = ValidatorFactory.getInstance();
+            Validator orderExistsValidator = validatorFactory.getOrderExistsValidator();
 
-                float newDiscount = orderService.cancelOrder(userID, orderID, totalPrice, balance);
-                request.getSession().setAttribute(ConstantContainer.BALANCE, (balance + totalPrice));
+            if(orderExistsValidator.validate(request)) {
+                try {
 
-                if (newDiscount != ConstantContainer.WRONG_DISCOUNT) {
-                    request.getSession().setAttribute(ConstantContainer.DISCOUNT, newDiscount);
+                    float newDiscount = orderService.cancelOrder(userID, orderID, totalPrice, balance);
+                    request.getSession().setAttribute(ConstantContainer.BALANCE, (balance + totalPrice));
+
+                    if (newDiscount != ConstantContainer.WRONG_DISCOUNT) {
+                        request.getSession().setAttribute(ConstantContainer.DISCOUNT, newDiscount);
+                    }
+
+                    request.setAttribute(ConstantContainer.AFTER_CANCEL_MSG, ConstantContainer.MESSAGE_AFTER_CANCEL);
+                    page = ConstantContainer.MY_ORDERS_PAGE;
+                } catch (DataSourceException e) {
+                    LOGGER.error(ConstantContainer.DATA_SOURCE_ERR_MSG, e);
+                } catch (ServiceSQLException e) {
+                    LOGGER.error(ConstantContainer.SQL_ERR_MSG, e);
                 }
-
-                request.setAttribute(ConstantContainer.AFTER_CANCEL_MSG, ConstantContainer.MESSAGE_AFTER_CANCEL);
-                page = ConstantContainer.MY_ORDERS_PAGE;
-            } catch (DataSourceException e) {
-                LOGGER.error(ConstantContainer.DATA_SOURCE_ERR_MSG, e);
-            } catch (ServiceSQLException e) {
-                LOGGER.error(ConstantContainer.SQL_ERR_MSG, e);
             }
         }
 

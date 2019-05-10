@@ -27,7 +27,6 @@ public class TourDAOImpl implements TourDAO {
     @Override
     public void createTour(String tourType, String hotelID, String hotelNight, String transport, String tourCost, String tourHot)
             throws TourConnectionPoolException, DAOSQLException {
-
         TourConnectionPool tourConnectionPool = TourConnectionPool.getInstance();
         Connection connection = tourConnectionPool.getConnection();
 
@@ -41,6 +40,30 @@ public class TourDAOImpl implements TourDAO {
                 statement.setString(4, transport);
                 statement.setString(5, tourCost);
                 statement.setString(6, tourHot);
+
+                statement.executeUpdate();
+
+            } catch (SQLException e) {
+                throw new DAOSQLException(e);
+            } finally {
+                tourConnectionPool.returnConnection(connection);
+            }
+        }
+    }
+
+    @Override
+    public void updateTour(String tourID, String tourCost, String tourHot)
+            throws TourConnectionPoolException, DAOSQLException {
+        TourConnectionPool tourConnectionPool = TourConnectionPool.getInstance();
+        Connection connection = tourConnectionPool.getConnection();
+
+        if (connection != null) {
+            try (PreparedStatement statement =
+                         connection.prepareStatement(DBRequestContainer.UPDATE_TOUR_REQUEST)) {
+
+                statement.setString(1, tourCost);
+                statement.setString(2, tourHot);
+                statement.setString(3, tourID);
 
                 statement.executeUpdate();
 

@@ -21,4 +21,5 @@ public interface OrderService {
 
     List<Order> getOrdersByID(String userID) throws ServiceSQLException, DataSourceException;
 
+    int getID(String orderID) throws DataSourceException, ServiceSQLException;
 }

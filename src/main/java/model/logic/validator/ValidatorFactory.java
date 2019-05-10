@@ -15,6 +15,7 @@ public class ValidatorFactory {
     private final Validator balanceValidator = new BalanceValidator();
     private final Validator addTourDataValidator = new AddTourDataValidator();
     private final Validator updateTourDataValidator = new UpdateTourDataValidator();
+    private final Validator orderExistsValidator = new OrderExistsValidator();
 
     private ValidatorFactory() {}
 
@@ -44,5 +45,9 @@ public class ValidatorFactory {
 
     public Validator getUpdateTourDataValidator() {
         return updateTourDataValidator;
+    }
+
+    public Validator getOrderExistsValidator() {
+        return orderExistsValidator;
     }
 }

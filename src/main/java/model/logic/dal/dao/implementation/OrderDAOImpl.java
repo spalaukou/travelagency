@@ -5,6 +5,7 @@ import model.entity.*;
 import model.entity.builder.BuilderFactory;
 import model.entity.builder.EntityBuilder;
 import model.logic.dal.dao.OrderDAO;
+import model.logic.dal.db_connection.DBConstantContainer;
 import model.logic.dal.db_connection.DBRequestContainer;
 import model.logic.dal.db_connection.connection_pool.TourConnectionPool;
 import model.logic.exception.logical.ServiceSQLException;
@@ -61,6 +62,33 @@ public class OrderDAOImpl implements OrderDAO {
             }
         }
         return newDiscount;
+    }
+
+    @Override
+    public int getID(String orderID) throws TourConnectionPoolException, DAOSQLException {
+        TourConnectionPool tourConnectionPool = TourConnectionPool.getInstance();
+        Connection connection = tourConnectionPool.getConnection();
+        int ID = ConstantContainer.WRONG_ID;
+
+        if (connection != null) {
+            try (PreparedStatement statement =
+                         connection.prepareStatement(DBRequestContainer.GET_ORDER_ID_REQUEST)) {
+
+                statement.setString(1, orderID);
+
+                ResultSet resultSet = statement.executeQuery();
+
+                while (resultSet.next()) {
+                    ID = resultSet.getInt(DBConstantContainer.ORDER_ID_ORDER);
+                }
+
+            } catch (SQLException e) {
+                throw new DAOSQLException(e);
+            } finally {
+                tourConnectionPool.returnConnection(connection);
+            }
+        }
+        return ID;
     }
 
     @Override

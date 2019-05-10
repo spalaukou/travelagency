@@ -37,6 +37,21 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    public int getID(String orderID) throws DataSourceException, ServiceSQLException {
+        int ID;
+
+        try {
+            ID = orderDAO.getID(orderID);
+        } catch (TourConnectionPoolException e) {
+            throw new DataSourceException(e);
+        } catch (DAOSQLException e) {
+            throw new ServiceSQLException(e);
+        }
+
+        return ID;
+    }
+
+    @Override
     public float cancelOrder(String userID, String orderID, int totalPrice, int balance)
             throws DataSourceException, ServiceSQLException {
         float newDiscount;
@@ -54,7 +69,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public List<Order> getOrdersByID(String userID) throws ServiceSQLException, DataSourceException {
-        List<Order> orders = null;
+        List<Order> orders;
 
         try {
             orders = orderDAO.getOrdersByID(userID);

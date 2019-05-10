@@ -19,5 +19,8 @@ public interface TourService {
 
     int getPrice(String tourID) throws ServiceSQLException, DataSourceException;
 
-    void createTour(String tourType, String hotelID, String hotelNight, String transport, String tourCost, String tourHot) throws ServiceSQLException, DataSourceException;
+    void createTour(String tourType, String hotelID, String hotelNight, String transport, String tourCost, String tourHot)
+            throws ServiceSQLException, DataSourceException;
+
+    void updateTour(String tourID, String tourCost, String tourHot) throws ServiceSQLException, DataSourceException;
 }

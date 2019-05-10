@@ -84,6 +84,10 @@ public final class DBRequestContainer {
             "FROM `tour`.`order`\n" +
             "WHERE (`idorder` = ?);";
 
+    public static final String GET_ORDER_ID_REQUEST = "SELECT `idorder`\n" +
+            "FROM `tour`.`order`\n" +
+            "WHERE `idorder` = ?;";
+
     //Show orders
     public static final String GET_ORDERS_BY_ID_REQUEST = "SELECT\n" +
             "`order`.`idorder`, `order`.`customer_id`,  `order`.`tour_id`, `order`.`totalPrice`,\n" +
@@ -100,5 +104,13 @@ public final class DBRequestContainer {
             "ORDER BY `order`.`idorder` ASC;";
 
     //Add new Tour
-    public static final String CREATE_TOUR_REQUEST = "INSERT INTO `tour`.`tour` (`name`, `hotel_id`, `night`, `transport_id`, `cost`, `hot`) VALUES (?, ?, ?, ?, ?, ?);";
+    public static final String CREATE_TOUR_REQUEST = "INSERT\n" +
+            "INTO `tour`.`tour` (`name`, `hotel_id`, `night`, `transport_id`, `cost`, `hot`)\n" +
+            "VALUES (?, ?, ?, ?, ?, ?);";
+
+    //Update Tour
+    public static final String UPDATE_TOUR_REQUEST = "UPDATE `tour`.`tour`\n" +
+            "SET `cost` = ?, `hot` = ?\n" +
+            "WHERE (`idtour` = ?);";
+
 }

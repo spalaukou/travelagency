@@ -46,7 +46,7 @@
         <tr>
             <td></td>
             <td>${type}</td>
-            <td>Hotel ID(1-18)</td>
+            <td>Hotel offer</td>
             <td>${nights}</td>
             <td>${transport}</td>
             <td>${cost}(1-10k)</td>
@@ -66,7 +66,28 @@
                     </select>
                 </td>
                 <td>
-                    <input type="number" size="1" min="1" max="18" name="hotelID"/>
+                        <%--                    <input type="number" size="1" min="1" max="18" name="hotelID"/>--%>
+                    <select name="hotelID">
+                        <option selected disabled>Select hotel offer</option>
+                        <option value="1">Turkey, Alanya. Vikingen 5*. UAI, 1 person</option>
+                        <option value="2">Turkey, Alanya. Vikingen 5*. UAI, 2 persons</option>
+                        <option value="3">Turkey, Alanya. Vikingen 5*. UAI, 3 persons</option>
+                        <option value="4">Turkey, Alanya. Vikingen 5*. AI, 1 person</option>
+                        <option value="5">Turkey, Alanya. Vikingen 5*. AI, 2 persons</option>
+                        <option value="6">Turkey, Alanya. Vikingen 5*. AI, 3 persons</option>
+                        <option value="7">Spain, Barcelona. Best 4*. AI, 1 person</option>
+                        <option value="8">Spain, Barcelona. Best 4*. AI, 2 persons</option>
+                        <option value="9">Spain, Barcelona. Best 4*. AI, 3 persons</option>
+                        <option value="10">Spain, Barcelona. Best 4*. FB, 1 person</option>
+                        <option value="11">Spain, Barcelona. Best 4*. FB, 2 persons</option>
+                        <option value="12">Spain, Barcelona. Best 4*. FB, 3 persons</option>
+                        <option value="13">Egypt, Hurghada. Super 3*. HB, 1 person</option>
+                        <option value="14">Egypt, Hurghada. Super 3*. HB, 2 persons</option>
+                        <option value="15">Egypt, Hurghada. Super 3*. HB, 3 persons</option>
+                        <option value="16">Egypt, Hurghada. Super 3*. RO, 1 person</option>
+                        <option value="17">Egypt, Hurghada. Super 3*. RO, 2 persons</option>
+                        <option value="18">Egypt, Hurghada. Super 3*. RO, 3 persons</option>
+                    </select>
                 </td>
                 <td>
                     <select name="tourNight">
@@ -131,10 +152,10 @@
             <td>${country}</td>
             <td>${city}</td>
             <td>${hotel}</td>
-            <td>${stars}(1-5)</td>
+            <td>${stars}</td>
             <td>${meals}</td>
-            <td>${persons}(1-5)</td>
-            <td>${nights}(1-20)</td>
+            <td>${persons}</td>
+            <td>${nights}</td>
             <td>${transport}</td>
             <td>${cost}(1-10k)</td>
             <td>${hot}</td>

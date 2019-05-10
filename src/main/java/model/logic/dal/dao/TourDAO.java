@@ -20,4 +20,6 @@ public interface TourDAO {
     int getPrice(String tourID) throws DAOSQLException, TourConnectionPoolException;
 
     void createTour(String tourType, String hotelID, String hotelNight, String transport, String tourCost, String tourHot) throws TourConnectionPoolException, DAOSQLException;
+
+    void updateTour(String tourID, String tourCost, String tourHot) throws TourConnectionPoolException, DAOSQLException;
 }
