@@ -14,30 +14,31 @@ import static org.testng.Assert.*;
  * @project TravelAgency
  */
 
-public class LoginValidatorTest {
+public class AccessValidatorTest {
 
-    private Validator loginValidator;
+    private Validator accessValidator;
     private MockHttpServletRequest mockRequest;
 
     @BeforeMethod
     public void setUp() {
         ValidatorFactory validatorFactory = ValidatorFactory.getInstance();
-        loginValidator = validatorFactory.getLoginValidator();
+        accessValidator = validatorFactory.getAccessValidator();
         mockRequest = new MockHttpServletRequest();
     }
 
     @Test
-    public void testValidateNewUser() {
-        mockRequest.addParameter(ConstantContainer.LOGIN, "newUser");
+    public void testValidateNonexistentUser() {
+        mockRequest.addParameter(ConstantContainer.LOGIN, "nonexistentUser");
+        mockRequest.addParameter(ConstantContainer.PASSWORD, "nonexistentPassword");
 
-        assertTrue(loginValidator.validate(mockRequest));
+        assertFalse(accessValidator.validate(mockRequest));
     }
 
     @Test
     public void testValidateExistingUser() {
-        mockRequest.addParameter(ConstantContainer.LOGIN, "stas");
+        mockRequest.addParameter(ConstantContainer.LOGIN, "admin");
+        mockRequest.addParameter(ConstantContainer.PASSWORD, "admin");
 
-        assertFalse(loginValidator.validate(mockRequest));
+        assertTrue(accessValidator.validate(mockRequest));
     }
-
 }
