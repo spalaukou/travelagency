@@ -13,6 +13,8 @@ import org.apache.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 
 /**
+ * The Command makes the purchase of the tour by the customer from his account.
+ *
  * @author Stanislau Palaukou on 06.05.2019
  * @project TravelAgency
  */
@@ -21,6 +23,14 @@ public class BuyTourCommand implements Command {
 
     private static final Logger LOGGER = Logger.getLogger(BuyTourCommand.class);
 
+    /**
+     * Creates a new order, checking the conditions for this.
+     *
+     * @param request
+     * @return the user’s orders page. If the conditions are not met, the initial page with
+     * informational message is returned. If the user is not signed in, the sign in page is
+     * returned.
+     */
     @Override
     public String execute(HttpServletRequest request) {
         String page = ConstantContainer.SIGN_IN_PAGE;

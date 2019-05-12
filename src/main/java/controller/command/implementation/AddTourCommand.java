@@ -13,13 +13,22 @@ import org.apache.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 
 /**
+ * The Command responsible for adding a new tour by a travel agent.
+ *
  * @author Stanislau Palaukou on 10.05.2019
  * @project TravelAgency
  */
+
 public class AddTourCommand implements Command {
 
     private static final Logger LOGGER = Logger.getLogger(AddTourCommand.class);
 
+    /**
+     * Adds a new tour and shows all existing tours in the tours manage panel.
+     *
+     * @param request
+     * @return manage tours page for Tour Agent user.
+     */
     @Override
     public String execute(HttpServletRequest request) {
 

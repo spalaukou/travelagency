@@ -23,21 +23,16 @@ public class ShowOrdersCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request) {
-        List<Order> orders = null;
+        List<Order> orders;
 
         ServiceFactory serviceFactory = ServiceFactory.getInstance();
         OrderService orderService = serviceFactory.getOrderService();
 
         String userID = request.getSession().getAttribute(ConstantContainer.USER_ID).toString();
-        String param = request.getParameter(ConstantContainer.PARAM);
 
         try {
 
-            if (ConstantContainer.ALL.equals(param)) {
-                //orders = orderService.getAllOrders();
-            } else {
-                orders = orderService.getOrdersByID(userID);
-            }
+            orders = orderService.getOrdersByID(userID);
 
             request.setAttribute(ConstantContainer.ORDERS, orders);
 

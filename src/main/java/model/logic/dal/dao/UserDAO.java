@@ -4,6 +4,8 @@ import model.entity.User;
 import model.logic.exception.technical.DAOSQLException;
 import model.logic.exception.technical.TourConnectionPoolException;
 
+import java.sql.Connection;
+
 /**
  * @author Stanislau Palaukou on 24.04.2019
  * @project TravelAgency
@@ -21,9 +23,9 @@ public interface UserDAO {
 
     int getBalance(String login) throws DAOSQLException, TourConnectionPoolException;
 
-    void setBalance(String userID, int balance) throws TourConnectionPoolException, DAOSQLException;
+    void setBalance(Connection connection, String userID, int balance) throws TourConnectionPoolException, DAOSQLException;
 
-    float setDiscount(String userID) throws TourConnectionPoolException, DAOSQLException;
+    float setDiscount(Connection connection, String userID) throws TourConnectionPoolException, DAOSQLException;
 
 
 

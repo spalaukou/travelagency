@@ -50,8 +50,42 @@ public class OrderDAOImpl implements OrderDAO {
                 ServiceFactory serviceFactory = ServiceFactory.getInstance();
                 UserService userService = serviceFactory.getUserService();
 
-                userService.setBalance(userID, balance - totalPrice);
-                newDiscount = userService.setDiscount(userID);
+                userService.setBalance(connection, userID, balance - totalPrice);
+                newDiscount = userService.setDiscount(connection, userID);
+
+            } catch (SQLException | ServiceSQLException e) {
+                throw new DAOSQLException(e);
+            } catch (DataSourceException e) {
+                throw new TourConnectionPoolException(e);
+            } finally {
+                tourConnectionPool.returnConnection(connection);
+            }
+        }
+        return newDiscount;
+    }
+
+    @Override
+    public float cancelOrder(String userID, String orderID, int totalPrice, int balance)
+            throws TourConnectionPoolException, DAOSQLException {
+
+        TourConnectionPool tourConnectionPool = TourConnectionPool.getInstance();
+        Connection connection = tourConnectionPool.getConnection();
+        float newDiscount = ConstantContainer.WRONG_DISCOUNT;
+
+        if (connection != null) {
+            try (PreparedStatement statement =
+                         connection.prepareStatement(DBRequestContainer.CANCEL_ORDER_REQUEST)) {
+
+                statement.setString(1, orderID);
+
+                ServiceFactory serviceFactory = ServiceFactory.getInstance();
+                UserService userService = serviceFactory.getUserService();
+
+                userService.setBalance(connection, userID, balance + totalPrice);
+
+                statement.executeUpdate();
+
+                newDiscount = userService.setDiscount(connection, userID);
 
             } catch (SQLException | ServiceSQLException e) {
                 throw new DAOSQLException(e);
@@ -89,39 +123,6 @@ public class OrderDAOImpl implements OrderDAO {
             }
         }
         return ID;
-    }
-
-    @Override
-    public float cancelOrder(String userID, String orderID, int totalPrice, int balance)
-            throws TourConnectionPoolException, DAOSQLException {
-
-        TourConnectionPool tourConnectionPool = TourConnectionPool.getInstance();
-        Connection connection = tourConnectionPool.getConnection();
-        float newDiscount = ConstantContainer.WRONG_DISCOUNT;
-
-        if (connection != null) {
-            try (PreparedStatement statement =
-                         connection.prepareStatement(DBRequestContainer.CANCEL_ORDER_REQUEST)) {
-
-                statement.setString(1, orderID);
-
-                ServiceFactory serviceFactory = ServiceFactory.getInstance();
-                UserService userService = serviceFactory.getUserService();
-
-                userService.setBalance(userID, balance + totalPrice);
-                newDiscount = userService.setDiscount(userID);
-
-                statement.executeUpdate();
-
-            } catch (SQLException | ServiceSQLException e) {
-                throw new DAOSQLException(e);
-            } catch (DataSourceException e) {
-                throw new TourConnectionPoolException(e);
-            } finally {
-                tourConnectionPool.returnConnection(connection);
-            }
-        }
-        return newDiscount;
     }
 
     @Override

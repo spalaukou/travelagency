@@ -1,17 +1,27 @@
 package controller.command;
 
 import controller.command.implementation.*;
+import model.ConstantContainer;
+import org.apache.log4j.Logger;
 
 import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * Class contains command types, command container and
+ * method that returns the required command.
+ *
  * @author Stanislau Palaukou on 25.04.2019
  * @project TravelAgency
  */
 
 public class CommandManager {
 
+    private static final Logger LOGGER = Logger.getLogger(CommandManager.class);
+
+    /**
+     * Enumeration of exists Command types.
+     */
     public enum CommandType {
         DEFAULT,
 
@@ -32,28 +42,45 @@ public class CommandManager {
     private CommandManager() {
     }
 
-    private static final Map<CommandType, Command> map;
+    /**
+     * Command Container. Commands are created in advance in static block.
+     */
+    private static final Map<CommandType, Command> commandContainer;
 
     static {
-        map = new HashMap<>();
-        map.put(CommandType.DEFAULT, new EmptyCommand());
-        map.put(CommandType.SIGN_IN, new SignInCommand());
-        map.put(CommandType.SIGN_UP, new SignUpCommand());
-        map.put(CommandType.SIGN_OUT, new SignOutCommand());
-        map.put(CommandType.CHANGE_LOCALE, new ChangeLocaleCommand());
-        map.put(CommandType.SHOW_TOURS, new ShowToursCommand());
-        map.put(CommandType.SHOW_ORDERS, new ShowOrdersCommand());
-        map.put(CommandType.BUY_TOUR, new BuyTourCommand());
-        map.put(CommandType.CANCEL_TOUR, new CancelTourCommand());
-        map.put(CommandType.ADD_TOUR, new    AddTourCommand());
-        map.put(CommandType.UPDATE_TOUR, new UpdateTourCommand());
-}
+        commandContainer = new HashMap<>();
+        commandContainer.put(CommandType.DEFAULT, new EmptyCommand());
+        commandContainer.put(CommandType.SIGN_IN, new SignInCommand());
+        commandContainer.put(CommandType.SIGN_UP, new SignUpCommand());
+        commandContainer.put(CommandType.SIGN_OUT, new SignOutCommand());
+        commandContainer.put(CommandType.CHANGE_LOCALE, new ChangeLocaleCommand());
+        commandContainer.put(CommandType.SHOW_TOURS, new ShowToursCommand());
+        commandContainer.put(CommandType.SHOW_ORDERS, new ShowOrdersCommand());
+        commandContainer.put(CommandType.BUY_TOUR, new BuyTourCommand());
+        commandContainer.put(CommandType.CANCEL_TOUR, new CancelTourCommand());
+        commandContainer.put(CommandType.ADD_TOUR, new AddTourCommand());
+        commandContainer.put(CommandType.UPDATE_TOUR, new UpdateTourCommand());
+    }
 
+    /**
+     * Getter for the Command which should be called.
+     *
+     * @param cmd
+     * @return Command that is called. If the requested command
+     * does not exists, the default command is returned.
+     */
     public static Command getCommand(String cmd) {
         CommandType type;
 
-        type = CommandType.valueOf(cmd.toUpperCase());
+        try {
 
-        return map.get(type);
+            type = CommandType.valueOf(cmd.toUpperCase());
+
+        } catch (IllegalArgumentException e) {
+            LOGGER.error(ConstantContainer.COMMAND_ERR_MSG, e);
+            type = CommandType.DEFAULT;
+        }
+
+        return commandContainer.get(type);
     }
 }

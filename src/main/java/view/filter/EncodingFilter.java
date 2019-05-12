@@ -1,4 +1,4 @@
-package controller.filter;
+package view.filter;
 
 import java.io.IOException;
 import javax.servlet.Filter;
@@ -11,6 +11,10 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.annotation.WebInitParam;
 
 /**
+ * Filter to modify request and response encoding. For correct interpretation
+ * of Cyrillic characters transmitted with the request, the filter intercepts
+ * the request and replaces its encoding.
+ *
  * @author Stanislau Palaukou on 02.05.2019
  * @project TravelAgency
  */

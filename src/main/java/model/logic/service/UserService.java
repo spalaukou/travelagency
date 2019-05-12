@@ -4,6 +4,8 @@ import model.entity.User;
 import model.logic.exception.logical.ServiceSQLException;
 import model.logic.exception.logical.DataSourceException;
 
+import java.sql.Connection;
+
 /**
  * @author Stanislau Palaukou on 24.04.2019
  * @project TravelAgency
@@ -21,7 +23,7 @@ public interface UserService {
 
     int getBalance(String login) throws DataSourceException, ServiceSQLException;
 
-    void setBalance(String userID, int balance) throws DataSourceException, ServiceSQLException;
+    void setBalance(Connection connection, String userID, int balance) throws DataSourceException, ServiceSQLException;
 
-    float setDiscount(String userID) throws DataSourceException, ServiceSQLException;
+    float setDiscount(Connection connection, String userID) throws DataSourceException, ServiceSQLException;
 }

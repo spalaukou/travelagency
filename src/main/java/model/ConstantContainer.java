@@ -19,7 +19,6 @@ public final class ConstantContainer {
     public static final String COUNTRY = "country";
     public static final String LOCALIZATION = "localization";
     public static final String TOUR_ID = "tour_id";
-    public static final String PARAM = "param";
     public static final String ALL = "all";
     public static final float DEFAULT_DISCOUNT = 1.0f;
     public static final int WRONG_BALANCE = -1;
@@ -87,6 +86,7 @@ public final class ConstantContainer {
 
     //logger messages
     public static final String DATA_SOURCE_ERR_MSG = "Data source error.";
+    public static final String COMMAND_ERR_MSG = "Command error.";
     public static final String SQL_ERR_MSG = "SQL error.";
     public static final String CONNECTION_POOL_ERR_MSG = "TourConnectionPool initialization error.";
     public static final String IO_ERR_MSG = "I/O error.";

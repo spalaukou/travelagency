@@ -149,9 +149,7 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public void setBalance(String userID, int balance) throws TourConnectionPoolException, DAOSQLException {
-        TourConnectionPool tourConnectionPool = TourConnectionPool.getInstance();
-        Connection connection = tourConnectionPool.getConnection();
+    public void setBalance(Connection connection, String userID, int balance) throws DAOSQLException {
         if (connection != null) {
             try (PreparedStatement preparedStatement =
                          connection.prepareStatement(DBRequestContainer.SET_BALANCE_REQUEST)) {
@@ -163,14 +161,12 @@ public class UserDAOImpl implements UserDAO {
 
             } catch (SQLException e) {
                 throw new DAOSQLException(e);
-            } finally {
-                tourConnectionPool.returnConnection(connection);
             }
         }
     }
 
     @Override
-    public float setDiscount(String userID) throws TourConnectionPoolException, DAOSQLException {
+    public float setDiscount(Connection connection, String userID) throws TourConnectionPoolException, DAOSQLException {
         int allOrdersCost = getAllOrdersCost(userID);
         float userDiscount = getUserDiscount(userID);
         float newDiscount;
@@ -186,15 +182,13 @@ public class UserDAOImpl implements UserDAO {
         }
 
         if(userDiscount != newDiscount) {
-            insertNewDiscount(userID, newDiscount);
+            insertNewDiscount(connection, userID, newDiscount);
         }
 
         return newDiscount;
     }
 
-    private void insertNewDiscount(String userID, float newDiscount) throws TourConnectionPoolException, DAOSQLException {
-        TourConnectionPool tourConnectionPool = TourConnectionPool.getInstance();
-        Connection connection = tourConnectionPool.getConnection();
+    private void insertNewDiscount(Connection connection, String userID, float newDiscount) throws DAOSQLException {
         if (connection != null) {
             try (PreparedStatement preparedStatement =
                          connection.prepareStatement(DBRequestContainer.SET_DISCOUNT_REQUEST)) {
@@ -206,8 +200,6 @@ public class UserDAOImpl implements UserDAO {
 
             } catch (SQLException e) {
                 throw new DAOSQLException(e);
-            } finally {
-                tourConnectionPool.returnConnection(connection);
             }
         }
     }

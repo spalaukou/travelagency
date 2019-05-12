@@ -28,7 +28,7 @@ public final class TourConnectionPool {
     private String login;
     private String password;
     private int connectionPoolSize;
-    private boolean isBlocked;
+    private boolean isLocked;
 
     private TourConnectionPool() {
         this.driver = DBConstantContainer.JDBC_MYSQL_DRIVER;
@@ -51,7 +51,7 @@ public final class TourConnectionPool {
     }
 
     private void initializePool() throws TourConnectionPoolException {
-        isBlocked = false;
+        isLocked = false;
 
         try {
 
@@ -71,7 +71,7 @@ public final class TourConnectionPool {
     public Connection getConnection() throws TourConnectionPoolException {
         Connection connection;
 
-        if(this.isBlocked){
+        if(this.isLocked){
             return null;
         }
 

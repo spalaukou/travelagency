@@ -1,5 +1,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="ctg" uri="customTags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <fmt:bundle basename="localization">
@@ -16,7 +17,9 @@
 <table width="100%" cellspacing="0" cellpadding="4">
     <tr>
         <td width="15%"><a href="${pageContext.request.contextPath}">${agencyName}</a></td>
-        <td width="70%" style="text-align: center;">${welcomeMessage}, ${login}!</td>
+        <td width="70%" style="text-align: center;">
+            <ctg:helloTag login="${login}" welcomeMessage="${welcomeMessage}"/>
+        </td>
         <td>
             <div style="text-align: right;">
                 <a href="start?command=sign_out">${signOut}</a>
@@ -42,5 +45,5 @@
 
 <c:set var= "agent" value="AGENT"/>
 <c:if test= "${userType eq agent}">
-    <jsp:include page="AgentHeader.jsp"/>
+    <jsp:include page="AgentPanel.jsp"/>
 </c:if>

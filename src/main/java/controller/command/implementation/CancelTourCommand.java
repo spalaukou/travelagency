@@ -13,6 +13,8 @@ import org.apache.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 
 /**
+ * The Command makes the cancel of the tour by the customer from his account.
+ *
  * @author Stanislau Palaukou on 06.05.2019
  * @project TravelAgency
  */
@@ -21,6 +23,13 @@ public class CancelTourCommand implements Command {
 
     private static final Logger LOGGER = Logger.getLogger(CancelTourCommand.class);
 
+    /**
+     * Checks the existence of the requested order, and if a check
+     * is performed, the order is deleted.
+     *
+     * @param request
+     * @return the user’s orders page.
+     */
     @Override
     public String execute(HttpServletRequest request) {
         String page = ConstantContainer.SIGN_IN_PAGE;

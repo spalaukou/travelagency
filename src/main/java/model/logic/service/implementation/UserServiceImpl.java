@@ -9,6 +9,8 @@ import model.logic.exception.logical.DataSourceException;
 import model.logic.exception.technical.TourConnectionPoolException;
 import model.logic.service.UserService;
 
+import java.sql.Connection;
+
 /**
  * @author Stanislau Palaukou on 24.04.2019
  * @project TravelAgency
@@ -91,9 +93,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void setBalance(String userID, int balance) throws DataSourceException, ServiceSQLException {
+    public void setBalance(Connection connection, String userID, int balance) throws DataSourceException, ServiceSQLException {
         try {
-            userDAO.setBalance(userID, balance);
+            userDAO.setBalance(connection, userID, balance);
         } catch (TourConnectionPoolException e) {
             throw new DataSourceException();
         } catch (DAOSQLException e) {
@@ -102,11 +104,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public float setDiscount(String userID) throws DataSourceException, ServiceSQLException {
+    public float setDiscount(Connection connection, String userID) throws DataSourceException, ServiceSQLException {
         float discount;
 
         try {
-            discount = userDAO.setDiscount(userID);
+            discount = userDAO.setDiscount(connection, userID);
         } catch (TourConnectionPoolException e) {
             throw new DataSourceException();
         } catch (DAOSQLException e) {

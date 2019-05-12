@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
+ * The main application servlet that handles everything.
+ *
  * @author Stanislau Palaukou on 24.04.2019
  * @project TravelAgency
  */
@@ -31,6 +33,13 @@ public class AgencyServlet extends HttpServlet {
             processRequest(request, response);
     }
 
+    /**
+     * The main method that processes the request, passes it to the command,
+     * and then passes the returned page to the dispatcher.
+     *
+     * @param request
+     * @param response
+     */
     private void processRequest(HttpServletRequest request, HttpServletResponse response) {
         String cmd = request.getParameter(ConstantContainer.COMMAND);
         Command command = CommandManager.getCommand(cmd);
