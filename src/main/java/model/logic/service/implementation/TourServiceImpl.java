@@ -12,6 +12,8 @@ import model.logic.service.TourService;
 import java.util.List;
 
 /**
+ * Implementation of Tour Service.
+ *
  * @author Stanislau Palaukou on 03.05.2019
  * @project TravelAgency
  */

@@ -3,8 +3,8 @@ package model.entity;
 import java.util.Objects;
 
 /**
- * Order is a class, that contains information
- * about User and what Tour he has bought.
+ * Order is a class, that contains information about User,
+ * what Tour he has bought and what the final price paid.
  *
  * @author Stanislau Palaukou on 28.04.2019
  * @project TravelAgency

@@ -66,7 +66,7 @@ public class CommandManager {
      * Getter for the Command which should be called.
      *
      * @param cmd
-     * @return Command that is called. If the requested command
+     * @return the Command that is called. If the requested command
      * does not exists, the default command is returned.
      */
     public static Command getCommand(String cmd) {

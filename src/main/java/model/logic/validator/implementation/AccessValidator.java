@@ -11,6 +11,9 @@ import org.apache.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 
 /**
+ * The validator is responsible for matching the login and password
+ * to provide access to the user.
+ *
  * @author Stanislau Palaukou on 30.04.2019
  * @project TravelAgency
  */
@@ -19,6 +22,13 @@ public class AccessValidator implements Validator {
 
     private static final Logger LOGGER = Logger.getLogger(AccessValidator.class);
 
+    /**
+     * Checks for matching the login and password entered by the user
+     * with the data in the system.
+     *
+     * @param request
+     * @return true if conditions are met.
+     */
     @Override
     public boolean validate(HttpServletRequest request) {
         String login = request.getParameter(ConstantContainer.LOGIN);

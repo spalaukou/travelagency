@@ -5,6 +5,8 @@ import model.logic.service.implementation.TourServiceImpl;
 import model.logic.service.implementation.UserServiceImpl;
 
 /**
+ * The Factory, that provides entity services.
+ *
  * @author Stanislau Palaukou on 27.04.2019
  * @project TravelAgency
  */

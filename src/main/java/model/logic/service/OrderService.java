@@ -7,6 +7,8 @@ import model.logic.exception.logical.DataSourceException;
 import java.util.List;
 
 /**
+ * Interface for Order service implementation.
+ *
  * @author Stanislau Palaukou on 06.05.2019
  * @project TravelAgency
  */

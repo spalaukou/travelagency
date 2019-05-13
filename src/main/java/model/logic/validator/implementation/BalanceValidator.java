@@ -12,6 +12,9 @@ import org.apache.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 
 /**
+ * The validator checks if there is enough money
+ * in the user's account to purchase the tour.
+ *
  * @author Stanislau Palaukou on 06.05.2019
  * @project TravelAgency
  */
@@ -20,6 +23,13 @@ public class BalanceValidator implements Validator {
 
     private static final Logger LOGGER = Logger.getLogger(BalanceValidator.class);
 
+    /**
+     * Checks if there is enough money in the user's account to purchase the tour.
+     * Compares the money in the account with the final cost of the tour.
+     *
+     * @param request
+     * @return true if there is enough money for purchase.
+     */
     @Override
     public boolean validate(HttpServletRequest request) {
         String tourID = request.getParameter(ConstantContainer.TOUR_ID);

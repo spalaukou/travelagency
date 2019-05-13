@@ -7,12 +7,21 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
+ * Class for building the Order from ResultSet.
+ *
  * @author Stanislau Palaukou on 09.05.2019
  * @project TravelAgency
  */
 
 public class OrderBuilder implements EntityBuilder<Order> {
 
+    /**
+     * Builds an Order entity.
+     *
+     * @param resultSet
+     * @return Order entity.
+     * @throws SQLException
+     */
     @Override
     public Order build(ResultSet resultSet) throws SQLException {
         Order order = new Order();

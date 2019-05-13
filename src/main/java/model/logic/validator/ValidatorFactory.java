@@ -3,6 +3,8 @@ package model.logic.validator;
 import model.logic.validator.implementation.*;
 
 /**
+ * The Factory, that provides Validators.
+ *
  * @author Stanislau Palaukou on 27.04.2019
  * @project TravelAgency
  */

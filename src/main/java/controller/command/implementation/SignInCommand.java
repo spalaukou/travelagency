@@ -14,6 +14,8 @@ import org.apache.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 
 /**
+ * User authorization command in the application.
+ *
  * @author Stanislau Palaukou on 22.04.2019
  * @project TravelAgency
  */
@@ -22,6 +24,13 @@ public class SignInCommand implements Command {
 
     private static final Logger LOGGER = Logger.getLogger(SignInCommand.class);
 
+    /**
+     * Validates the user credentials and, upon successful verification, logs into the system.
+     *
+     * @param request
+     * @return the index page of application with user panel and information.
+     * If the user is not signed in, the sign in page is returned.
+     */
     @Override
     public String execute(HttpServletRequest request) {
         String page = ConstantContainer.SIGN_IN_PAGE;

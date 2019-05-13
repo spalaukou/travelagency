@@ -34,7 +34,7 @@ public class AgencyServlet extends HttpServlet {
     }
 
     /**
-     * The main method that processes the request, passes it to the command,
+     * The main method that processes the request, passes it to the Command,
      * and then passes the returned page to the dispatcher.
      *
      * @param request

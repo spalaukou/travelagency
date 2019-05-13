@@ -12,6 +12,8 @@ import model.logic.service.OrderService;
 import java.util.List;
 
 /**
+ * Implementation of Order Service.
+ *
  * @author Stanislau Palaukou on 06.05.2019
  * @project TravelAgency
  */

@@ -1,6 +1,8 @@
 package model.logic.dal.db_connection;
 
 /**
+ * Container that stores various immutable queries to the DataBase.
+ *
  * @author Stanislau Palaukou on 27.04.2019
  * @project TravelAgency
  */

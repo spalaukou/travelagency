@@ -7,6 +7,8 @@ import model.logic.exception.logical.DataSourceException;
 import java.sql.Connection;
 
 /**
+ * Interface for User service implementation.
+ *
  * @author Stanislau Palaukou on 24.04.2019
  * @project TravelAgency
  */

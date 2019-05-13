@@ -12,6 +12,8 @@ import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
 /**
+ * Provides connections to the DataBase.
+ *
  * @author Stanislau Palaukou on 21.04.2019
  * @project TravelAgency
  */
@@ -50,6 +52,12 @@ public final class TourConnectionPool {
         return INSTANCE;
     }
 
+    /**
+     * TourConnectionPool initialization and filling it
+     * with the number of connections specified in advance.
+     *
+     * @throws TourConnectionPoolException
+     */
     private void initializePool() throws TourConnectionPoolException {
         isLocked = false;
 
@@ -68,6 +76,11 @@ public final class TourConnectionPool {
         }
     }
 
+    /**
+     * Method provides connection from the Queue.
+     * @return
+     * @throws TourConnectionPoolException
+     */
     public Connection getConnection() throws TourConnectionPoolException {
         Connection connection;
 
@@ -86,6 +99,12 @@ public final class TourConnectionPool {
         return connection;
     }
 
+    /**
+     * Method returns connection to the Queue.
+     *
+     * @param connection
+     * @throws TourConnectionPoolException
+     */
     public void returnConnection(Connection connection) throws TourConnectionPoolException {
 
         try {

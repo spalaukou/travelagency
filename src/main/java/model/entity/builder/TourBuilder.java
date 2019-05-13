@@ -9,12 +9,21 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
+ * Class for building the Tour from ResultSet.
+ *
  * @author Stanislau Palaukou on 09.05.2019
  * @project TravelAgency
  */
 
 public class TourBuilder implements EntityBuilder<Tour> {
 
+    /**
+     * Builds a Tour entity.
+     *
+     * @param resultSet
+     * @return Tour entity.
+     * @throws SQLException
+     */
     @Override
     public Tour build(ResultSet resultSet) throws SQLException {
         Tour tour = new Tour();

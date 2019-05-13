@@ -5,7 +5,7 @@ import javax.servlet.jsp.tagext.TagSupport;
 import java.io.IOException;
 
 /**
- * Custom tag with greeting users on each page
+ * Custom tag with greeting User on each page
  * of the application.
  *
  * @author Stanislau Palaukou on 12.05.2019

@@ -1,18 +1,20 @@
 package controller.command.implementation;
 
-        import controller.command.Command;
-        import model.ConstantContainer;
-        import model.logic.exception.logical.ServiceSQLException;
-        import model.logic.exception.logical.DataSourceException;
-        import model.logic.service.ServiceFactory;
-        import model.logic.service.UserService;
-        import model.logic.validator.Validator;
-        import model.logic.validator.ValidatorFactory;
-        import org.apache.log4j.Logger;
+import controller.command.Command;
+import model.ConstantContainer;
+import model.logic.exception.logical.ServiceSQLException;
+import model.logic.exception.logical.DataSourceException;
+import model.logic.service.ServiceFactory;
+import model.logic.service.UserService;
+import model.logic.validator.Validator;
+import model.logic.validator.ValidatorFactory;
+import org.apache.log4j.Logger;
 
-        import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletRequest;
 
 /**
+ * User registration command in the system.
+ *
  * @author Stanislau Palaukou on 24.04.2019
  * @project TravelAgency
  */
@@ -21,6 +23,13 @@ public class SignUpCommand implements Command {
 
     private static final Logger LOGGER = Logger.getLogger(SignUpCommand.class);
 
+    /**
+     * Checks user's login and password and, if the conditions are met, allows
+     * the user to be registered in the system.
+     *
+     * @param request
+     * @return the sing up result page, if the conditions are met.
+     */
     @Override
     public String execute(HttpServletRequest request) {
         String page = ConstantContainer.SIGN_UP_PAGE;
@@ -31,8 +40,8 @@ public class SignUpCommand implements Command {
         Validator lengthValidator = validatorFactory.getLoginPassLengthValidator();
         Validator loginValidator = validatorFactory.getLoginValidator();
 
-        if(lengthValidator.validate(request)) {
-            if(loginValidator.validate(request)) {
+        if (lengthValidator.validate(request)) {
+            if (loginValidator.validate(request)) {
 
                 try {
                     ServiceFactory serviceFactory = ServiceFactory.getInstance();

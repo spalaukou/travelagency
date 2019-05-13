@@ -7,6 +7,8 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 /**
+ * Provides connection to the DataBase.
+ *
  * @author Stanislau Palaukou on 28.04.2019
  * @project TravelAgency
  */

@@ -12,6 +12,8 @@ import model.logic.service.UserService;
 import java.sql.Connection;
 
 /**
+ * Implementation of User Service.
+ *
  * @author Stanislau Palaukou on 24.04.2019
  * @project TravelAgency
  */

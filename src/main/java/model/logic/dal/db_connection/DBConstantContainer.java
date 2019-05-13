@@ -1,6 +1,9 @@
 package model.logic.dal.db_connection;
 
 /**
+ * Container that keeps various immutable variables
+ * that are used when connecting to the DataBase.
+ *
  * @author Stanislau Palaukou on 27.04.2019
  * @project TravelAgency
  */

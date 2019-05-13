@@ -11,12 +11,22 @@ import model.logic.exception.technical.TourConnectionPoolException;
 import java.sql.*;
 
 /**
+ * Implementation of User DAO.
+ *
  * @author Stanislau Palaukou on 24.04.2019
  * @project TravelAgency
  */
 
 public class UserDAOImpl implements UserDAO {
 
+    /**
+     * Executes DataBase query and creates an entry with the data of the new user.
+     *
+     * @param login
+     * @param password
+     * @throws DAOSQLException
+     * @throws TourConnectionPoolException
+     */
     @Override
     public void signUp(String login, String password) throws DAOSQLException, TourConnectionPoolException {
 
@@ -40,6 +50,15 @@ public class UserDAOImpl implements UserDAO {
         }
     }
 
+    /**
+     * Executes DataBase query and retrieves user characteristics by login.
+     *
+     * @param login
+     * @param password
+     * @return User entity with all characteristics to set in the user's session.
+     * @throws TourConnectionPoolException
+     * @throws DAOSQLException
+     */
     @Override
     public User signIn(String login, String password) throws TourConnectionPoolException, DAOSQLException {
         User user = null;
@@ -74,6 +93,14 @@ public class UserDAOImpl implements UserDAO {
         return user;
     }
 
+    /**
+     * Executes DataBase query and gets the user id by requested login.
+     *
+     * @param login
+     * @return User ID if the User exists.
+     * @throws TourConnectionPoolException
+     * @throws DAOSQLException
+     */
     @Override
     public int getID(String login) throws TourConnectionPoolException, DAOSQLException {
         int userID = DBConstantContainer.WRONG_USER_ID;
@@ -84,7 +111,9 @@ public class UserDAOImpl implements UserDAO {
         if (connection != null) {
             try (PreparedStatement statement =
                          connection.prepareStatement(DBRequestContainer.GET_LOGIN_REQUEST)) {
+
                 statement.setString(1, login);
+
                 ResultSet resultSet = statement.executeQuery();
 
                 while (resultSet.next()) {
@@ -99,6 +128,14 @@ public class UserDAOImpl implements UserDAO {
         return userID;
     }
 
+    /**
+     * Executes DataBase query and gets the user password by requested login.
+     *
+     * @param login
+     * @return User's password.
+     * @throws TourConnectionPoolException
+     * @throws DAOSQLException
+     */
     @Override
     public String getPassword(String login) throws TourConnectionPoolException, DAOSQLException {
         String password = DBConstantContainer.WRONG_USER_PASSWORD;
@@ -124,6 +161,14 @@ public class UserDAOImpl implements UserDAO {
         return password;
     }
 
+    /**
+     * Executes DataBase query and gets the user balance by requested login.
+     *
+     * @param login
+     * @return
+     * @throws DAOSQLException
+     * @throws TourConnectionPoolException
+     */
     @Override
     public int getBalance(String login) throws DAOSQLException, TourConnectionPoolException {
         int balance = DBConstantContainer.WRONG_USER_BALANCE;
@@ -148,6 +193,14 @@ public class UserDAOImpl implements UserDAO {
         return balance;
     }
 
+    /**
+     * Executes DataBase query and sets the user balance by requested user id.
+     *
+     * @param connection
+     * @param userID
+     * @param balance
+     * @throws DAOSQLException
+     */
     @Override
     public void setBalance(Connection connection, String userID, int balance) throws DAOSQLException {
         if (connection != null) {
@@ -165,6 +218,15 @@ public class UserDAOImpl implements UserDAO {
         }
     }
 
+    /**
+     * Method gets all orders cost and user discount by User ID, and sets new User discount if it is changed.
+     *
+     * @param connection
+     * @param userID
+     * @return User discount.
+     * @throws TourConnectionPoolException
+     * @throws DAOSQLException
+     */
     @Override
     public float setDiscount(Connection connection, String userID) throws TourConnectionPoolException, DAOSQLException {
         int allOrdersCost = getAllOrdersCost(userID);
@@ -188,6 +250,14 @@ public class UserDAOImpl implements UserDAO {
         return newDiscount;
     }
 
+    /**
+     * Executes DataBase query and sets the user discount by requested user id.
+     *
+     * @param connection
+     * @param userID
+     * @param newDiscount
+     * @throws DAOSQLException
+     */
     private void insertNewDiscount(Connection connection, String userID, float newDiscount) throws DAOSQLException {
         if (connection != null) {
             try (PreparedStatement preparedStatement =
@@ -204,6 +274,14 @@ public class UserDAOImpl implements UserDAO {
         }
     }
 
+    /**
+     * Executes DataBase query and gets all the user's orders cost by requested user id.
+     *
+     * @param userID
+     * @return
+     * @throws TourConnectionPoolException
+     * @throws DAOSQLException
+     */
     private int getAllOrdersCost(String userID) throws TourConnectionPoolException, DAOSQLException {
         int allOrdersCost = DBConstantContainer.WRONG_ALL_ORDERS_COST;
 
@@ -230,6 +308,14 @@ public class UserDAOImpl implements UserDAO {
         return allOrdersCost;
     }
 
+    /**
+     * Executes DataBase query and gets the user discount by requested user id.
+     *
+     * @param userID
+     * @return
+     * @throws TourConnectionPoolException
+     * @throws DAOSQLException
+     */
     private float getUserDiscount(String userID) throws TourConnectionPoolException, DAOSQLException {
         float userDiscount = DBConstantContainer.WRONG_USER_DISCOUNT;
 

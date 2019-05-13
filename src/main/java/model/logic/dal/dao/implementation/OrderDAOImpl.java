@@ -23,12 +23,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Implementation of Order DAO.
+ *
  * @author Stanislau Palaukou on 07.05.2019
  * @project TravelAgency
  */
 
 public class OrderDAOImpl implements OrderDAO {
 
+    /**
+     * Executes DataBase query and creates a new Order by requested parameters.
+     * Calls methods to set new User balance and discount.
+     *
+     * @param userID
+     * @param tourID
+     * @param totalPrice
+     * @param balance
+     * @return new User discount.
+     * @throws TourConnectionPoolException
+     * @throws DAOSQLException
+     */
     @Override
     public float createOrder(String userID, String tourID, int totalPrice, int balance)
             throws TourConnectionPoolException, DAOSQLException {
@@ -64,6 +78,18 @@ public class OrderDAOImpl implements OrderDAO {
         return newDiscount;
     }
 
+    /**
+     * Executes DataBase query and cancels the Order by Order ID.
+     * Calls methods to set new User balance and discount.
+     *
+     * @param userID
+     * @param orderID
+     * @param totalPrice
+     * @param balance
+     * @return new User discount.
+     * @throws TourConnectionPoolException
+     * @throws DAOSQLException
+     */
     @Override
     public float cancelOrder(String userID, String orderID, int totalPrice, int balance)
             throws TourConnectionPoolException, DAOSQLException {
@@ -98,6 +124,14 @@ public class OrderDAOImpl implements OrderDAO {
         return newDiscount;
     }
 
+    /**
+     * Executes DataBase query and gets Order ID by requested Order ID.
+     *
+     * @param orderID
+     * @return a good Order ID if it exists, or wrong Order ID if not.
+     * @throws TourConnectionPoolException
+     * @throws DAOSQLException
+     */
     @Override
     public int getID(String orderID) throws TourConnectionPoolException, DAOSQLException {
         TourConnectionPool tourConnectionPool = TourConnectionPool.getInstance();
@@ -125,6 +159,14 @@ public class OrderDAOImpl implements OrderDAO {
         return ID;
     }
 
+    /**
+     * Executes DataBase query and gets Orders by requested User ID.
+     *
+     * @param userID
+     * @return List of Orders
+     * @throws DAOSQLException
+     * @throws TourConnectionPoolException
+     */
     @Override
     public List<Order> getOrdersByID(String userID) throws DAOSQLException, TourConnectionPoolException {
         List<Order> orders;
@@ -150,6 +192,13 @@ public class OrderDAOImpl implements OrderDAO {
         return orders;
     }
 
+    /**
+     * Creates a list of Orders by calling the Order Builder.
+     *
+     * @param resultSet
+     * @return List of Orders
+     * @throws SQLException
+     */
     private List<Order> createOrderList(ResultSet resultSet) throws SQLException {
         List<Order> orders = new ArrayList<>();
         BuilderFactory builderFactory = BuilderFactory.getInstance();

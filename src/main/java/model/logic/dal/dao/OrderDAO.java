@@ -7,6 +7,8 @@ import model.logic.exception.technical.TourConnectionPoolException;
 import java.util.List;
 
 /**
+ * Interface for Tour DAO implementation.
+ *
  * @author Stanislau Palaukou on 07.05.2019
  * @project TravelAgency
  */

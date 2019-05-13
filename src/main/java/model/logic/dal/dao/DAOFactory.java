@@ -5,6 +5,8 @@ import model.logic.dal.dao.implementation.TourDAOImpl;
 import model.logic.dal.dao.implementation.UserDAOImpl;
 
 /**
+ * The Factory, that provides DAO entities.
+ *
  * @author Stanislau Palaukou on 27.04.2019
  * @project TravelAgency
  */

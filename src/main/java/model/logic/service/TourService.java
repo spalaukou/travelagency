@@ -7,6 +7,8 @@ import model.logic.exception.logical.DataSourceException;
 import java.util.List;
 
 /**
+ * Interface for Tour service implementation.
+ *
  * @author Stanislau Palaukou on 28.04.2019
  * @project TravelAgency
  */

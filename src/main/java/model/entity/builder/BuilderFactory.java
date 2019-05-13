@@ -4,6 +4,8 @@ import model.entity.Order;
 import model.entity.Tour;
 
 /**
+ * The Factory, that provides entity builders.
+ *
  * @author Stanislau Palaukou on 09.05.2019
  * @project TravelAgency
  */

@@ -12,6 +12,12 @@ import javax.servlet.http.HttpServletRequest;
 
 public interface Command {
 
+    /**
+     * Performs actions depending on the request.
+     *
+     * @param request
+     * @return a String page.
+     */
     String execute(HttpServletRequest request);
 
 }

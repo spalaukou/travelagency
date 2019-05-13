@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
+ * The Command allows the user to see the table of Tours purchased by him.
+ *
  * @author Stanislau Palaukou on 06.05.2019
  * @project TravelAgency
  */
@@ -21,6 +23,12 @@ public class ShowOrdersCommand implements Command {
 
     private static final Logger LOGGER = Logger.getLogger(ShowOrdersCommand.class);
 
+    /**
+     * Creates a List of user's orders and set it in the request for further display.
+     *
+     * @param request
+     * @return the user’s orders page.
+     */
     @Override
     public String execute(HttpServletRequest request) {
         List<Order> orders;

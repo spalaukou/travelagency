@@ -1,6 +1,8 @@
 package model.logic.exception;
 
 /**
+ * Main exception for all exception in the application.
+ *
  * @author Stanislau Palaukou on 21.04.2019
  * @project TravelAgency
  */

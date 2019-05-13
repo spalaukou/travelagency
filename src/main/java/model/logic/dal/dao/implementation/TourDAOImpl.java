@@ -18,12 +18,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Implementation of Tour DAO.
+ *
  * @author Stanislau Palaukou on 03.05.2019
  * @project TravelAgency
  */
 
 public class TourDAOImpl implements TourDAO {
 
+    /**
+     * Executes DataBase query and creates a new Tour by requested parameters.
+     *
+     * @param tourType
+     * @param hotelID
+     * @param hotelNight
+     * @param transport
+     * @param tourCost
+     * @param tourHot
+     * @throws TourConnectionPoolException
+     * @throws DAOSQLException
+     */
     @Override
     public void createTour(String tourType, String hotelID, String hotelNight, String transport, String tourCost, String tourHot)
             throws TourConnectionPoolException, DAOSQLException {
@@ -51,6 +65,15 @@ public class TourDAOImpl implements TourDAO {
         }
     }
 
+    /**
+     * Executes DataBase query and updates the Tour by requested parameters.
+     *
+     * @param tourID
+     * @param tourCost
+     * @param tourHot
+     * @throws TourConnectionPoolException
+     * @throws DAOSQLException
+     */
     @Override
     public void updateTour(String tourID, String tourCost, String tourHot)
             throws TourConnectionPoolException, DAOSQLException {
@@ -75,6 +98,15 @@ public class TourDAOImpl implements TourDAO {
         }
     }
 
+    /**
+     * Executes DataBase query and creates a Tour list by requested country and User's discount.
+     *
+     * @param country
+     * @param discount
+     * @return List of Tours
+     * @throws DAOSQLException
+     * @throws TourConnectionPoolException
+     */
     @Override
     public List<Tour> getToursByCountry(String country, float discount)
             throws DAOSQLException, TourConnectionPoolException {
@@ -100,6 +132,14 @@ public class TourDAOImpl implements TourDAO {
         return tours;
     }
 
+    /**
+     * Executes DataBase query and creates a list of all Tours.
+     *
+     * @param discount
+     * @return List of Tours
+     * @throws DAOSQLException
+     * @throws TourConnectionPoolException
+     */
     @Override
     public List<Tour> getAllTours(float discount)
             throws DAOSQLException, TourConnectionPoolException {
@@ -124,6 +164,14 @@ public class TourDAOImpl implements TourDAO {
         return tours;
     }
 
+    /**
+     * Executes DataBase query and get a Tour price by requested Tour ID.
+     *
+     * @param tourID
+     * @return price of the Tour
+     * @throws DAOSQLException
+     * @throws TourConnectionPoolException
+     */
     @Override
     public int getPrice(String tourID) throws DAOSQLException, TourConnectionPoolException {
         int price = DBConstantContainer.WRONG_TOUR_PRICE;
@@ -153,6 +201,14 @@ public class TourDAOImpl implements TourDAO {
         return price;
     }
 
+    /**
+     * Creates a list of Tours by calling the Tour Builder.
+     *
+     * @param resultSet
+     * @param discount
+     * @return List of Tours
+     * @throws SQLException
+     */
     private List<Tour> createTourList(ResultSet resultSet, float discount) throws SQLException {
         List<Tour> tours = new ArrayList<>();
         BuilderFactory builderFactory = BuilderFactory.getInstance();

@@ -1,6 +1,8 @@
 package model;
 
 /**
+ * Container that keeps various immutable variables used in the application.
+ *
  * @author Stanislau Palaukou on 25.04.2019
  * @project TravelAgency
  */
@@ -28,12 +30,6 @@ public final class ConstantContainer {
     public static final String TOTAL_PRICE = "tp";
     public static final String TOUR_TYPE = "tourType";
     public static final String HOTEL_ID = "hotelID";
-    public static final String HOTEL_COUNTRY = "hotelCountry";
-    public static final String HOTEL_CITY = "hotelCity";
-    public static final String HOTEL_NAME = "hotelName";
-    public static final String HOTEL_STAR = "hotelStar";
-    public static final String HOTEL_MEAL = "hotelMeal";
-    public static final String HOTEL_PERSON = "hotelPerson";
     public static final String TOUR_NIGHT = "tourNight";
     public static final String TRANSPORT_TYPE = "transport";
     public static final String TOUR_COST = "tourCost";

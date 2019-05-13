@@ -6,11 +6,19 @@ import model.logic.validator.Validator;
 import javax.servlet.http.HttpServletRequest;
 
 /**
+ * Data validator that is sent in the request.
+ *
  * @author Stanislau Palaukou on 10.05.2019
  * @project TravelAgency
  */
 public class UpdateTourDataValidator implements Validator {
 
+    /**
+     * Verification of all data sent in the request.
+     *
+     * @param request
+     * @return true if all requested data exists.
+     */
     @Override
     public boolean validate(HttpServletRequest request) {
         String tourID = request.getParameter(ConstantContainer.TOUR_ID);

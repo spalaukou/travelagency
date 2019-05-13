@@ -13,6 +13,8 @@ import org.apache.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 
 /**
+ * The Command responsible for updating a tour by a travel agent.
+ *
  * @author Stanislau Palaukou on 10.05.2019
  * @project TravelAgency
  */
@@ -20,6 +22,12 @@ public class UpdateTourCommand implements Command {
 
     private static final Logger LOGGER = Logger.getLogger(UpdateTourCommand.class);
 
+    /**
+     * Updates a tour and shows all existing tours in the tours manage panel.
+     *
+     * @param request
+     * @return manage tours page for Tour Agent user.
+     */
     @Override
     public String execute(HttpServletRequest request) {
         ValidatorFactory validatorFactory = ValidatorFactory.getInstance();
