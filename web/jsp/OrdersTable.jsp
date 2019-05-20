@@ -73,7 +73,7 @@
     <c:forEach var="order" items="${orders}" varStatus="status">
         <tr>
             <td><c:out value="${status.count}"/></td>
-            <td><c:out value="${order.tour.name}"/></td>
+            <td><c:out value="${order.tour.type}"/></td>
             <td><c:out value="${order.tour.hotel.country}"/></td>
             <td><c:out value="${order.tour.hotel.city}"/></td>
             <td><c:out value="${order.tour.hotel.name}"/></td>

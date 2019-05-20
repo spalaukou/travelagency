@@ -66,7 +66,7 @@
     <c:forEach var="tour" items="${tours}" varStatus="status">
         <tr>
             <td><c:out value="${status.count}"/></td>
-            <td><c:out value="${tour.name}"/></td>
+            <td><c:out value="${tour.type}"/></td>
             <td><c:out value="${tour.hotel.country}"/></td>
             <td><c:out value="${tour.hotel.city}"/></td>
             <td><c:out value="${tour.hotel.name}"/></td>

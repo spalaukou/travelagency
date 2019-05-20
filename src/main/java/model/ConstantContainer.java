@@ -34,6 +34,7 @@ public final class ConstantContainer {
     public static final String TRANSPORT_TYPE = "transport";
     public static final String TOUR_COST = "tourCost";
     public static final String TOUR_HOT = "tourHot";
+    public static final String PARAM = "param";
 
     //attributes
     public static final String ERR_LOGIN_PASS_MSG = "errorLoginPassMessage";

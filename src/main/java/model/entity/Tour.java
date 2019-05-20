@@ -17,7 +17,7 @@ import java.util.Objects;
  */
 
 public class Tour extends BaseEntity {
-    private String name;
+    private String type;
     private Hotel hotel;
     private int night;
     private Transport transport;
@@ -28,8 +28,8 @@ public class Tour extends BaseEntity {
     public Tour() {
     }
 
-    public Tour(String name, Hotel hotel, int night, Transport transport, int cost, float hot) {
-        this.name = name;
+    public Tour(String type, Hotel hotel, int night, Transport transport, int cost, float hot) {
+        this.type = type;
         this.hotel = hotel;
         this.night = night;
         this.transport = transport;
@@ -37,12 +37,12 @@ public class Tour extends BaseEntity {
         this.hot = hot;
     }
 
-    public String getName() {
-        return name;
+    public String getType() {
+        return type;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setType(String type) {
+        this.type = type;
     }
 
     public Hotel getHotel() {
@@ -101,20 +101,20 @@ public class Tour extends BaseEntity {
         return night == tour.night &&
                 cost == tour.cost &&
                 Float.compare(tour.hot, hot) == 0 &&
-                Objects.equals(name, tour.name) &&
+                Objects.equals(type, tour.type) &&
                 Objects.equals(hotel, tour.hotel) &&
                 Objects.equals(transport, tour.transport);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, hotel, night, transport, cost, hot);
+        return Objects.hash(type, hotel, night, transport, cost, hot);
     }
 
     @Override
     public String toString() {
         return "Tour{" +
-                "name='" + name + '\'' +
+                "type='" + type + '\'' +
                 ", hotel=" + hotel +
                 ", night=" + night +
                 ", transport=" + transport +

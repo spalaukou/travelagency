@@ -28,7 +28,7 @@ public class TourBuilder implements EntityBuilder<Tour> {
     public Tour build(ResultSet resultSet) throws SQLException {
         Tour tour = new Tour();
         tour.setId(resultSet.getInt(DBConstantContainer.TOUR_ID_TOUR));
-        tour.setName(resultSet.getString(DBConstantContainer.TOUR_NAME));
+        tour.setType(resultSet.getString(DBConstantContainer.TOUR_TYPE));
 
         Hotel hotel = new Hotel();
         hotel.setId(resultSet.getInt(DBConstantContainer.HOTEL_ID_HOTEL));

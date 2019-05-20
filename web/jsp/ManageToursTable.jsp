@@ -186,7 +186,7 @@
                 <tr>
                     <td><c:out value="${status.count}"/></td>
                     <td><c:out value="${tour.id}"/></td>
-                    <td>${tour.name}</td>
+                    <td>${tour.type}</td>
                     <td>${tour.hotel.country}</td>
                     <td>${tour.hotel.city}</td>
                     <td>${tour.hotel.name}</td>

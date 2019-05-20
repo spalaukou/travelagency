@@ -32,7 +32,7 @@ public final class DBRequestContainer {
 
     //Show Tours
     public static final String GET_ALL_TOURS_REQUEST = "SELECT\n" +
-            "`tour`.`idtour`, `tour`.`name`, `tour`.`hotel_id`, `tour`.`night`, `tour`.`transport_id`, `tour`.`cost`, `tour`.`hot`,\n" +
+            "`tour`.`idtour`, `tour`.`type`, `tour`.`hotel_id`, `tour`.`night`, `tour`.`transport_id`, `tour`.`cost`, `tour`.`hot`,\n" +
             "`hotel`.`idhotel`, `hotel`.`name`, `hotel`.`country`, `hotel`.`city`, `hotel`.`star`, `hotel`.`meal`, `hotel`.`person`,\n" +
             "`transport`.`idtransport`, `transport`.`type`\n" +
             "FROM `tour`.`tour` inner join `tour`.`hotel` inner join `tour`.`transport`\n" +
@@ -40,7 +40,7 @@ public final class DBRequestContainer {
             "AND `transport`.`idtransport` = `tour`.`transport_id`;";
 
     public static final String GET_TOURS_BY_COUNTRY_REQUEST = "SELECT\n" +
-            "`tour`.`idtour`, `tour`.`name`, `tour`.`hotel_id`, `tour`.`night`, `tour`.`transport_id`, `tour`.`cost`, `tour`.`hot`,\n" +
+            "`tour`.`idtour`, `tour`.`type`, `tour`.`hotel_id`, `tour`.`night`, `tour`.`transport_id`, `tour`.`cost`, `tour`.`hot`,\n" +
             "`hotel`.`idhotel`, `hotel`.`name`, `hotel`.`country`, `hotel`.`city`, `hotel`.`star`, `hotel`.`meal`, `hotel`.`person`,\n" +
             "`transport`.`idtransport`, `transport`.`type`\n" +
             "FROM `tour`.`tour` inner join `tour`.`hotel` inner join `tour`.`transport`\n" +
@@ -94,7 +94,7 @@ public final class DBRequestContainer {
     public static final String GET_ORDERS_BY_ID_REQUEST = "SELECT\n" +
             "`order`.`idorder`, `order`.`customer_id`,  `order`.`tour_id`, `order`.`totalPrice`,\n" +
             "`user`.`iduser`, `user`.`type`, `user`.`login`, `user`.`password`, `user`.`balance`, `user`.`discount`,\n" +
-            "`tour`.`idtour`, `tour`.`name`, `tour`.`hotel_id`, `tour`.`night`, `tour`.`transport_id`, `tour`.`cost`, `tour`.`hot`,\n" +
+            "`tour`.`idtour`, `tour`.`type`, `tour`.`hotel_id`, `tour`.`night`, `tour`.`transport_id`, `tour`.`cost`, `tour`.`hot`,\n" +
             "`hotel`.`idhotel`, `hotel`.`name`, `hotel`.`country`, `hotel`.`city`, `hotel`.`star`, `hotel`.`meal`, `hotel`.`person`,\n" +
             "`transport`.`idtransport`, `transport`.`type`\n" +
             "FROM `tour`.`order` inner join `tour`.`user` inner join `tour`.`tour` inner join `tour`.`hotel` inner join `tour`.`transport`\n" +
@@ -107,7 +107,7 @@ public final class DBRequestContainer {
 
     //Add new Tour
     public static final String CREATE_TOUR_REQUEST = "INSERT\n" +
-            "INTO `tour`.`tour` (`name`, `hotel_id`, `night`, `transport_id`, `cost`, `hot`)\n" +
+            "INTO `tour`.`tour` (`type`, `hotel_id`, `night`, `transport_id`, `cost`, `hot`)\n" +
             "VALUES (?, ?, ?, ?, ?, ?);";
 
     //Update Tour

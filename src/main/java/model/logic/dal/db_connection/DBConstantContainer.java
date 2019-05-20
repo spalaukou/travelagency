@@ -26,7 +26,7 @@ public final class DBConstantContainer {
     public static final String USER_DISCOUNT = "user.discount";
 
     public static final String TOUR_ID_TOUR = "tour.idtour";
-    public static final String TOUR_NAME = "tour.name";
+    public static final String TOUR_TYPE = "tour.type";
     public static final String TOUR_HOTEL_ID = "tour.hotel_id";
     public static final String TOUR_NIGHT = "tour.night";
     public static final String TOUR_TRANSPORT_ID = "tour.transport_id";
