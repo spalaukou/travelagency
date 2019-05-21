@@ -36,7 +36,7 @@
         <td style="text-align: center;">${role}: ${userType}</td>
         <td style="text-align: center;">ID: ${userid}</td>
         <td style="text-align: center;">${balanceText}: ${balance}</td>
-        <td style="text-align: center;">${discountText}: ${discount}</td>
+        <td style="text-align: center;">${discountText}: ${Math.round( (1.0 - discount) * 100 )} %</td>
         <td style="text-align: center;"><a href="start?command=show_orders">${myOrders}</a></td>
     </tr>
 </table>

@@ -76,11 +76,11 @@
             <td><c:out value="${tour.night}"/></td>
             <td><c:out value="${tour.transport.type}"/></td>
             <td><c:out value="${tour.cost}"/></td>
-            <td><c:out value="${tour.hot}"/></td>
+            <td><c:out value="${Math.round( (1.0 - tour.hot) * 100 )} %"/></td>
             <td>
                 <c:choose>
-                    <c:when test="${sessionScope.login != null}"><c:out value="${discount}"/></c:when>
-                    <c:otherwise>1.0</c:otherwise>
+                    <c:when test="${sessionScope.login != null}"><c:out value="${Math.round( (1.0 - discount) * 100 )} %"/></c:when>
+                    <c:otherwise>0 %</c:otherwise>
                 </c:choose>
             </td>
             <td>

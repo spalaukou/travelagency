@@ -83,8 +83,8 @@
             <td><c:out value="${order.tour.night}"/></td>
             <td><c:out value="${order.tour.transport.type}"/></td>
             <td><c:out value="${order.tour.cost}"/></td>
-            <td><c:out value="${order.tour.hot}"/></td>
-            <td><c:out value="${discount}"/></td>
+            <td><c:out value="${Math.round( (1.0 - order.tour.hot) * 100 )} %"/></td>
+            <td><c:out value="${Math.round( (1.0 - discount) * 100 )} %"/></td>
             <td><c:out value="${order.totalPrice}"/></td>
             <td>
                 <a href="start?command=cancel_tour&id=${order.id}&tp=${order.totalPrice}" class="button">
