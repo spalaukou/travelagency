@@ -22,6 +22,9 @@
     <fmt:message key="locale.tours.click" var="click"/>
     <fmt:message key="locale.tours.buy" var="buy"/>
 </fmt:bundle>
+
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+
 <html>
 <head>
     <title>${toursText}</title>
@@ -37,63 +40,125 @@
     </c:otherwise>
 </c:choose>
 
-<br/>
+<div class="container">
+    <div class="main">
+        <div class="center">
 
-<div style="text-align: center;">
-    ${weOffer}
+            <br/>
+            ${weOffer}
+            <br/><br/>
+
+            <div class="grid tour">
+                <div class="box">
+                    ${num}
+                </div>
+                <div class="box">
+                    ${type}
+                </div>
+                <div class="box">
+                    ${country}
+                </div>
+                <div class="box">
+                    ${city}
+                </div>
+                <div class="box">
+                    ${hotel}
+                </div>
+                <div class="box">
+                    ${stars}
+                </div>
+                <div class="box">
+                    ${meals}
+                </div>
+                <div class="box">
+                    ${persons}
+                </div>
+                <div class="box">
+                    ${nights}
+                </div>
+                <div class="box">
+                    ${transport}
+                </div>
+                <div class="box">
+                    ${cost}
+                </div>
+                <div class="box">
+                    ${hot}
+                </div>
+                <div class="box">
+                    ${yourDisc}
+                </div>
+                <div class="box">
+                    ${total}
+                </div>
+                <div class="box">
+                    ${click}
+                </div>
+            </div>
+
+            <c:forEach var="tour" items="${tours}" varStatus="status">
+                <div class="grid tour">
+                    <div class="box">
+                        <c:out value="${status.count}"/>
+                    </div>
+                    <div class="box">
+                        <c:out value="${tour.type}"/>
+                    </div>
+                    <div class="box">
+                        <c:out value="${tour.hotel.country}"/>
+                    </div>
+                    <div class="box">
+                        <c:out value="${tour.hotel.city}"/>
+                    </div>
+                    <div class="box">
+                        <c:out value="${tour.hotel.name}"/>
+                    </div>
+                    <div class="box">
+                        <c:out value="${tour.hotel.star}"/>
+                    </div>
+                    <div class="box">
+                        <c:out value="${tour.hotel.meal}"/>
+                    </div>
+                    <div class="box">
+                        <c:out value="${tour.hotel.person}"/>
+                    </div>
+                    <div class="box">
+                        <c:out value="${tour.night}"/>
+                    </div>
+                    <div class="box">
+                        <c:out value="${tour.transport.type}"/>
+                    </div>
+                    <div class="box">
+                        <c:out value="${tour.cost}"/>
+                    </div>
+                    <div class="box">
+                        <c:out value="${Math.round( (1.0 - tour.hot) * 100 )} %"/>
+                    </div>
+                    <div class="box">
+                        <c:choose>
+                            <c:when test="${sessionScope.login != null}">
+                                <c:out value="${Math.round( (1.0 - discount) * 100 )} %"/>
+                            </c:when>
+                            <c:otherwise>0 %</c:otherwise>
+                        </c:choose>
+                    </div>
+                    <div class="box">
+                        <c:out value="${tour.totalPrice}"/>
+                    </div>
+                    <div class="box">
+                        <a href="start?command=buy_tour&tour_id=${tour.id}&tp=${tour.totalPrice}" class="button">
+                            <button>${buy}</button>
+                        </a>
+                    </div>
+
+                </div>
+            </c:forEach>
+
+            <br/>
+
+        </div>
+    </div>
 </div>
-
-<br/>
-
-<table cellspacing="0" cellpadding="4" border="1" align="center">
-    <tr>
-        <td>${num}</td>
-        <td>${type}</td>
-        <td>${country}</td>
-        <td>${city}</td>
-        <td>${hotel}</td>
-        <td>${stars}</td>
-        <td>${meals}</td>
-        <td>${persons}</td>
-        <td>${nights}</td>
-        <td>${transport}</td>
-        <td>${cost}</td>
-        <td>${hot}</td>
-        <td>${yourDisc}</td>
-        <td>${total}</td>
-        <td>${click}</td>
-    </tr>
-    <c:forEach var="tour" items="${tours}" varStatus="status">
-        <tr>
-            <td><c:out value="${status.count}"/></td>
-            <td><c:out value="${tour.type}"/></td>
-            <td><c:out value="${tour.hotel.country}"/></td>
-            <td><c:out value="${tour.hotel.city}"/></td>
-            <td><c:out value="${tour.hotel.name}"/></td>
-            <td><c:out value="${tour.hotel.star}"/></td>
-            <td><c:out value="${tour.hotel.meal}"/></td>
-            <td><c:out value="${tour.hotel.person}"/></td>
-            <td><c:out value="${tour.night}"/></td>
-            <td><c:out value="${tour.transport.type}"/></td>
-            <td><c:out value="${tour.cost}"/></td>
-            <td><c:out value="${Math.round( (1.0 - tour.hot) * 100 )} %"/></td>
-            <td>
-                <c:choose>
-                    <c:when test="${sessionScope.login != null}"><c:out value="${Math.round( (1.0 - discount) * 100 )} %"/></c:when>
-                    <c:otherwise>0 %</c:otherwise>
-                </c:choose>
-            </td>
-            <td>
-                <c:out value="${tour.totalPrice}"/>
-            </td>
-            <td>
-                <a href="start?command=buy_tour&tour_id=${tour.id}&tp=${tour.totalPrice}" class="button">
-                    <button>${buy}</button>
-                </a>
-            </td>
-        </tr>
-    </c:forEach>
-</table>
 
 <jsp:include page="footer/Footer.jsp"/>
 

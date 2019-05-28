@@ -24,6 +24,9 @@
     <fmt:message key="locale.buy.afterPurchaseMessage" var="afterPurchaseMessageLocale"/>
     <fmt:message key="locale.buy.afterCancelMessage" var="afterCancelMessageLocale"/>
 </fmt:bundle>
+
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+
 <html>
 <head>
     <title>${ordersText}</title>
@@ -39,61 +42,125 @@
     </c:otherwise>
 </c:choose>
 
-<br/>
+<div class="container">
+    <div class="main">
+        <div class="center">
 
-<div style="text-align: center;">
-    <c:choose>
-        <c:when test="${afterPurchaseMessage != null}"><c:out value="${afterPurchaseMessageLocale}"/></c:when>
-        <c:when test="${afterCancelMessage != null}"><c:out value="${afterCancelMessageLocale}"/></c:when>
-    </c:choose>
-        <br/>
-    ${yourOrders}
+            <br/>
+            <c:choose>
+                <c:when test="${afterPurchaseMessage != null}"><c:out value="${afterPurchaseMessageLocale}"/></c:when>
+                <c:when test="${afterCancelMessage != null}"><c:out value="${afterCancelMessageLocale}"/></c:when>
+            </c:choose>
+            <br/>
+            ${yourOrders}
+            <br/><br/>
+
+            <div class="grid tour">
+                <div class="box">
+                    ${num}
+                </div>
+                <div class="box">
+                    ${type}
+                </div>
+                <div class="box">
+                    ${country}
+                </div>
+                <div class="box">
+                    ${city}
+                </div>
+                <div class="box">
+                    ${hotel}
+                </div>
+                <div class="box">
+                    ${stars}
+                </div>
+                <div class="box">
+                    ${meals}
+                </div>
+                <div class="box">
+                    ${persons}
+                </div>
+                <div class="box">
+                    ${nights}
+                </div>
+                <div class="box">
+                    ${transport}
+                </div>
+                <div class="box">
+                    ${cost}
+                </div>
+                <div class="box">
+                    ${hot}
+                </div>
+                <div class="box">
+                    ${yourDisc}
+                </div>
+                <div class="box">
+                    ${youPaid}
+                </div>
+                <div class="box">
+                    ${click}
+                </div>
+            </div>
+
+            <c:forEach var="order" items="${orders}" varStatus="status">
+                <div class="grid tour">
+                    <div class="box">
+                        <c:out value="${status.count}"/>
+                    </div>
+                    <div class="box">
+                        <c:out value="${order.tour.type}"/>
+                    </div>
+                    <div class="box">
+                        <c:out value="${order.tour.hotel.country}"/>
+                    </div>
+                    <div class="box">
+                        <c:out value="${order.tour.hotel.city}"/>
+                    </div>
+                    <div class="box">
+                        <c:out value="${order.tour.hotel.name}"/>
+                    </div>
+                    <div class="box">
+                        <c:out value="${order.tour.hotel.star}"/>
+                    </div>
+                    <div class="box">
+                        <c:out value="${order.tour.hotel.meal}"/>
+                    </div>
+                    <div class="box">
+                        <c:out value="${order.tour.hotel.person}"/>
+                    </div>
+                    <div class="box">
+                        <c:out value="${order.tour.night}"/>
+                    </div>
+                    <div class="box">
+                        <c:out value="${order.tour.transport.type}"/>
+                    </div>
+                    <div class="box">
+                        <c:out value="${order.tour.cost}"/>
+                    </div>
+                    <div class="box">
+                        <c:out value="${Math.round( (1.0 - order.tour.hot) * 100 )} %"/>
+                    </div>
+                    <div class="box">
+                        <c:out value="${Math.round( (1.0 - discount) * 100 )} %"/>
+                    </div>
+                    <div class="box">
+                        <c:out value="${order.totalPrice}"/>
+                    </div>
+                    <div class="box">
+                        <a href="start?command=cancel_tour&id=${order.id}&tp=${order.totalPrice}" class="button">
+                            <button>${cancel}</button>
+                        </a>
+                    </div>
+
+                </div>
+            </c:forEach>
+
+            <br/>
+
+        </div>
+    </div>
 </div>
-
-<br/>
-
-<table cellspacing="0" cellpadding="4" border="1" align="center">
-    <tr>
-        <td>${num}</td>
-        <td>${type}</td>
-        <td>${country}</td>
-        <td>${city}</td>
-        <td>${hotel}</td>
-        <td>${stars}</td>
-        <td>${meals}</td>
-        <td>${persons}</td>
-        <td>${nights}</td>
-        <td>${transport}</td>
-        <td>${cost}</td>
-        <td>${hot}</td>
-        <td>${yourDisc}</td>
-        <td>${youPaid}</td>
-        <td>${click}</td>
-    </tr>
-    <c:forEach var="order" items="${orders}" varStatus="status">
-        <tr>
-            <td><c:out value="${status.count}"/></td>
-            <td><c:out value="${order.tour.type}"/></td>
-            <td><c:out value="${order.tour.hotel.country}"/></td>
-            <td><c:out value="${order.tour.hotel.city}"/></td>
-            <td><c:out value="${order.tour.hotel.name}"/></td>
-            <td><c:out value="${order.tour.hotel.star}"/></td>
-            <td><c:out value="${order.tour.hotel.meal}"/></td>
-            <td><c:out value="${order.tour.hotel.person}"/></td>
-            <td><c:out value="${order.tour.night}"/></td>
-            <td><c:out value="${order.tour.transport.type}"/></td>
-            <td><c:out value="${order.tour.cost}"/></td>
-            <td><c:out value="${Math.round( (1.0 - order.tour.hot) * 100 )} %"/></td>
-            <td><c:out value="${Math.round( (1.0 - discount) * 100 )} %"/></td>
-            <td><c:out value="${order.totalPrice}"/></td>
-            <td>
-                <a href="start?command=cancel_tour&id=${order.id}&tp=${order.totalPrice}" class="button">
-                    <button>${cancel}</button>
-                </a>
-            </td>
-        </tr>
-    </c:forEach>
-</table>
 
 <jsp:include page="footer/Footer.jsp"/>
 

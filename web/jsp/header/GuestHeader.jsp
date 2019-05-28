@@ -9,19 +9,35 @@
     <fmt:message key="locale.signUp" var="signUp"/>
 </fmt:bundle>
 
-<table width="100%" cellspacing="0" cellpadding="4">
-    <tr>
-        <td width="15%"><a href="${pageContext.request.contextPath}">${agencyName}</a></td>
-        <td width="70%" style="text-align: center;">
-            <ctg:helloTag login="${login}" welcomeMessage="${welcomeMessage}"/>
-        </td>
-        <td>
-            <a href="${pageContext.request.contextPath}/jsp/SignIn.jsp">${signIn}</a>
-        </td>
-        <td>
-            <a href="${pageContext.request.contextPath}/jsp/SignUp.jsp">${signUp}</a>
-        </td>
-    </tr>
-</table>
-
-<hr/>
+<div class="grid guest">
+    <div class="nav">
+        <ul>
+            <a href="${pageContext.request.contextPath}">
+                <li>
+                    ${agencyName}
+                </li>
+            </a>
+        </ul>
+    </div>
+    <div class="nav msg">
+        <ctg:helloTag login="${login}" welcomeMessage="${welcomeMessage}"/>
+    </div>
+    <div class="nav">
+        <ul>
+            <a href="${pageContext.request.contextPath}/jsp/SignIn.jsp">
+                <li>
+                    ${signIn}
+                </li>
+            </a>
+        </ul>
+    </div>
+    <div class="nav">
+        <ul>
+            <a href="${pageContext.request.contextPath}/jsp/SignUp.jsp">
+                <li>
+                    ${signUp}
+                </li>
+            </a>
+        </ul>
+    </div>
+</div>

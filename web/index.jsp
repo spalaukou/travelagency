@@ -21,13 +21,13 @@
     <fmt:message key="locale.index.lvl_3_discount" var="lvl_3_discount"/>
     <fmt:message key="locale.buy.errorNotEnoughMoneyMessage" var="errorNotEnoughMoneyMessageLocale"/>
 </fmt:bundle>
+
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+
 <html>
 
 <head>
     <title>${title}</title>
-    <style type="text/css">
-        a.button {display:grid; height:100%; width:100%; text-align: center}
-    </style>
 </head>
 
 <body>
@@ -36,46 +36,80 @@
 
 <c:if test="${sessionScope.login == null}">
     <jsp:include page="jsp/header/GuestHeader.jsp"/>
-    <br/>
-    <div style="text-align: center;">
-        ${please} <a href="${pageContext.request.contextPath}/jsp/SignIn.jsp">${signIn}</a>
-        ${notHaveAccount} <a href="${pageContext.request.contextPath}/jsp/SignUp.jsp">${signUp}</a>${toBuy}
+    <div class="container">
+        <div class="main">
+            <div class="center">
+                    ${please} <a href="${pageContext.request.contextPath}/jsp/SignIn.jsp">${signIn}</a>
+                    ${notHaveAccount} <a href="${pageContext.request.contextPath}/jsp/SignUp.jsp">${signUp}</a>${toBuy}
+            </div>
+        </div>
     </div>
-    <br/>
 </c:if>
 
 <c:if test="${sessionScope.login != null}">
     <jsp:include page="jsp/header/UserHeader.jsp"/>
-    <div style="text-align: center;">
-        <c:if test="${errorNotEnoughMoneyMessage != null}">
-            ${errorNotEnoughMoneyMessageLocale}
-        </c:if><br/>
-            ${selectToursRegistered}
+    <div class="container">
+        <div class="main">
+            <div class="center">
+                <c:if test="${errorNotEnoughMoneyMessage != null}">
+                    <br/>
+                    ${errorNotEnoughMoneyMessageLocale}
+                </c:if>
+                <br/>
+                    ${selectToursRegistered}
+            </div>
+        </div>
     </div>
 </c:if>
 
-<br/>
+<div class="container">
+    <div class="main">
+        <div class="center">
 
-<table width="100%" cellspacing="0" cellpadding="4" border="1">
-    <tr>
-        <td width="25%" bgcolor="#A9DFBF"><a href="start?command=show_tours" class="button">${showAllTours}</a></td>
-        <td width="25%" bgcolor="#F9E79F"><a href="start?command=show_tours&country=spain" class="button">${travelToSpain}</a></td>
-        <td width="25%" bgcolor="#F1948A"><a href="start?command=show_tours&country=turkey" class="button">${restInTurkey}</a></td>
-        <td width="25%" bgcolor="#D3EDF6"><a href="start?command=show_tours&country=egypt" class="button">${vacationInEgypt}</a></td>
-    </tr>
-</table>
+            <div class="travel">
+                <div class="options">
+                    <a href="start?command=show_tours" class="button">
+                        <div class="option all">
+                            <div class="caption">${showAllTours}</div>
+                        </div>
+                    </a>
+                </div>
+                <div class="options">
+                    <a href="start?command=show_tours&country=spain" class="button">
+                        <div class="option spain">
+                            <div class="caption">${travelToSpain}</div>
+                        </div>
+                    </a>
+                </div>
+                <div class="options">
+                    <a href="start?command=show_tours&country=turkey" class="button">
+                        <div class="option turkey">
+                            <div class="caption">${restInTurkey}</div>
+                        </div>
+                    </a>
+                </div>
+                <div class="options">
+                    <a href="start?command=show_tours&country=egypt" class="button">
+                        <div class="option egypt">
+                            <div class="caption">${vacationInEgypt}</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
 
-<br/>
-
-<div style="text-align: center;">
-    ${travelWithUs}<br/><br/><br/>
-    ${weOfferDiscounts}<br/>
-    ${lvl_1_discount}<br/>
-    ${lvl_2_discount}<br/>
-    ${lvl_3_discount}
+            <br/><br/>
+            ${travelWithUs}
+            <br/><br/>
+            ${weOfferDiscounts}
+            <br/>
+            ${lvl_1_discount}
+            <br/>
+            ${lvl_2_discount}
+            <br/>
+            ${lvl_3_discount}
+        </div>
+    </div>
 </div>
-
-<br/>
 
 <jsp:include page="jsp/footer/Footer.jsp"/>
 

@@ -10,6 +10,9 @@
     <fmt:message key="locale.sign.andBuy" var="andBuy"/>
     <fmt:message key="locale.sign.back" var="back"/>
 </fmt:bundle>
+
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+
 <html>
 <head>
     <title>${regRes}</title>
@@ -18,13 +21,17 @@
 
 <jsp:include page="header/GuestHeader.jsp"/>
 
-<div style="text-align: center;">
-    ${success} ${param.login}!<br/>
+<div class="container">
+    <div class="main">
+        <div class="center">
+            ${success} ${param.login}!<br/>
 
-    ${nowYouCan} <a href="${pageContext.request.contextPath}/jsp/SignIn.jsp">${toSignIn}</a> ${andBuy}<br/>
+            ${nowYouCan} <a href="${pageContext.request.contextPath}/jsp/SignIn.jsp">${toSignIn}</a> ${andBuy}<br/>
 
-    <br/>
-    <a href="${pageContext.request.contextPath}">${back}</a>
+            <br/>
+            <a href="${pageContext.request.contextPath}">${back}</a>
+        </div>
+    </div>
 </div>
 
 <jsp:include page="footer/Footer.jsp"/>

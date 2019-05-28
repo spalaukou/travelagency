@@ -14,34 +14,56 @@
     <fmt:message key="locale.myOrders" var="myOrders"/>
 </fmt:bundle>
 
-<table width="100%" cellspacing="0" cellpadding="4">
-    <tr>
-        <td width="15%"><a href="${pageContext.request.contextPath}">${agencyName}</a></td>
-        <td width="70%" style="text-align: center;">
-            <ctg:helloTag login="${login}" welcomeMessage="${welcomeMessage}"/>
-        </td>
-        <td>
-            <div style="text-align: right;">
-                <a href="start?command=sign_out">${signOut}</a>
-            </div>
-        </td>
-    </tr>
-</table>
+<div class="grid user">
+    <div class="nav">
+        <ul>
+            <a href="${pageContext.request.contextPath}">
+                <li>
+                    ${agencyName}
+                </li>
+            </a>
+        </ul>
+    </div>
+    <div class="nav msg">
+        <ctg:helloTag login="${login}" welcomeMessage="${welcomeMessage}"/>
+    </div>
+    <div class="nav">
+        <ul>
+            <a href="start?command=sign_out">
+                <li>
+                    ${signOut}
+                </li>
+            </a>
+        </ul>
+    </div>
+</div>
 
-<hr/>
-
-<table width="100%" cellspacing="0" cellpadding="4" border="1">
-    <tr>
-        <td style="text-align: center;">${profileInfo}</td>
-        <td style="text-align: center;">${role}: ${userType}</td>
-        <td style="text-align: center;">ID: ${userid}</td>
-        <td style="text-align: center;">${balanceText}: ${balance}</td>
-        <td style="text-align: center;">${discountText}: ${Math.round( (1.0 - discount) * 100 )} %</td>
-        <td style="text-align: center;"><a href="start?command=show_orders">${myOrders}</a></td>
-    </tr>
-</table>
-
-<hr/>
+<div class="grid panel">
+    <div class="nav msg">
+        ${profileInfo}
+    </div>
+    <div class="nav msg">
+        ${role}: ${userType}
+    </div>
+    <div class="nav msg">
+        ID: ${userid}
+    </div>
+    <div class="nav msg">
+        ${balanceText}: ${balance}
+    </div>
+    <div class="nav msg">
+        ${discountText}: ${Math.round( (1.0 - discount) * 100 )} %
+    </div>
+    <div class="nav">
+        <ul>
+            <a href="start?command=show_orders">
+                <li>
+                    ${myOrders}
+                </li>
+            </a>
+        </ul>
+    </div>
+</div>
 
 <c:set var= "agent" value="AGENT"/>
 <c:if test= "${userType eq agent}">

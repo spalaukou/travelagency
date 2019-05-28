@@ -1,0 +1,175 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    background: url(../view/img/background.jpg) no-repeat center center;
+    background-size: cover;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 100;
+}
+
+a.button {
+    height: 100%;
+    width: 100%;
+    text-align: center;
+}
+
+.container {
+    margin: auto;
+    max-width: 1000px;
+}
+
+.main {
+    background-color: lightblue;
+    padding: 10px 10px;
+}
+
+.travel {
+    text-align: center;
+    position: relative;
+}
+
+.options {
+    display: inline-block;
+    border: 3px solid white;
+    width: 235px;
+    height: 350px;
+}
+
+.options:hover {
+    background: white;
+    opacity: 0.5;
+}
+
+.option {
+    background-size: cover;
+    background-position: center;
+    height: 100%;
+}
+
+.all {
+    background-image: url("../view/img/travel.jpg");
+}
+
+.spain {
+    background-image: url("../view/img/spain.jpg");
+}
+
+.turkey {
+    background-image: url("../view/img/turkey.jpg");
+}
+
+.egypt {
+    background-image: url("../view/img/egypt.jpg");
+}
+
+.caption {
+    display: block;
+    font-size: 18px;
+    background-color: white;
+    color: black;
+    padding: 10px;
+    opacity: 0.75;
+    position: relative;
+    top: 10%;
+}
+
+.nav {
+    background: steelblue;
+    height: 80px;
+    width: 100%;
+}
+
+.nav ul {
+    height: 80px;
+    list-style: none;
+    margin: 0 auto;
+    padding: 0;
+    width: 100%;
+}
+
+.nav ul li {
+    color: white;
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    height: 80px;
+    line-height: 80px;
+    list-style: none;
+    padding: 0;
+    transition: background .5s;
+}
+
+.msg {
+    color: white;
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    height: 80px;
+    line-height: 80px;
+    list-style: none;
+    padding: 0;
+    transition: background .5s;
+}
+
+.btn:hover, .nav ul li:hover {
+    background: skyblue;
+    cursor: pointer;
+    transition: background .5s;
+}
+
+.left {
+    text-align: left;
+}
+
+.right {
+    text-align: right;
+}
+
+.center {
+    text-align: center;
+}
+
+.footer {
+    height: 100px;
+    background-color: bisque;
+    padding: 10px 10px;
+}
+
+.info {
+    width: 100%;
+}
+
+.grid {
+    display: grid;
+    margin: auto;
+    width: 1000px;
+}
+
+.guest {
+    grid-template-columns: 15% 70% 1fr 1fr;
+}
+
+.user {
+    grid-template-columns: 15% 1fr 15%;
+}
+
+.panel {
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 15%;
+}
+
+.manage {
+    grid-template-columns: 1fr 1fr;
+}
+
+.tour {
+    width: 100%;
+    grid-template-columns: 2% 1fr 1fr 1fr 1fr 5% 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+.box {
+    background-color: beige;
+    margin: 2px;
+}

@@ -13,6 +13,9 @@
     <fmt:message key="locale.sign.wrongAction" var="wrongActionLocale"/>
     <fmt:message key="locale.sign.nullPage" var="nullPageLocale"/>
 </fmt:bundle>
+
+<link rel="stylesheet" type="text/css" href="../css/style.css"/>
+
 <html>
 <head>
     <title>${signUp}</title>
@@ -21,30 +24,36 @@
 
 <jsp:include page="header/GuestHeader.jsp"/>
 
-<div style="text-align: center;">
-    <form name="loginForm" method="POST" action="${pageContext.request.contextPath}\start">
-        <input type="hidden" name="command" value="sign_up"/>
-        <p>${signUpText}</p>
-        <p>${login}<br/>
-            <input type="text" name="login"/>
-        </p>
-        <p>${password}<br/>
-            <input type="password" name="password"/>
-        </p>
-        <c:choose>
-            <c:when test="${errorLoginPassMessage != null}"><c:out value="${errorLoginPassMessageLocale}"/></c:when>
-            <c:when test="${shortLoginPassMessage != null}"><c:out value="${shortLoginPassMessageLocale}"/></c:when>
-            <c:when test="${wrongAction != null}"><c:out value="${wrongActionLocale}"/></c:when>
-            <c:when test="${nullPage != null}"><c:out value="${nullPageLocale}"/></c:when>
-        </c:choose>
-        <br/>
-        <tr>
-            <td colspan="2">
-                <input type="reset" value="${clear}"/>
-                <input type="submit" value="${signUp}"/>
-            </td>
-        </tr>
-    </form>
+<div class="container">
+    <div class="main">
+        <div class="center">
+            <form name="loginForm" method="POST" action="${pageContext.request.contextPath}\start">
+                <input type="hidden" name="command" value="sign_up"/>
+                <p>${signUpText}</p>
+                <p>${login}<br/>
+                    <input type="text" name="login"/>
+                </p>
+                <p>${password}<br/>
+                    <input type="password" name="password"/>
+                </p>
+                <c:choose>
+                    <c:when test="${errorLoginPassMessage != null}"><c:out
+                            value="${errorLoginPassMessageLocale}"/></c:when>
+                    <c:when test="${shortLoginPassMessage != null}"><c:out
+                            value="${shortLoginPassMessageLocale}"/></c:when>
+                    <c:when test="${wrongAction != null}"><c:out value="${wrongActionLocale}"/></c:when>
+                    <c:when test="${nullPage != null}"><c:out value="${nullPageLocale}"/></c:when>
+                </c:choose>
+                <br/>
+                <tr>
+                    <td colspan="2">
+                        <input type="reset" value="${clear}"/>
+                        <input type="submit" value="${signUp}"/>
+                    </td>
+                </tr>
+            </form>
+        </div>
+    </div>
 </div>
 
 <jsp:include page="footer/Footer.jsp"/>

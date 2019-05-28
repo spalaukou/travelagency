@@ -44,6 +44,9 @@
     <fmt:message key="locale.tours.upd" var="afterUpdateMessageLocale"/>
     <fmt:message key="locale.tours.updErr" var="errorUpdateMessageLocale"/>
 </fmt:bundle>
+
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+
 <html>
 <head>
     <title>${manageToursText}</title>
@@ -54,163 +57,174 @@
 <c:if test="${userType eq agent}">
     <jsp:include page="header/UserHeader.jsp"/>
 
-    <br/>
+    <div class="container">
+        <div class="main">
+            <div class="center">
 
-    <div style="text-align: center;">
-            ${addNewTour}<br/><br/>
+                <br/>
+
+                <div style="text-align: center;">
+                        ${addNewTour}<br/><br/>
+                </div>
+
+                <table cellspacing="0" cellpadding="4" border="1" align="center">
+                    <tr>
+                        <td></td>
+                        <td>${type}</td>
+                        <td>${hotelOffer}</td>
+                        <td>${nights}</td>
+                        <td>${transport}</td>
+                        <td>${cost}${k}</td>
+                        <td>${hot}</td>
+                        <td>${clockToAdd}</td>
+                    </tr>
+                    <form name="updateTour" method="POST" action="${pageContext.request.contextPath}\start">
+                        <input type="hidden" name="command" value="add_tour"/>
+                        <tr>
+                            <td>${enterData}</td>
+                            <td>
+                                <select name="tourType">
+                                    <option selected disabled>${type}</option>
+                                    <option value="excursion">${excursion}</option>
+                                    <option value="shopping">${shopping}</option>
+                                    <option value="rest">${rest}</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select name="hotelID">
+                                    <option selected disabled>${hotelOffer}</option>
+                                    <option value="1">${vikingen} UAI, 1 ${onePerson}</option>
+                                    <option value="2">${vikingen} UAI, 2 ${fewPerson}</option>
+                                    <option value="3">${vikingen} UAI, 3 ${fewPerson}</option>
+                                    <option value="4">${vikingen} AI, 1 ${onePerson}</option>
+                                    <option value="5">${vikingen} AI, 2 ${fewPerson}</option>
+                                    <option value="6">${vikingen} AI, 3 ${fewPerson}</option>
+                                    <option value="7">${best} AI, 1 ${onePerson}</option>
+                                    <option value="8">${best} AI, 2 ${fewPerson}</option>
+                                    <option value="9">${best} AI, 3 ${fewPerson}</option>
+                                    <option value="10">${best} FB, 1 ${onePerson}</option>
+                                    <option value="11">${best} FB, 2 ${fewPerson}</option>
+                                    <option value="12">${best} FB, 3 ${fewPerson}</option>
+                                    <option value="13">${superName} HB, 1 ${onePerson}</option>
+                                    <option value="14">${superName} HB, 2 ${fewPerson}</option>
+                                    <option value="15">${superName} HB, 3 ${fewPerson}</option>
+                                    <option value="16">${superName} RO, 1 ${onePerson}</option>
+                                    <option value="17">${superName} RO, 2 ${fewPerson}</option>
+                                    <option value="18">${superName} RO, 3 ${fewPerson}</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select name="tourNight">
+                                    <option selected disabled>${nights}</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                                    <option value="13">13</option>
+                                    <option value="14">14</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select name="transport">
+                                    <option selected disabled>${transport}</option>
+                                    <option value="1">${car}</option>
+                                    <option value="2">${train}</option>
+                                    <option value="3">${airplane}</option>
+                                    <option value="4">${ship}</option>
+                                </select>
+                            </td>
+                            <td><input type="number" min="1" max="10000" size="1" name="tourCost"/></td>
+                            <td>
+                                <select name="tourHot">
+                                    <option selected disabled>${hot}</option>
+                                    <option value="1.0">1.0</option>
+                                    <option value="0.9">0.9</option>
+                                    <option value="0.8">0.8</option>
+                                    <option value="0.7">0.7</option>
+                                </select>
+                            </td>
+                            <td><input type="submit" value="${addTour}"/></td>
+                        </tr>
+                    </form>
+                </table>
+
+                <div style="text-align: center;">
+                    <c:choose>
+                        <c:when test="${afterAddMessage != null}"><c:out value="${afterAddMessageLocale}"/></c:when>
+                        <c:when test="${errorAddMessage != null}"><c:out value="${errorAddMessageLocale}"/></c:when>
+                    </c:choose>
+                    <br/>
+                </div>
+
+                <br/>
+
+                <div style="text-align: center;">
+                        ${manageToursText}:<br/><br/>
+                    <c:choose>
+                        <c:when test="${afterUpdateMessage != null}"><c:out
+                                value="${afterUpdateMessageLocale}"/></c:when>
+                        <c:when test="${errorUpdateMessage != null}"><c:out
+                                value="${errorUpdateMessageLocale}"/></c:when>
+                    </c:choose>
+                </div>
+                <table cellspacing="0" cellpadding="4" border="1" align="center">
+                    <tr>
+                        <td>${num}</td>
+                        <td>${id}</td>
+                        <td>${type}</td>
+                        <td>${country}</td>
+                        <td>${city}</td>
+                        <td>${hotel}</td>
+                        <td>${stars}</td>
+                        <td>${meals}</td>
+                        <td>${persons}</td>
+                        <td>${nights}</td>
+                        <td>${transport}</td>
+                        <td>${cost}${k}</td>
+                        <td>${hot}</td>
+                        <td>${total}</td>
+                        <td>${clickToUpdate}</td>
+                    </tr>
+                    <c:forEach var="tour" items="${tours}" varStatus="status">
+                        <form name="updateTour" method="POST" action="${pageContext.request.contextPath}\start?">
+                            <input type="hidden" name="command" value="update_tour"/>
+                            <input type="hidden" name="tour_id" value="${tour.id}"/>
+                            <tr>
+                                <td><c:out value="${status.count}"/></td>
+                                <td><c:out value="${tour.id}"/></td>
+                                <td>${tour.type}</td>
+                                <td>${tour.hotel.country}</td>
+                                <td>${tour.hotel.city}</td>
+                                <td>${tour.hotel.name}</td>
+                                <td>${tour.hotel.star}</td>
+                                <td>${tour.hotel.meal}</td>
+                                <td>${tour.hotel.person}</td>
+                                <td>${tour.night}</td>
+                                <td>${tour.transport.type}</td>
+                                <td><input type="number" size="1" min="1" max="10000" name="tourCost"
+                                           value="${tour.cost}"/></td>
+                                <td>
+                                    <select name="tourHot">
+                                        <option selected>${tour.hot}</option>
+                                        <option value="1.0">1.0</option>
+                                        <option value="0.9">0.9</option>
+                                        <option value="0.8">0.8</option>
+                                        <option value="0.7">0.7</option>
+                                    </select>
+                                </td>
+                                <td><c:out value="${tour.totalPrice}"/></td>
+                                <td><input type="submit" value="${updateTour}"/></td>
+                            </tr>
+                        </form>
+                    </c:forEach>
+                </table>
+
+            </div>
+        </div>
     </div>
-
-    <table cellspacing="0" cellpadding="4" border="1" align="center">
-        <tr>
-            <td></td>
-            <td>${type}</td>
-            <td>${hotelOffer}</td>
-            <td>${nights}</td>
-            <td>${transport}</td>
-            <td>${cost}${k}</td>
-            <td>${hot}</td>
-            <td>${clockToAdd}</td>
-        </tr>
-        <form name="updateTour" method="POST" action="${pageContext.request.contextPath}\start">
-            <input type="hidden" name="command" value="add_tour"/>
-            <tr>
-                <td>${enterData}</td>
-                <td>
-                    <select name="tourType">
-                        <option selected disabled>${type}</option>
-                        <option value="excursion">${excursion}</option>
-                        <option value="shopping">${shopping}</option>
-                        <option value="rest">${rest}</option>
-                    </select>
-                </td>
-                <td>
-                    <select name="hotelID">
-                        <option selected disabled>${hotelOffer}</option>
-                        <option value="1">${vikingen} UAI, 1 ${onePerson}</option>
-                        <option value="2">${vikingen} UAI, 2 ${fewPerson}</option>
-                        <option value="3">${vikingen} UAI, 3 ${fewPerson}</option>
-                        <option value="4">${vikingen} AI, 1 ${onePerson}</option>
-                        <option value="5">${vikingen} AI, 2 ${fewPerson}</option>
-                        <option value="6">${vikingen} AI, 3 ${fewPerson}</option>
-                        <option value="7">${best} AI, 1 ${onePerson}</option>
-                        <option value="8">${best} AI, 2 ${fewPerson}</option>
-                        <option value="9">${best} AI, 3 ${fewPerson}</option>
-                        <option value="10">${best} FB, 1 ${onePerson}</option>
-                        <option value="11">${best} FB, 2 ${fewPerson}</option>
-                        <option value="12">${best} FB, 3 ${fewPerson}</option>
-                        <option value="13">${superName} HB, 1 ${onePerson}</option>
-                        <option value="14">${superName} HB, 2 ${fewPerson}</option>
-                        <option value="15">${superName} HB, 3 ${fewPerson}</option>
-                        <option value="16">${superName} RO, 1 ${onePerson}</option>
-                        <option value="17">${superName} RO, 2 ${fewPerson}</option>
-                        <option value="18">${superName} RO, 3 ${fewPerson}</option>
-                    </select>
-                </td>
-                <td>
-                    <select name="tourNight">
-                        <option selected disabled>${nights}</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                        <option value="10">10</option>
-                        <option value="11">11</option>
-                        <option value="12">12</option>
-                        <option value="13">13</option>
-                        <option value="14">14</option>
-                    </select>
-                </td>
-                <td>
-                    <select name="transport">
-                        <option selected disabled>${transport}</option>
-                        <option value="1">${car}</option>
-                        <option value="2">${train}</option>
-                        <option value="3">${airplane}</option>
-                        <option value="4">${ship}</option>
-                    </select>
-                </td>
-                <td><input type="number" min="1" max="10000" size="1" name="tourCost"/></td>
-                <td>
-                    <select name="tourHot">
-                        <option selected disabled>${hot}</option>
-                        <option value="1.0">1.0</option>
-                        <option value="0.9">0.9</option>
-                        <option value="0.8">0.8</option>
-                        <option value="0.7">0.7</option>
-                    </select>
-                </td>
-                <td><input type="submit" value="${addTour}"/></td>
-            </tr>
-        </form>
-    </table>
-
-    <div style="text-align: center;">
-        <c:choose>
-            <c:when test="${afterAddMessage != null}"><c:out value="${afterAddMessageLocale}"/></c:when>
-            <c:when test="${errorAddMessage != null}"><c:out value="${errorAddMessageLocale}"/></c:when>
-        </c:choose>
-        <br/>
-    </div>
-
-    <br/>
-
-    <div style="text-align: center;">
-            ${manageToursText}:<br/><br/>
-        <c:choose>
-            <c:when test="${afterUpdateMessage != null}"><c:out value="${afterUpdateMessageLocale}"/></c:when>
-            <c:when test="${errorUpdateMessage != null}"><c:out value="${errorUpdateMessageLocale}"/></c:when>
-        </c:choose>
-    </div>
-    <table cellspacing="0" cellpadding="4" border="1" align="center">
-        <tr>
-            <td>${num}</td>
-            <td>${id}</td>
-            <td>${type}</td>
-            <td>${country}</td>
-            <td>${city}</td>
-            <td>${hotel}</td>
-            <td>${stars}</td>
-            <td>${meals}</td>
-            <td>${persons}</td>
-            <td>${nights}</td>
-            <td>${transport}</td>
-            <td>${cost}${k}</td>
-            <td>${hot}</td>
-            <td>${total}</td>
-            <td>${clickToUpdate}</td>
-        </tr>
-        <c:forEach var="tour" items="${tours}" varStatus="status">
-            <form name="updateTour" method="POST" action="${pageContext.request.contextPath}\start?">
-                <input type="hidden" name="command" value="update_tour"/>
-                <input type="hidden" name="tour_id" value="${tour.id}"/>
-                <tr>
-                    <td><c:out value="${status.count}"/></td>
-                    <td><c:out value="${tour.id}"/></td>
-                    <td>${tour.type}</td>
-                    <td>${tour.hotel.country}</td>
-                    <td>${tour.hotel.city}</td>
-                    <td>${tour.hotel.name}</td>
-                    <td>${tour.hotel.star}</td>
-                    <td>${tour.hotel.meal}</td>
-                    <td>${tour.hotel.person}</td>
-                    <td>${tour.night}</td>
-                    <td>${tour.transport.type}</td>
-                    <td><input type="number" size="1" min="1" max="10000" name="tourCost" value="${tour.cost}"/></td>
-                    <td>
-                        <select name="tourHot">
-                            <option selected>${tour.hot}</option>
-                            <option value="1.0">1.0</option>
-                            <option value="0.9">0.9</option>
-                            <option value="0.8">0.8</option>
-                            <option value="0.7">0.7</option>
-                        </select>
-                    </td>
-                    <td><c:out value="${tour.totalPrice}"/></td>
-                    <td><input type="submit" value="${updateTour}"/></td>
-                </tr>
-            </form>
-        </c:forEach>
-    </table>
 
     <jsp:include page="footer/Footer.jsp"/>
 </c:if>

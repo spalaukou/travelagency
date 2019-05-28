@@ -6,14 +6,21 @@
     <fmt:message key="locale.selectLanguage" var="selectLanguage"/>
 </fmt:bundle>
 
-<hr/>
-
-<table width="100%" cellspacing="0" cellpadding="4">
-    <tr>
-        <td style="text-align: left;">© ${author}, 2019</td>
-        <td style="text-align: right;">${selectLanguage}:
-            <a href="${pageContext.request.contextPath}/start?command=change_locale&localization=en_US">EN</a> |
-            <a href="${pageContext.request.contextPath}/start?command=change_locale&localization=ru_RU">RU</a>
-        </td>
-    </tr>
-</table>
+<div class="container">
+    <div class="footer">
+        <table class="info">
+            <tr>
+                <td class="left">© ${author}, 2019</td>
+                <td class="right">${selectLanguage}:
+                    <a href="${pageContext.request.contextPath}/start?command=change_locale&localization=en_US">
+                        EN
+                    </a>
+                    |
+                    <a href="${pageContext.request.contextPath}/start?command=change_locale&localization=ru_RU">
+                        RU
+                    </a>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

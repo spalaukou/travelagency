@@ -6,15 +6,17 @@
     <fmt:message key="locale.tours.manageTours" var="manageToursText"/>
 </fmt:bundle>
 
-<div style="text-align: center;">
-
+<div class="grid manage">
+    <div class="nav msg">
+        ${agentPanel}
+    </div>
+    <div class="nav">
+        <ul>
+            <a href="start?command=show_tours&param=manage">
+                <li>
+                    ${manageToursText}
+                </li>
+            </a>
+        </ul>
+    </div>
 </div>
-
-<table width="100%" cellspacing="0" cellpadding="4">
-    <tr>
-        <td width="50%" style="text-align: center;">${agentPanel}</td>
-        <td width="50%" style="text-align: center;"><a href="start?command=show_tours&param=manage">${manageToursText}</a></td>
-    </tr>
-</table>
-
-<hr/>
