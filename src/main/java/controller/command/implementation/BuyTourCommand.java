@@ -60,6 +60,7 @@ public class BuyTourCommand implements Command {
                     }
 
                     request.setAttribute(ConstantContainer.AFTER_PURCHASE_MSG, ConstantContainer.MESSAGE_AFTER_PURCHASE);
+                    request.removeAttribute(ConstantContainer.TOUR_ID);
                     page = ConstantContainer.MY_ORDERS_PAGE;
 
                 } catch (DataSourceException e) {

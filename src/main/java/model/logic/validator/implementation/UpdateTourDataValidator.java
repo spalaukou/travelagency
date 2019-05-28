@@ -25,6 +25,11 @@ public class UpdateTourDataValidator implements Validator {
         String tourCost = request.getParameter(ConstantContainer.TOUR_COST);
         String tourHot = request.getParameter(ConstantContainer.TOUR_HOT);
 
-        return tourID != null && tourCost != null && tourHot != null;
+        return tourID != null && tourCost != null && tourHot != null
+                && Integer.valueOf(tourID) > 0
+                && Integer.valueOf(tourCost) >= 1
+                && Integer.valueOf(tourCost) <= 10000
+                && Float.valueOf(tourHot) >= 0.7f
+                && Float.valueOf(tourHot) <= 1.0f;
     }
 }
